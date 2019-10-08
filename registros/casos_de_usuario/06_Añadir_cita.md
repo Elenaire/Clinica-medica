@@ -2,23 +2,24 @@
 
 **ID**: 06         
 ----------------------------------------------------------------------------------------------------------------------
-**Descripción**: Se introduce el nombre y apellidos del usuario que se busca y el sistema lo muestra.
+**Descripción**: Se introduce una cita y esta se añade al registro de citas.
 
-**Actores principales**: Administrador
+**Actores principales**: Secretario
 
 **Precondiciones**:
 * Ninguna
 
 **Flujo principal**:
-1. El administrador desea consultar los datos de un usuario
-1. El administrador abre el cuadro de diálogo de búsqueda en el menú principal
-1. El administrador introduce el nombre y apellidos del usuario
-1. El sistema muestra por pantalla los datos del usuario
+1. El secretario desea añadir una cita para un paciente
+2. El secretario se desplaza a la opción añadir cita dentro de un paciente
+3. El secretario introduce la fecha de la siguiente cita y la guarda
+4. El sistema muestra por pantalla si el usuario introduce un dato erróneo
+5. Al terminar se muestra por pantalla un mensaje de acción llevada a cabo con éxito
 
 **Postcondiciones**:
 
-* Se muestran al administrador las distintas operaciones relativas al usuario
+* Se añade la cita al registro de cita.
 
 **Flujos alternativos**:
 
-4.a. Si no existe el usuario, se muestra un mensaje de error
+4.a. Si introduce un dato erróneo se manda un mensaje de error y pide de nuevo el dato
