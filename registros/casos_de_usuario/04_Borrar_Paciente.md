@@ -22,4 +22,4 @@
 
 **Flujos alternativos**:
 
-4.a. Si no existe el usuario, se muestra un mensaje de error
+4.a Si no existe el usuario, se muestra un mensaje de error
