@@ -22,4 +22,4 @@
 **Flujos alternativos**:
 
 1.a. Si no existen pacientes con los parametros introducidos se mostrara un mensaje de error
-2.b. Si existe mas de un usuario con los parametros introducidos se mostrara una lista con los pacientes que los cumplan ordenados por una opción por defecto
+2.b. Si existe mas de un usuario con los parametros introducidos se mostrara una lista con los pacientes que los cumplan ordenados por una opción por defecto y dando la opción de volver a introducir parametros de busqueda y ordenación
