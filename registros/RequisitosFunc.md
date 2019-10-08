@@ -45,11 +45,9 @@
     6. Consultar citas
     7. Eliminar citas
     7. Consultar el tratamiento del paciente
-    8. Consultar datos sobre las citas.
-    9. Consultar los historiales de tratamientos, pacientes y citas.
-    10. Permitir a los pacientes anular citas desde su casa.
-    11. Modificar citas.
+    8. Consultar el historial del paciente
+    
 # **Requisitos no funcionales**
-    1.Sistema operativo Linux
-    2.Lenguaje de implementación: C++
-    3.Máximo almacenamiento()
+1.Sistema operativo Linux
+2.Lenguaje de implementación: C++
+3.Máximo almacenamiento()
