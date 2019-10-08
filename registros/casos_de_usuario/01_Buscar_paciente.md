@@ -3,16 +3,16 @@
 **ID**: 01
 **Descripción**: Se busca un paciente de la forma que elija el usuario y se muestra, dependiendo del metodo que se elija se muestra una lista con los pacientes.
 
-**Actores principales**: Administrador
+**Actores principales**: Secretario 
 
 **Precondiciones**:
 * Tener un registro con pacientes.
 
 **Flujo principal**:
-1. El administrador desea consultar los datos de un paciente
-2. El administrador selecciona buscar en el menú principal
-3. El administrador selecciona el metodo de busqueda del paciente
-4. El administrador instroduce los parametros de busqueda segun el metodo elegido de busqueda
+1. El secretario desea consultar los datos de un paciente
+2. El secretario selecciona buscar en el menú principal
+3. El secretario selecciona el metodo de busqueda del paciente
+4. El secretario instroduce los parametros de busqueda segun el metodo elegido de busqueda
 5. Se muestran los datos de ese paciente
 
 **Postcondiciones**:
