@@ -12,12 +12,15 @@
     3. Fecha de nacimiento.
     4. Teléfono.
     5. Código Postal.
+    6. Tipo de paciente (privado o público).
+    7. Registro de los pacientes.
+    
 
  **Citas de la clínica**
   
   	1. Fecha de la cita.
   	2. Paciente correspondiente a cada cita.
-  	3. Número de citas.
+  	3. Número de cada cita.
  	4. Concepto de las citas.
 
  **Tratamientos**
@@ -30,16 +33,22 @@
  **Historial**
   	
 	1. Registo de los tratamientos (acabados y en curso).
- 	2. Registro de los pacientes actuales.
+ 	2. Registro de las notas tomadas.
   	3. Registro de todas las citas.
 
-# **Requisitos funcionales (ordenados por grupos)**
-    1. Añadir o eliminar pacientes.
-    2. Modificar pacientes.
-    3. Añadir o eliminar citas.
-    3. Buscar pacientes por nombre y apellidos.
-    4. Consultar datos sobre el tratamiento de los pacientes.
-    5. Consultar datos sobre las citas.
-    6. Consultar los historiales de tratamientos, pacientes y citas.
-    7. Permitir a los pacientes anular citas desde su casa.
-    8. Modificar citas
+# **Requisitos funcionales**
+    1. Añadir pacientes.
+    2. Eliminar pacientes.
+    3. Modificar pacientes.
+    4. Añadir citas.
+    5. Eliminar citas.
+    6. Buscar pacientes por nombre y apellidos.
+    7. Consultar datos sobre el tratamiento de los pacientes.
+    8. Consultar datos sobre las citas.
+    9. Consultar los historiales de tratamientos, pacientes y citas.
+    10. Permitir a los pacientes anular citas desde su casa.
+    11. Modificar citas.
+# **Requisitos no funcionales**
+    1.Sistema operativo Linux
+    2.Lenguaje de implementación: C++
+    3.Máximo almacenamiento()
