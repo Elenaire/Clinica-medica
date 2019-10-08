@@ -6,28 +6,32 @@
 # **Datos que gestiona el sistema**
 
  **Pacientes de la clínica**
-	1. Nombre y apellidos.
+    
+    1. Nombre y apellidos.
     2. Dirección.
-	3. Fecha de nacimiento.
+    3. Fecha de nacimiento.
     4. Teléfono.
     5. Código Postal.
 
  **Citas de la clínica**
-  1. Fecha de la cita.
-  2. Paciente correspondiente a cada cita.
-  3. Número de citas.
-  4. Concepto de las citas.
+  
+  	1. Fecha de la cita.
+  	2. Paciente correspondiente a cada cita.
+  	3. Número de citas.
+ 	4. Concepto de las citas.
 
  **Tratamientos**
-  1. Medicamentos.
-  2. Concentraciones.
-  3. Regularidad.
-  4. Fecha (inicio/final).
+  
+  	1. Medicamentos.
+  	2. Concentraciones.
+  	3. Regularidad.
+  	4. Fecha (inicio/final).
  
  **Historial**
-  1. Registo de los tratamientos (acabados y en curso).
-  2. Registro de los pacientes actuales.
-  3. Registro de todas las citas.
+  	
+	1. Registo de los tratamientos (acabados y en curso).
+ 	2. Registro de los pacientes actuales.
+  	3. Registro de todas las citas.
 
 # **Requisitos funcionales (ordenados por grupos)**
     1. Añadir o eliminar pacientes.
