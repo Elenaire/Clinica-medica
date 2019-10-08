@@ -20,4 +20,4 @@
 
 **Flujos alternativos**:
 
-4.a. Si no existen citas en el rango seleccionado, se muestra un mensaje de error
+5.a. Si no existen citas en el rango seleccionado, se muestra un mensaje de error
