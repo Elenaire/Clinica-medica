@@ -10,14 +10,14 @@
 
 **Flujo principal**:
 1. El administrador desea consultar las próximas citas
-2. El administrador ab
-3. El administrador introduce el nombre y apellidos del usuario
-4. El sistema muestra por pantalla los datos del usuario
+2. El administrador elige la opción "Consultar citas"
+3. El administrador elige el rango en el cual quiere ver las próximas citas, o todas
+4. El sistema muestra por pantalla las citas en el rango seleccionado
 
 **Postcondiciones**:
 
-* Se muestran al administrador las distintas operaciones relativas al usuario
+* Ninguna
 
 **Flujos alternativos**:
 
-4.a. Si no existe el usuario, se muestra un mensaje de error
+4.a. Si no existen citas en el rango seleccionado, se muestra un mensaje de error
