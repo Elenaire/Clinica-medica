@@ -20,5 +20,5 @@
 
 **Flujos alternativos**:
 
-2.a.SI el usuario agregado ya existe, se preguntará al administrador si quiere modificar este o no.
+2.a Si el usuario agregado ya existe, se preguntará al administrador si quiere modificar este o no.
 
