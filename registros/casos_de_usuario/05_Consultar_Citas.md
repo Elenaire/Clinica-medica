@@ -3,15 +3,15 @@
 **ID**: 05
 **Descripción**: Permite visualizar las próximas citas en rangos de 7,15 o 30 días o la totalidad de las citas
 
-**Actores principales**: Administrador
+**Actores principales**: Secretario
 
 **Precondiciones**:
 * Existencia de citas
 
 **Flujo principal**:
-1. El administrador desea consultar las próximas citas
-2. El administrador elige la opción "Consultar citas"
-3. El administrador elige el rango en el cual quiere ver las próximas citas, o todas
+1. El secretario desea consultar las próximas citas
+2. El secretario elige la opción "Consultar citas"
+3. El secretario elige el rango en el cual quiere ver las próximas citas, o todas
 4. El sistema muestra por pantalla las citas en el rango seleccionado
 
 **Postcondiciones**:
