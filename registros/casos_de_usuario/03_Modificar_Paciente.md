@@ -1,4 +1,3 @@
-
 ## Modificar Paciente
 
 **ID**: 03
@@ -12,11 +11,10 @@
 
 **Flujo principal**:
 1. El secretario desea modificar los datos de un paciente
-2. El secretario abre el cuadro de diálogo de búsqueda en el menú principal
-3. El secretario introduce el nombre y apellidos del paciente
-4. El sistema muestra por pantalla los datos del paciente
-5. El sistema pregunta que datos del usuario desea modificar
-6. El secretario modifica los datos del paciente
+2. El secretario selecciona la opción de modificar paciente
+3. El sistema pregunta que datos del usuario desea modificar
+4. El sistema pide confirmación de cambios
+5. El secretario modifica los datos del paciente
 
 **Postcondiciones**:
 
@@ -24,5 +22,5 @@
 
 **Flujos alternativos**:
 
-3.a Si no existe el usuario, se muestra un mensaje de error
+3.a Si algun dato no es valido se pedirá al secretario que lo vuelva a introducir
 

@@ -10,7 +10,7 @@
 
 **Flujo principal**:
 1. El secretario desea consultar los datos de un paciente
-2. El secretario selecciona buscar en el menú principal
+2. El secretario selecciona la opción buscar paciente
 3. El secretario selecciona el metodo de busqueda del paciente
 4. El secretario instroduce los parametros de busqueda segun el metodo elegido de busqueda
 5. Se muestran los datos de ese paciente
