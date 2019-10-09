@@ -49,6 +49,6 @@
 10. Permitir a los pacientes anular citas desde su casa
 11. Modificar citas
 # **Requisitos no funcionales**
-1.Sistema operativo Linux
-2.Lenguaje de implementación: C++
-3.Máximo almacenamiento()
+* Sistema operativo Linux
+* Lenguaje de implementación: C++
+* Máximo almacenamiento()
