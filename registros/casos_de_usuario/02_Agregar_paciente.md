@@ -22,4 +22,4 @@
 
 2.a Si el usuario agregado ya existe, se preguntará al administrador si quiere modificar este o no
 
-2.b Si algun dato no es valido se pedirá añ secretario que lo vuelva a introducir
+2.b Si algun dato no es valido se pedirá al secretario que lo vuelva a introducir
