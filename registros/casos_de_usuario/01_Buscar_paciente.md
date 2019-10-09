@@ -17,10 +17,10 @@
 
 **Postcondiciones**:
 
-* Se habre el menu de opciones de pacientes
+* Se abre el menu de opciones de ese paciente
 
 **Flujos alternativos**:
 
-1.a Si no existen pacientes con los parametros introducidos se mostrara un mensaje de error
+4.a Si no existen pacientes con los parametros introducidos se mostrara un mensaje de error
 
-1.b Si existe mas de un usuario con los parametros introducidos se mostrara una lista con los pacientes que los cumplan ordenados por una opción por defecto y dando la opción de volver a introducir parametros de busqueda y ordenación
+4.b Si existe mas de un usuario con los parametros introducidos se mostrara una lista con los pacientes que los cumplan ordenados por una opción por defecto y dando la opción de volver a introducir parametros de busqueda y ordenación

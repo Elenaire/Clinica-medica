@@ -1,7 +1,7 @@
 ## Modificar cita
 
 **ID**: 07
-**Descripción**: Modfica uno o varios campos de una cita
+**Descripción**: Modficalos datos de una cita
 
 **Actores principales**: Secretario
 
@@ -13,7 +13,8 @@
 2. El secretario selecciona la opción de modificar cita
 3. El secretario selecciona la cita
 4. El secretario introduce los nuevos datos
-5. El sistema guarda los nuevos datos de la cita
+5. El sistema pide el secretario que confime si los datos son correctos
+6. El sistema guarda los nuevos datos de la cita
 
 **Postcondiciones**:
 
@@ -21,4 +22,6 @@
 
 **Flujos alternativos**:
 
-7.a Si el secretario introduce un dato no válido en un campo, se le volverá a pedir.
+4.a Si el secretario introduce un dato no válido en un campo, se le volverá a pedir
+
+4.a Si el secretario no confirma los cambios la cita no se verá modificada

@@ -6,7 +6,6 @@
 **Actores principales**: Secretario
 
 **Precondiciones**:
-* Existencia de pacientes en lista
 * Haber seleccionado un paciente
 
 **Flujo principal**:
@@ -17,3 +16,7 @@
 **Postcondiciones**:
 
 * Se elimina al paciente
+
+**Flujos alternativos**:
+
+3.a Si el secretario no confirma no se eliminara

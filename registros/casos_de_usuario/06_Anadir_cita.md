@@ -6,7 +6,7 @@
 **Actores principales**: Secretario
 
 **Precondiciones**:
-* Ninguna
+* Haber seleccionado un paciente
 
 **Flujo principal**:
 1. El secretario desea añadir una cita para un paciente
@@ -21,5 +21,9 @@
 
 **Flujos alternativos**:
 
-4.a. Si el secretario habia selecionado previamente a un paciente no se pedira que introduzca al paciente
+3.a. Si el secretario habia selecionado previamente a un paciente no se pedira que introduzca al paciente
+
+3.b Si algun dato no es valido se pedirá al secretario que lo vuelva a introducir
+
+4.a Si el secretario no confirma los cambios se cancela la acción
 

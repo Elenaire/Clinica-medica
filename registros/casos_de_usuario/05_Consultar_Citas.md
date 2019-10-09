@@ -20,4 +20,4 @@
 
 **Flujos alternativos**:
 
-5.a. Si no existe un registro con las citas se muestra un mensaje de error
+2.a Si no existe un registro con las citas se muestra un mensaje de error
