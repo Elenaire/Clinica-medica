@@ -3,18 +3,18 @@
 **ID**: 04
 **Descripción**: Se eliminan los datos de un paciente
 
-**Actores principales**: Administrador
+**Actores principales**: Secretario
 
 **Precondiciones**:
 * Existencia de pacientes en lista
 * Búsqueda del paciente a eliminar
 
 **Flujo principal**:
-1. El administrador desea eliminar un paciente
-2. El administrador abre el cuadro de diálogo de búsqueda en el menú principal
-3. El administrador introduce el nombre y apellidos del paciente
+1. El secretario desea eliminar un paciente
+2. El secretario abre el cuadro de diálogo de búsqueda en el menú principal
+3. El secretario introduce el nombre y apellidos del paciente
 4. El sistema muestra por pantalla los datos del paciente
-5. El administrador selecciona la opción de eliminar paciente
+5. El secretario selecciona la opción de eliminar paciente
 
 **Postcondiciones**:
 
