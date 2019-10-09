@@ -1,7 +1,6 @@
 ## Añadir una cita a la agenda
 
 **ID**: 06         
-----------------------------------------------------------------------------------------------------------------------
 **Descripción**: Se introduce una cita y esta se añade al registro de citas.
 
 **Actores principales**: Secretario
@@ -11,15 +10,16 @@
 
 **Flujo principal**:
 1. El secretario desea añadir una cita para un paciente
-2. El secretario se desplaza a la opción añadir cita dentro de un paciente
-3. El secretario introduce la fecha de la siguiente cita y la guarda
-4. El sistema muestra por pantalla si el usuario introduce un dato erróneo
+2. El secretario selecciona la opción de añadir cita
+3. El secretario introduce la fecha de la cita, el paciente y tiene la opcion de añadir un comentario a la cita
+4. Se muestran los datos y se pide confirmación para guardar la cita
 5. Al terminar se muestra por pantalla un mensaje de acción llevada a cabo con éxito
 
 **Postcondiciones**:
 
-* Se añade la cita al registro de cita.
+* Ninguna
 
 **Flujos alternativos**:
 
-4.a. Si introduce un dato erróneo se manda un mensaje de error y pide de nuevo el dato
+4.a. Si el secretario habia selecionado previamente a un paciente no se pedira que introduzca al paciente
+
