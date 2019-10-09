@@ -20,8 +20,7 @@
   
   1. Fecha de la cita
   2. Paciente correspondiente a cada cita
-  3. Número de cada cita
- 4. Concepto de las citas
+  3. Comentarios (opcional)
 
  **Tratamientos**
   
