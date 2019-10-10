@@ -6,7 +6,7 @@
 
 **Precondiciones**:
 * Existencia de notas asociada a un paciente
-
+* Haber seleccionado un paciente
 **Flujo principal**:
 1. El secretario desea eliminar una nota sobre un paciente
 2. El secretario selecciona la nota que desea eliminar
