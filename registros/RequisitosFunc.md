@@ -7,31 +7,37 @@
 
  **Pacientes de la clínica**
     
-1. Nombre y apellidos
-2. Dirección
-3. Fecha de nacimiento
-4. Teléfono
-5. Código Postal
-6. Tipo de paciente (privado o público)    
+1. Numero del paciente
+2. Nombre y apellidos
+3. Dirección
+4. Fecha de nacimiento
+5. Teléfono
+6. Código Postal
+7. Tipo de paciente (privado o público)    
 
  **Citas de la clínica**
   
-  1. Fecha de la cita
-  2. Paciente correspondiente a cada cita
-  3. Comentarios (opcional)
+ 1. Numero de cita
+ 2. Fecha de la cita
+ 3. Paciente correspondiente a cada cita
+ 4. Comentarios (opcional)
 
  **Tratamientos**
   
-  1. Medicamentos
-  2. Concentraciones
-  3. Regularidad
-  4. Fecha (inicio/final)
+  1. Numero del tratamiento
+  2. Medicamentos
+  3. Concentraciones
+  4. Regularidad
+  5. Fecha (inicio/final)
+  6. Concluido (sin concluir/concluido/finalizado con exito)
+  7. Comentarios (opcional)
  
  **Historial**
   	
- 1. Registo de los tratamientos (acabados y en curso)
- 2. Registro de las notas tomadas
- 3. Registro de todas las citas
+ 1. Numero de registro
+ 2. Registo de los tratamientos (acabados y en curso)
+ 3. Registro de las notas tomadas
+ 4. Registro de todas las citas
 
 # **Requisitos funcionales**
 

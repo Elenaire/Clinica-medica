@@ -1,6 +1,6 @@
 ## Añadir Tratamiento
 
-**ID**: 9
+**ID**: 09
 **Descripción**: Añade un tratamiento a un paciente
 
 **Actores principales**: Secretario
@@ -12,7 +12,7 @@
 1. El secretario desea añadir un tratamiento a un paciente
 2. El secretario selecciona la opción de añadir tratamiento
 3. El secretario introduce los datos del tratamiento
-4. El sistema pide al secretario que confime si el tratamiento es correcto
+4. El sistema pide al secretario que confirme si el tratamiento es correcto
 5. El sistema guarda el tratamiento del paciente
 
 **Postcondiciones**:

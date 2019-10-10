@@ -1,6 +1,6 @@
 ## Consultar tratamiento
 
-**ID**: 10
+**ID**: 11
 **Descripción**: Accede a los datos del tratamiento de un paciente
 
 **Actores principales**: Secretario

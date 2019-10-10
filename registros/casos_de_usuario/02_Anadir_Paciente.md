@@ -10,7 +10,7 @@
 
 **Flujo principal**:
 1. El secretario desea agregar un nuevo paciente
-2. El secretario selecciona la opcin de agregar paciente
+2. El secretario selecciona la opción de agregar paciente
 3. El secretario introduce los datos del nuevo paciente
 4. El sistema pide el secretario que confime si los datos son correctos
 5. El sistema guarda los datos del paciente
@@ -23,7 +23,7 @@
 
 3.a Si algun dato no es valido se pedirá al secretario que lo vuelva a introducir
 
-4.a Si el secretario no confirma los cambios se cancela la acción
+4.a Si el secretario no confirma los datos se cancela la acción
 
 5.a Si el usuario agregado ya existe, se preguntará al administrador si quiere modificar este o no
 

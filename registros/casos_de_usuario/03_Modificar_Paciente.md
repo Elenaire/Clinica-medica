@@ -1,4 +1,4 @@
-## Modificar Paciente
+## Modificar paciente
 
 **ID**: 03
 **Descripción**: Permite modificar uno o varios datos de un paciente

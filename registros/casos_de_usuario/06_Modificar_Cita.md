@@ -18,7 +18,7 @@
 
 **Postcondiciones**:
 
-* El sistema emite un mensaje informado de la modificación de los datos
+* Se muestra un mensaje informando de la correcta modificación de los datos
 
 **Flujos alternativos**:
 
