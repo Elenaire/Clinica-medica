@@ -6,6 +6,7 @@
 
 **Precondiciones**:
 * Existencia de notas asociada a un paciente
+* Haber seleccionado un paciente
 
 **Flujo principal**:
 1. El secretario desea modificar una nota sobre un paciente
