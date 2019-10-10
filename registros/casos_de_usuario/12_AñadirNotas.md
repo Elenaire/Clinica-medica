@@ -7,6 +7,7 @@
 
 **Precondiciones**:
 * Existencia de pacientes
+* Haber seleccionado uno de los pacientes
 
 **Flujo principal**:
 1. El secretario desea añadir una nota sobre un paciente
