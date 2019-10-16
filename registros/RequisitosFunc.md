@@ -1,7 +1,7 @@
 # **Partes interesadas:**
 
-1. Clínica Médica.
-2. Grupo 3 IS.
+1. Clínica
+2. Desarrolladores
 
 # **Datos que gestiona el sistema**
 
@@ -53,6 +53,7 @@
 10. Consutar historial y/o tratamientos del paciente
 10. Modificar historial del paciente
 11. Modificar tratamiento
+12. Cancelar tratamiento
 
 # **Requisitos no funcionales**
 * Sistema operativo Linux

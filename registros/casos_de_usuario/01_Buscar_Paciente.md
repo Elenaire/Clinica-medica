@@ -13,7 +13,9 @@
 2. El secretario selecciona la opción buscar paciente
 3. El secretario selecciona el metodo de busqueda del paciente
 4. El secretario instroduce los parametros de busqueda segun el metodo elegido de busqueda
-5. Se muestran los datos de ese paciente
+5. Se listan los pacientes en función de los parametros introducidos
+6. El secretario seleciona a un paciente de la lista
+7. Se muestran los datos de ese paciente
 
 **Postcondiciones**:
 

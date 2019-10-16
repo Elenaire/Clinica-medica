@@ -10,8 +10,8 @@
 
 **Flujo principal**:
 1. El secretario desearía consultar un tratamiento
-2. El secretario selecciona la opción de consulta tratamiento
-3. El secretario se muestran los tratamientos recientes del paciente
+2. El secretario selecciona la opción de consultar tratamiento
+3. El sistema muestra por pantalla los tratamientos que está siguiendo el paciente
 
 **Postcondiciones**:
 
@@ -21,4 +21,4 @@
 
 2.a Si el paciente no ha recibido tratamientos se le informará al secretario de esto y finalizara la acción
 
-
+3.a. Si el paciente no está siguiendo ningun tratamiento no se mostrá nada
