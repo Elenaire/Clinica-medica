@@ -1,9 +1,9 @@
 **ID**: 13
-**Nombre**: modificar historial
+**Nombre**: Modificar historial
 
-**Prioridad** (de 1 a 10): ?
-**Puntos estimado**: ?
-**Iteración**: ?
+**Prioridad** (de 1 a 10): 4
+**Puntos estimado**: 4
+**Iteración**: 3
 
 **Responsable**: Pendiente
 

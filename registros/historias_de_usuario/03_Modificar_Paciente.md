@@ -1,9 +1,9 @@
 **ID**: 03
 **Nombre**: Modificar paciente
 
-**Prioridad** (de 1 a 10): ?
-**Puntos estimado**: ?
-**Iteración**: ?
+**Prioridad** (de 1 a 10): 6
+**Puntos estimado**: 3
+**Iteración**: 3
 
 **Responsable**: Pendiente
 

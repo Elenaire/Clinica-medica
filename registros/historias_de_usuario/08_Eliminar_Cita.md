@@ -1,9 +1,9 @@
 **ID**: 08
 **Nombre**: Eliminar cita
 
-**Prioridad** (de 1 a 10): ?
-**Puntos estimado**: ?
-**Iteración**: ?
+**Prioridad** (de 1 a 10): 7
+**Puntos estimado**: 2
+**Iteración**: 3
 
 **Responsable**: Pendiente
 

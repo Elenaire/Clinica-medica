@@ -1,9 +1,9 @@
 **ID**: 06
 **Nombre**: Modificar cita
 
-**Prioridad** (de 1 a 10): ?
-**Puntos estimado**: ?
-**Iteración**: ?
+**Prioridad** (de 1 a 10): 3
+**Puntos estimado**: 2
+**Iteración**: 3
 
 **Responsable**: Pendiente
 

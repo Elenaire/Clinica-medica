@@ -1,9 +1,9 @@
 **ID**: 10
 **Nombre**: Modificar tratamiento
 
-**Prioridad** (de 1 a 10): ?
-**Puntos estimado**: ?
-**Iteración**: ?
+**Prioridad** (de 1 a 10): 5
+**Puntos estimado**: 4
+**Iteración**: 3
 
 **Responsable**: Pendiente
 
