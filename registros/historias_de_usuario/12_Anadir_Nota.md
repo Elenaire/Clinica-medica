@@ -1,23 +1,17 @@
-## Añadir nota
+**ID**: 12
+**Nombre**: Añadir nota
 
-**ID**: 12   
-**Descripción**: Se introduce una nota y esta se añade al historial.
+**Prioridad** (de 1 a 10): ?
+**Puntos estimado**: ?
+**Iteración**: ?
 
-**Actores principales**: Secretario
+**Responsable**: Pendiente
 
-**Precondiciones**:
-* Haber seleccionado un paciente
+#### Descripción
 
-**Flujo principal**:
-1. El secretario desea añadir una nota al historial de un paciente
-2. El secretario selecciona la opción de añadir nota 
-3. El secretario introduce la nota
-4. Se pide confirmación para guardar la nota
+Como *secretario de la clínica* quiero *poder añadir anotaciones al historial de mis pacientes* para *tenerlo en cuenta a la hora de tratar a mis pacientes*
 
-**Postcondiciones**:
+#### Validación
 
-* Se muestra un mensaje informando de que se ha añadido correctamente
-
-**Flujos alternativos**:
-
-4.a Si el secretario no confirma guardar la nota se cancela la acción
+* Se deben poder guardar notas
+* Se debe pedir confirmación antes de guardar las notas
