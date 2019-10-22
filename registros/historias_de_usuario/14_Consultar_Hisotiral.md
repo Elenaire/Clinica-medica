@@ -5,7 +5,7 @@
 **Puntos estimado**: 5
 **Iteración**: 2
 
-**Responsable**: Pendiente
+**Responsable**: Rafael Varona Serrano
 
 #### Descripción
 
