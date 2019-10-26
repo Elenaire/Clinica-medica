@@ -5,7 +5,7 @@
 **Puntos estimado**: 4
 **Iteración**: 3
 
-**Responsable**: Pendiente
+**Responsable**: Elena Martín
 
 #### Descripción
 

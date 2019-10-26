@@ -5,7 +5,7 @@
 **Puntos estimado**: 2
 **Iteración**: 1
 
-**Responsable**: Pendiente
+**Responsable**: Javier Roldán
 
 #### Descripción
 
