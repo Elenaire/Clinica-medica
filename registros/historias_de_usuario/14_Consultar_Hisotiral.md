@@ -5,11 +5,7 @@
 **Puntos estimado**: 5
 **Iteración**: 2
 
-<<<<<<< HEAD
 **Responsable**: Rafael Varona
-=======
-**Responsable**: Rafael Varona Serrano
->>>>>>> a121ffde2181755dcc3e33e43bb848567da152fd
 
 #### Descripción
 
