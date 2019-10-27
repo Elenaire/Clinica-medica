@@ -58,4 +58,7 @@
 # **Requisitos no funcionales**
 * Sistema operativo Linux
 * Lenguaje de implementación: C++
-* Máximo almacenamiento()
+* No habrá pacientes duplicado
+* Las citas no se solaparan
+* Se pediran confirmaciones antes de añadir, borrar o modificar
+* No se podran borrar ni modificar tratamientos o historiales a menos que sean recientes
