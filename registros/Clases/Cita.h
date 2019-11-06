@@ -11,7 +11,7 @@
 
 		void mostrarRegistro() override;			//Muestra por pantalla los datos de la cita
 		bool modificable() override;
-		borrarCita();			//Elimina la cita de la agenda
+		void borrar() override;
 		-Cita();				//Destructor
 	}
 #endif

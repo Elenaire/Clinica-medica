@@ -17,7 +17,7 @@
 
 		void mostrarRegistro() override;		//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
-		borrarTratamiento();
+		void borrar() override;
 		-Tratamiento();				//Destructor
 	}
 #endif

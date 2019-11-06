@@ -12,6 +12,7 @@
 		Registro();					//Constructor
 		virtual void mostrarRegistro();
 		virtual bool modificable(); //Devuelve true si el registro puede modificarse y false si no puede
+		virtual void borrar();		//Borra el registro del historial
 	}
 #endif
 

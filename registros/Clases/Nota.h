@@ -3,7 +3,7 @@
 	#include "Registro.h"
 	class Nota:public Registro{
 	private:
-		strict contenido_;
+		string contenido_;
 	public:
 		Nota();					//Constructor
 
@@ -11,7 +11,7 @@
 
 		void mostrarRegistro() override;			//Muestra por pantalla los datos de la nota
 		bool modificable() override;
-		borrarNota();			//Elimina la nota dle historial
+		void borrar() override;
 		-Nota();				//Destructor
 	}
 #endif
