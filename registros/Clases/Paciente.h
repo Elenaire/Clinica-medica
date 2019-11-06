@@ -16,28 +16,20 @@
 		int telefono_;
 		int codpostal_;
 		int tipo_;				//Publico 0, Privado 1, otro posible tipo otro numero
-		list <tratamiento> tratamientos_;
-		list <nota> notas_;
 	public:
-		Paciente();				//Constructor  (Tengo que mirar si se pueden hacer 2 constructores, uno pasandole los daots y solo con la id y que lo lea de un fichero)
+		Paciente();				//Constructor  (Tengo que mirar si se pueden hacer 2 constructores, uno pasandole los datos y solo con la id y que lo lea de un fichero)
 
-		// get y set			//Incluidos cita, nota y tratamiento 
-
-		cargarCitas();
-		addTratamiento();
-		addCita();
+		// get y set
+		getCitas();
+		getTratamientos();
+		getNotas();
 		mostrarPaciente();		//Muestra por pantalla los datos del paciente
-		mostrarHCitas();		//Muestra el historial de citas
-		mostrarTratamientos();	//Muestra los tratamientos historial o actuales
-		mostrarHNotas();		//Muestra el historial de notas
+		mostrarTratamientos();	//Muestra los tratamientos actuales
 		mostrarHistorial();		//Muestra el historial de citas,tratamientos y notas ordenado por fecha sin distinguir el tipo
-		guardarPaciente();		//Añade o modifica al paciente en el fichero de pacientes
-		cargarTratamientos();
-		cargarNotas();
-		cargarCitas();
-		addTratamiento();
 		addCita();
+		addTratamiento();
 		addNota();
+		guardarPaciente();		//Añade o modifica al paciente en el fichero de pacientes
 		borrarPaciente();		//Elimina al paciente del fichero de pacientes y elimina todos sus datos
 		-Paciente();			//Destructor
 	}

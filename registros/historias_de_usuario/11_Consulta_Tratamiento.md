@@ -15,4 +15,5 @@ Como *secretario de la clínica* quiero *consultar el tratamiento de mi paciente
 
 * Se deben mostrar los datos de los tratamientos que está llevando el paciente
 * Se debe dar la opción de consultar el historial de tratamientos
-* Se debe mostrar el mensaje de error correspondiente cuando el paciente no haya recibido tratamientos
+* Se debe mostrar el mensaje de error correspondiente cuando el paciente no esté reciviendo tratamientos
+* Se debe actualizar el estado de los tratamientos finalizados
