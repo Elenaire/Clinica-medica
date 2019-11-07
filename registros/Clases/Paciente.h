@@ -24,8 +24,11 @@
 		getTratamientos();
 		getNotas();
 		mostrarPaciente();		//Muestra por pantalla los datos del paciente
-		mostrarTratamientos();	//Muestra los tratamientos actuales
-		mostrarHistorial();		//Muestra el historial de citas,tratamientos y notas ordenado por fecha sin distinguir el tipo
+		mostrarTratamientos ();		// Muestra los tratamientos actuales
+		mostrarHCitas ();		// Muestra el historial de citas
+		mostrarHTratamientos ();	// Muestra el historial de tratamientos
+		mostrarHNotas ();		// Muestra el historial de notas
+		mostrarHistorial ();		// Muestra el historial de citas, estudios y notas ordenadas por fecha sin distinguir el tipo
 		addCita();
 		addTratamiento();
 		addNota();
