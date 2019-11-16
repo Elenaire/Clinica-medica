@@ -1,5 +1,20 @@
 #include "funciones.h"
 
+void hoy(struct fecha &f){
+	time_t aux=time(0);
+	tm *t=localtime(&aux);
+	f.a=t->tm_year;
+	f.m=t->tm_mon;
+	f.d=t->tm_mday;
+}
+void hoy(struct hora &h){
+	time_t aux=time(0);
+	tm *t=localtime(&aux);
+	h.h=t->tm_hour;
+	h.m=t->tm_min;
+	h.s=t->tm_sec;
+}
+
 int dias(struct fecha f1,struct fecha f2){		//Devulve los dias transcurridos desde f1 hasta f2, si ha transcurrido mas de un mes devulve 100, f2 es anterios a f1 devuelve un numero negativo
 		int mes[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 		int aux,a,m,d;

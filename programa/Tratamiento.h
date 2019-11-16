@@ -11,7 +11,7 @@
 		int estado_;			//Sin concluir 0,finalizado con exito 1, concluido -1
 		strict comentario_;
 	public:
-		Tratamiento();					//Constructor
+		Tratamiento(int paciente);					//Constructor
 		void mostrarRegistro() override;		//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
 		bool borrar() override;
@@ -39,7 +39,7 @@
 		inline int getEstado()const{
 			return estado_;
 		}
-		inline void setFechaInicio(const int n){		//Me fio de que no vais a introcudir ningun numero extraño
+		inline void setEstado(const int n){		//Me fio de que no vais a introcudir ningun numero extraño
 			estado_=n;
 		}
 		inline string getComentario()const{

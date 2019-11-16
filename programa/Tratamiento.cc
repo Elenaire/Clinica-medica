@@ -1,6 +1,12 @@
 #include "Tratamiento.h"
 
-		Tratamiento::Tratamiento(){}				//Constructor
+Tratamiento::Tratamiento(int paciente):Registro(paciente){				//Constructor
+	medicamento_="";
+	comentario_="";
+	regularidad_="";
+	estado_=0;
+	comentario_="";
+}
 
 
 	private:
@@ -14,26 +20,26 @@
 
 
 
-		void Tratamiento::mostrarRegistro() override{
-			cout<<"Tratamento de "<<medicamento_<<ennl<<"Concentración de "<<concentracion_<<endl<<"Con regularidad "<<regularidad_<<end;
-			printf("Iniciado el %d/%d/%d ",inicio_.d,inicio_.m,inicio_.a);
-			switch(estado_){
-				case -1:
-					printf("y cancelado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
-					break;
-				case 0:
-					printf("y con previsión de finalizarse el %d/%d/%d\n",final_.d,final_.m,final_.a);
-				break;
-				default:
-					printf("y finalizado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
-			}
-			cout<<comentario_;
-		}
-		bool modificable() override{
-			if(modificable_){
-				return modificable_
-			}
-			else if(){
-			}
-		}
-		bool borrar() override;
+void Tratamiento::mostrarRegistro() override{
+/*	cout<<"Tratamento de "<<medicamento_<<ennl<<"Concentración de "<<concentracion_<<endl<<"Con regularidad "<<regularidad_<<end;
+	printf("Iniciado el %d/%d/%d ",inicio_.d,inicio_.m,inicio_.a);
+	switch(estado_){
+		case -1:
+			printf("y cancelado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
+			break;
+		case 0:
+			printf("y con previsión de finalizarse el %d/%d/%d\n",final_.d,final_.m,final_.a);
+		break;
+		default:
+			printf("y finalizado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
+	}
+	cout<<comentario_;*/
+}
+bool modificable() override{
+	if(modificable_){
+		return modificable_
+	}
+	else if(){			//---------------
+	}
+}
+bool borrar() override;
