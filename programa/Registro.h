@@ -17,6 +17,6 @@
 		virtual void mostrarRegistro();
 		virtual bool modificable(); //Devuelve true si el registro puede modificarse y false si no puede
 		virtual bool borrar();		//Borra el registro del historial
-	}
+	};
 #endif
 

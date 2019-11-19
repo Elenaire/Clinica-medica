@@ -17,6 +17,7 @@ void menuPaciente(Paciente p){
 		case /*añadir tratamiento*/:		//Añadir tratamiento +Hecho  -Funciones
 			Tratamiento t(p.getID());
 			char c;
+			bool bucle=true;
 			string aux;
 			fecha f,f1,f2;
 			hoy(f);
@@ -29,16 +30,33 @@ void menuPaciente(Paciente p){
 			printf("Regularidad: ");
 			cin>>aux;
 			t.setRegularidad(aux);
-			do{
+			while(bucle){
 				printf("Fecha de inicio: ");
-				while(leerFecha(f1)!=true){
+				while(bucle){
+					if(leerFecha(f1)!=true){
 					printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
-				}						
-				printf("Fecha de finalización: ");
-				while(leerFecha(f2)!=true){
-					printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+					}
+					else if(dias(f,f1)<0||modificable_==false){			//Modificable_
+						printf("Esa fecha ya ha pasado\n");
+					}
+					else{
+						bucle=false;
+					}
 				}
-			}while((dias(f1,f2))&&(dias(f,f1)))		//hoy?-----------------------
+				printf("Fecha de finalización: ");
+				bucle=true;
+				while(bucle){
+					if(leerFecha(f2)!=true){
+						printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+					}
+					else if(dias(f1,f2)){
+						printf("El tratamiento no puede finalizar antes de empezar\n");
+					}
+					else{
+						bucle=false;
+					}
+				}
+			}
 			t.setFechaInicio(f1);
 			t.setFechaFinal(f2);
 			printf("introduzca un comentario(opcional): ");
