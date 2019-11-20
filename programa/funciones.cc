@@ -15,28 +15,29 @@ void hoy(struct hora &h){
 	h.s=t->tm_sec;
 }
 bool leerFecha(struct fecha &f){
-	if(scanf("%2d/%2d/%4d",f.d,f.m,f.a)==EOF){
+	if(scanf("%2d/%2d/%4d",&f.d,&f.m,&f.a)==EOF){
 		return false;
 	}
 	return true;
 }
 bool leerHora(struct hora &h){
 	h.s=0;
-	if(scanf("%2d:%2d",h.h,h.m)==EOF){
+	if(scanf("%2d:%2d",&h.h,&h.m)==EOF){
 		return false;
 	}
 	return true;
 }
 
 char* escribeFecha(struct fecha const &f){
-	char c[11];
+	char *c=(char*)malloc(11*sizeof(char));
 	sprintf(c,"%2d/%2d/%4d",f.d,f.m,f.a);
 	return c;
 }
 char* escribeHora(struct hora const &h){
-	char c[5];
+	char *c=(char*)malloc(5*sizeof(char));
 	sprintf(c,"%2d:%2d",h.h,h.m);
 	return c;
+}
 
 int dias(struct fecha f1,struct fecha f2){		//Devulve los dias transcurridos desde f1 hasta f2, si ha transcurrido mas de un mes devulve 100, f2 es anterios a f1 devuelve un numero negativo
 		int mes[12]={31,28,31,30,31,30,31,31,30,31,30,31};
@@ -76,4 +77,24 @@ int dias(struct fecha f1,struct fecha f2){		//Devulve los dias transcurridos des
 			}
 		}
 		return aux;	
+	}
+	int minutos(struct hora h1,struct hora h2){
+		int h,m;
+		h=h2.h-h1.h;
+		if(h==0){
+			m=h2.m-h1.m;
+		}
+		else if(h>0){
+			m=100;
+			if(h==1){
+				m=(60-h1.m+h2.m);
+			}
+		}
+		else if(h<0){
+			m=-100;
+			if(h==-1){
+				m=-(60-h2.m+h1.m);
+			}
+		}
+		return m;
 	}

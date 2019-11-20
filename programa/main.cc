@@ -84,7 +84,8 @@ void menuPaciente(Paciente p){
 }
 
 int main(){
-	int menu;
+	int menu;			
+	//modificable_=false;
 	/*
 	Inicio
 	*/
