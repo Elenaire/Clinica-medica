@@ -10,15 +10,11 @@
 #include "Tratamiento.h"
 #include "Nota.h"
 
+using namespace std;
+
 class Paciente
 {
 private:
-  list <Cita> citas_;
-  list <Cita>::iterator c_;
-  list <Tratamiento> tratamientos_;
-  list <Tratamiento>::iterator t_;
-  list <Notas> notas_;
-  list <Notas>::iterator n_;
   int id_;
   string nombre_;
   string apellidos_;
@@ -49,6 +45,8 @@ public:
   list <Tratamiento> getTratamiento();
   list <Nota> getNotas();
   void mostrarPaciente();
+  void mostrarRegistro();
+
 
 };
 

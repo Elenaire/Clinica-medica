@@ -36,12 +36,108 @@ list <Cita> Paciente::getCitas()
 {
   list <Cita> aux;
   list <Cita>::iterator c;
-  ifstream file("citas.txt")
-
-
-
-
+  ifstream file;
+  file.open("citas.txt")
+  string cad
+  for(c=aux.begin();c!=aux.end();c++)
+  {
+  	getline(file,cad,"/");
+    (c->fecha_)->d=stoi(cad);
+    getline(file,cad,"/");
+    (c->fecha_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (c->fecha_)->a=stoi(cad);
+    getline(file,cad,":");
+    (c->hora_)->h=stoi(cad);
+    getline(file,cad,":");
+    (c->hora_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (c->hora_)->s=stoi(cad);
+    getline(file,cad,"||");
+    c->paciente_=stoi(cad);
+    getline(file,(c->comentario_),"\n");
+    aux.push_back(c);
+  }
+  file.close();
+  return aux;
 }
+
+list <Tratamiento> Paciente::getTratamiento()
+{
+  list <Tratamiento> aux;
+  list <Tratamiento>::iterator t;
+  ifstream file;
+  file.open("Tratamientos.txt")
+  string cad
+  for(t=aux.begin();t!=aux.end();t++)
+  {
+  	getline(file,cad,"/");
+    (t->fecha_)->d=stoi(cad);
+    getline(file,cad,"/");
+    (t->fecha_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (t->fecha_)->a=stoi(cad);
+    getline(file,cad,":");
+    (t->hora_)->h=stoi(cad);
+    getline(file,cad,":");
+    (t->hora_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (t->hora_)->s=stoi(cad);
+    getline(file,cad,"||");
+    t->paciente_=stoi(cad);
+    getline(file,(t->medicamento_),"||");
+    getline(file,(t->concentracion_),"||");
+    getline(file,(t->regularidad_),"||");
+    getline(file,cad,"/");
+    (t->fecha_inicio_)->d=stoi(cad);
+    getline(file,cad,"/");
+    (t->fecha_inicio_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (t->fecha_inicio_)->a=stoi(cad);
+    getline(file,cad,"/");
+    (t->fecha_final_)->d=stoi(cad);
+    getline(file,cad,"/");
+    (t->fecha_final_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (t->fecha_final_)->a=stoi(cad);
+    getline(file,cad,"\n");
+    t->estado=stoi(cad);
+    aux.push_back(t);
+  }
+  file.close();
+  return aux;
+}
+
+list <Nota> Paciente::getNotas()
+{
+  list <Nota> aux;
+  list <Nota>::iterator n;
+  ifstream file;
+  file.open("citas.txt")
+  string cad
+  for(n=aux.begin();n!=aux.end();n++)
+  {
+  	getline(file,cad,"/");
+    (n->fecha_)->d=stoi(cad);
+    getline(file,cad,"/");
+    (n->fecha_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (n->fecha_)->a=stoi(cad);
+    getline(file,cad,":");
+    (n->hora_)->h=stoi(cad);
+    getline(file,cad,":");
+    (n->hora_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (n->hora_)->s=stoi(cad);
+    getline(file,cad,"||");
+    n->paciente_=stoi(cad);
+    getline(file,(n->nota_),"\n");
+    aux.push_back(n);
+  }
+  file.close();
+  return aux;
+}
+
 
 void Paciente::AddPaciente(Paciente p)
 {
@@ -93,3 +189,73 @@ void Paciente::AddPaciente(Paciente p)
   }
   archivo.close();
 }
+
+void Paciente::mostrarRegistro()
+{
+	list <Cita> aux;
+  list <Cita>::iterator c;
+  ifstream file;
+  file.open("citas.txt")
+  string cad
+  for(c=aux.begin();c!=aux.end();c++)
+  {
+  	getline(file,cad,"/");
+    (c->fecha_)->d=stoi(cad);
+    getline(file,cad,"/");
+    (c->fecha_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (c->fecha_)->a=stoi(cad);
+    getline(file,cad,":");
+    (c->hora_)->h=stoi(cad);
+    getline(file,cad,":");
+    (c->hora_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (c->hora_)->s=stoi(cad);
+    getline(file,cad,"||");
+    c->paciente_=stoi(cad);
+    getline(file,(c->comentario_),"\n");
+    aux.push_back(c);
+  }
+  file.close();
+     //??????????????????????????????????????????
+}
+
+void Paciente::mostrarHCitas()
+{
+  list <Cita> aux;
+  list <Cita>::iterator c;
+  ifstream file;
+  file.open("citas.txt")
+  string cad
+  for(c=aux.begin();c!=aux.end();c++)
+  {
+  	getline(file,cad,"/");
+    (c->fecha_)->d=stoi(cad);
+    getline(file,cad,"/");
+    (c->fecha_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (c->fecha_)->a=stoi(cad);
+    getline(file,cad,":");
+    (c->hora_)->h=stoi(cad);
+    getline(file,cad,":");
+    (c->hora_)->m=stoi(cad);
+    getline(file,cad,"||");
+    (c->hora_)->s=stoi(cad);
+    getline(file,cad,"||");
+    c->paciente_=stoi(cad);
+    getline(file,(c->comentario_),"\n");
+    aux.push_back(c);
+  }
+  file.close();
+  for(c=aux.begin();c!=aux.end();c++)
+  {
+  	if(id_=(c->paciente_))
+  	{
+  		cout<<(c->fecha_)->d<<endl;
+  		cout<<(c->fecha_)->m<<endl;
+  		cout<<(c->fecha_)->a<<endl;
+  	}
+  }
+}
+
+
