@@ -98,3 +98,140 @@ int dias(struct fecha f1,struct fecha f2){		//Devulve los dias transcurridos des
 		}
 		return m;
 	}
+
+	bool filtraPacientes(int filtro,list<paciente> &p){			//Sin completar   (edad)
+		if((p.empty)||(filtro==0)){
+			//lee lista de pacientes
+		}
+		else{
+			string aux;
+			string aux2;
+			struct fecha f;
+			int n;
+			list<paciente> lista;
+			list<paciente> iterator i;
+			bool bucle=false;
+			switch(filtro){
+				case 0:
+					return true;
+				break;
+				case 1:
+					getline(cin,aux);
+					for(i=p.begin();i!=p.end();++i){		//Podria no leer el ultimo paciente
+						aux2=i->nombre_+i->apellidos_;
+						if(aux.compare(aux2)){				//Si en aux se encuentra aux2 es positivo, si no coincide algun caracter es negativo
+							lista.push_back(*i);
+						}
+					}
+				break;
+				case 2:
+					getline(cin,aux);
+					for(i=p.begin();i!=p.end();++i){
+						if(aux.compare(i->nombre_)){
+							lista.push_back(*i);
+						}
+					}
+				break;
+				case 3:
+					getline(cin,aux);
+					for(i=p.begin();i!=p.end();++i){
+						if(aux.compare(i->apellidos_)){
+							lista.push_back(*i);
+						}
+					}
+				break;
+				case 4:					//Edad----------
+					getline(cin,aux);
+					for(i=p.begin();i!=p.end();++i){
+						if(aux.compare(i->nombre_)){
+							lista.push_back(*i);
+						}
+					}
+				break;
+				case 5:
+					do{
+						if(leerFecha(f)==false){
+							printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+						}
+					}while (!bucle);
+					for(i=p.begin();i!=p.end();++i){
+						if(f==i->fechanacimiento_){
+							lista.push_back(*i);
+						}
+					}
+				break;
+				case 6:
+					getline(cin,aux);
+					for(i=p.begin();i!=p.end();++i){
+						if(aux.compare(i->direccion_)){
+							lista.push_back(*i);
+						}
+					}
+				break;
+				case 7:
+				scanf("%d",&n);
+				for(i=p.begin();i!=p.end();++i){
+					if(n==i->codpostal_){
+						lista.push_back(*i);
+					}
+				}
+				break;
+				case 8:
+					scanf("%d",&n);
+					for(i=p.begin();i!=p.end();++i){
+						if(n==i->telefono_){
+							lista.push_back(*i);
+						}
+					}
+				break;
+				case 9:
+				for(i=p.begin();i!=p.end();++i){
+					if(i->tipo_==0){
+						lista.push_back(*i);
+					}
+				}
+				break;
+				case 9:
+				for(i=p.begin();i!=p.end();++i){
+					if(i->tipo_==1){
+						lista.push_back(*i);
+					}
+				}
+				break;
+				default:
+						printf("Error, introduzca un numero valido\n");
+						return false;
+			}
+			if(aux.empty){
+				printf("Error, ningun paciente corresponde con su busqueda\n");
+				return false;
+			}
+			else{
+				p=aux;
+			}
+			return true;
+		}
+	}
+
+	void ordenarPacientes(int parametro,list<paciente> &p){			//Necesito crear funciones de ordenación (ojalá pudiera declararlas pero si lo hago alguien me borrara el .h)
+		int orden;
+		switch(parametro){
+			case 1:		//Nombre y apellidos
+				printf("¿Orden ascendente(1) o descendente(-1)? \n");  	//Ordena si es positivo ascendente, si es negativo descendente y si es 0 cancela
+				scanf("%d",&orden);
+					if(orden!=0){
+						//p.sort(funcion);
+						if(orden<0){p.reverse();}
+					}
+			break;
+			case 2:
+
+			break;
+			case 3:
+
+			break;
+			case 0:		//Ordena por id
+
+			break;
+		}
+	}

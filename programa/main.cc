@@ -1,7 +1,45 @@
 #include "Paciente.h"
 
-Paciente buscarPaciente(){
-	//--------------
+Paciente buscarPaciente(){		//Sin completar -ni funciones
+	int menu;
+	list<paciente> pacientes;
+	printf("0 Listar pacientes\nBuscar paciente por:\n1 Nombre completo\n2 Nombre\n3 Apellidos\n 4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Pacientes públicos\n9 Pacientes privados\n-1 Salir\n");
+	scanf("%d",&menu);
+	if(menu>0){
+		filtrarPacientes(menu,pacientes);
+	}
+	while(menu>0){				//se sale con -1 o con negativo?
+		//
+		//Mostrar lista
+		//
+		printf("1 Seleccionar paciente\n2 Ordenar pacientes\n3 Filtra pacientes\n-1 Salir\n");
+		scanf("%d",&menu);
+		switch(menu){
+			case 1:			//Seleccionar paciente
+				printf("Introduzca el id del paciente\n");
+				scanf("%d",&id);
+				for(i=p.begin();i!=pacientes.end();++i){
+					if(i->id_==id){
+						return *i;
+					}
+				}
+				printf("El paciente seleccionado no coincide con los que se muestran por pantalla\n");
+				menu=0;
+			break;
+			case 2:			//Ordenar pacientes
+				printf("Ordenar por:\n1 Nombre\n2 Apellidos\n3 Fecha de nacimiento");
+				scanf("%d",&menu);
+				if(menu>0){ordenarPacientes(menu,pacientes);}
+			break;
+			case 3:			//Filtrar pacientes
+				printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n 4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Pacientes públicos\n9 Pacientes privados\n-1 Salir\n");
+				do{
+					scanf("%d",&menu);
+				}while((menu>0)&&(filtrarPacientes(menu,pacientes)));
+			break;
+		}
+	}
+
 }
 void menuPaciente(Paciente p){
 	int menu;
@@ -12,7 +50,7 @@ void menuPaciente(Paciente p){
 	while(n!=/*salir*/)
 	switch(menu){
 		case 1:
-
+		buscarPaciente();
 		break;
 		case /*añadir tratamiento*/:		//Añadir tratamiento +Hecho  -Funciones
 			Tratamiento t(p.getID());
@@ -22,13 +60,13 @@ void menuPaciente(Paciente p){
 			fecha f,f1,f2;
 			hoy(f);
 			printf("Medicamento: ");		//Empieza a pedir datos
-			cin>>aux;
+			getline(cin,aux);
 			t.setMedicamento(aux);
 			printf("Concemtración: ");
-			cin>>aux;
+			getline(cin,aux);
 			t.setConcentracion(aux);
 			printf("Regularidad: ");
-			cin>>aux;
+			getline(cin,aux);
 			t.setRegularidad(aux);
 			while(bucle){
 				printf("Fecha de inicio: ");
