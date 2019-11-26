@@ -139,53 +139,17 @@ list <Nota> Paciente::getNotas()
 }
 
 
-void Paciente::AddPaciente(Paciente p)
+void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
 {
-  list<Paciente> aux;
-  list<Paciente>::iterator i;
-  ifstream file;
-  file.open("Pacientes.txt");
-  string cad;
-  for (i=aux.begin();i!=aux.end();i++)
-  {
-    getline(file,cad,"||");
-    i->id_=stoi(cad);
-    getline(file,cad,"||");
-    i->nombre_=cad;
-    getline(file,cad,"||");
-    i->apellidos_=cad;
-    getline(file,cad,"||");
-    i->direccion_=cad;
-    getline(file,cad,"/");
-    (i->fechanacimiento_)->d=stoi(cad);
-    getline(file,cad,"/");
-    (i->fechanacimiento_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (i->fechanacimiento_)->a=stoi(cad);
-    getline(file,cad,"||");
-    i->telefono_=stoi(cad);
-    getline(file,cad,"||");
-    i->codpostal_=stoi(cad);
-    getline(file,cad,"\n");
-    i->tipo_=stoi(cad);
-    aux.push_back(i);
-  }
-  file.close();
-  i++;
-  aux.resize(i,p);
-  ofstream archivo;
-  archivo.open("Pacientes.txt");
-  for (i=aux.begin();i!=aux.end();i++)
-  {
-    archivo<<i->id_<<"||";
-    archivo<<i->nombre_<<"||";
-    archivo<<i->apellidos_<<"||";
-    archivo<<(i->fechanacimiento_)->d<<"/";
-    archivo<<(i->fechanacimiento_)->m<<"/";
-    archivo<<(i->fechanacimiento_)->a<<"||";
-    archivo<<i->telefono_<<"||";
-    archivo<<i->codpostal_<<"||";
-    archivo<<i->tipo_<<endl;
+  fstream archivo;
+  archivo.open("Pacientes.txt",std::fstream::app);
+  archivo<<p.id_<<"||";
+  archivo<<p.nombre_<<"||";
+  archivo<<p.apellidos_<<"||";
+  archivo<<escribeFecha(p.fechanacimiento_)<<"||";
+  archivo<<p.telefono_<<"||";
+  archivo<<p.codpostal_<<"||";
+  archivo<<p.tipo_<<endl;
   }
   archivo.close();
 }
@@ -243,7 +207,7 @@ void Paciente::mostrarHCitas()
     (c->hora_)->s=stoi(cad);
     getline(file,cad,"||");
     c->paciente_=stoi(cad);
-    getline(file,(c->comentario_),"\n");
+    getline(file,(c->comentario_),"\n"); //Javier, esto lo tienes que modificar, para que compare el numero del paciente con el ID  del paciente y solo copie los datos del paciente
     aux.push_back(c);
   }
   file.close();
@@ -258,4 +222,10 @@ void Paciente::mostrarHCitas()
   }
 }
 
-
+void Paciente::mostrarHistorial()
+{
+  // pide k kiere hase
+  // llama a funcion getListaX
+  // se imprimen en mostaerRegistro
+  //si todo -> get citas, gt, tratamientos y get notas
+}
