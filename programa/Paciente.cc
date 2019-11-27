@@ -1,4 +1,4 @@
-#include "Pacientes.h"
+#include "Paciente.h"
 
 Paciente::Paciente(int telefono)
 {
@@ -12,6 +12,18 @@ Paciente::Paciente(int telefono)
   fechanacimiento_->d=0;
   codpostal_=0;
   tipo_=-1;
+}
+int Paciente::getEdad(){
+  int aux=HOY.a-fechanacimiento_.a;
+  if(fechanacimiento_.m>HOY.m){
+    aux--;
+  }
+  else if(fechanacimiento_.m==HOY.m){
+    if(fechanacimiento_.d>HOY.d){
+      aux--;
+    }
+  }
+  return aux;
 }
 
 void Paciente::mostrarPaciente()
@@ -62,7 +74,7 @@ list <Cita> Paciente::getCitas()
   return aux;
 }
 
-list <Tratamiento> Paciente::getTratamiento()
+list <Tratamiento> Paciente::getTratamiento()   //Mal
 {
   list <Tratamiento> aux;
   list <Tratamiento>::iterator t;
@@ -150,7 +162,6 @@ void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
   archivo<<p.telefono_<<"||";
   archivo<<p.codpostal_<<"||";
   archivo<<p.tipo_<<endl;
-  }
   archivo.close();
 }
 
@@ -228,4 +239,11 @@ void Paciente::mostrarHistorial()
   // llama a funcion getListaX
   // se imprimen en mostaerRegistro
   //si todo -> get citas, gt, tratamientos y get notas
+}
+
+void Paciente::addTratamiento(const Tratamiento t){   //Sin probar
+  fstream file;
+  file.open(to_string(id_)+"/Tratamientos.txt";,ios::in|ios::out|ios::app|ios::ate);
+  file<<escribeFecha(t.getFecha())<<"||"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
+  file.close();
 }

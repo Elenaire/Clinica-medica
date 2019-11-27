@@ -1,7 +1,10 @@
+#ifndef FUNCIONES_H
+  #define FUNCIONES_H
+
 	#include <string>
 	#include <ctime>
 	#include <iostream>
-
+	#include <list>
 	struct fecha{
 		int d;					//Dia
 		int m;					//Mes
@@ -39,6 +42,7 @@
 			}
 		}
 	};
+	static fecha HOY;
 	struct hora{
 		int h;					//Hora
 		int m;					//Minuto
@@ -53,6 +57,9 @@
 	char* escribeHora(struct hora const &h);		//-Sin probar
 	int dias(struct fecha f1,struct fecha f2);		//Devulve los dias transcurridos desde f1 hasta f2, si ha transcurrido mas de un mes devulve 100, f2 es anterios a f1 devuelve -1
 	int minutos(struct hora h1,struct hora h2);		//Devulve los minutos transcurridos desde h1 hasta h2, si hay mas de 2 horas de diferencia devulve 100 o -100
-	bool filtraPacientes(int filtro,list<paciente> &p);			//Sin completar
-	void ordenarPacientes(int parametro,list<paciente> &p);		//Sin completar
-	void leerPacientes(int filtro,void * parametro,list<paciente> &p);//------
+	/*
+	bool filtraPacientes(int filtro,list<Paciente> &p);			//Sin completar
+	void ordenarPacientes(int parametro,list<Paciente> &p);		//Sin completar
+	list<Paciente> leerPacientes();//------			*/
+
+#endif

@@ -12,6 +12,6 @@
 		void mostrarRegistro() override;			//Muestra por pantalla los datos de la nota
 		bool modificable() override;
 		bool borrar() override;
-		-Nota();				//Destructor
-	}
+		//-Nota();				//Destructor
+	};
 #endif

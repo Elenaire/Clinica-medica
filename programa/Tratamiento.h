@@ -6,34 +6,43 @@
 		string medicamento_;
 		string concentracion_;
 		string regularidad_;
-		struct fecha inicio_;
-		struct fecha final_;
+		fecha inicio_;
+		fecha final_;
 		int estado_;			//Sin concluir 0,finalizado con exito 1, concluido -1
-		strict comentario_;
+		string comentario_;
 	public:
 		Tratamiento(int paciente);					//Constructor
 		void mostrarRegistro() override;		//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
 		bool borrar() override;
+		inline string getMedicamento()const{
+			return medicamento_;
+		}
 		inline void setMedicamento(const string med){
 			medicamento_=med;
 		}
-		inline void setConcentracion(const sting con){
+		inline string getConcentracion()const{
+			return concentracion_;
+		}
+		inline void setConcentracion(const string con){
 			concentracion_=con;
+		}
+		inline string getRegularidad()const{
+			return regularidad_;
 		}
 		inline void setRegularidad(const string reg){
 			regularidad_=reg;
 		}
-		inline struct fecha getFechaInicio()const{
+		inline fecha getFechaInicio()const{
 			return inicio_;
 		}
-		inline void setFechaInicio(const struct fecha f){
+		inline void setFechaInicio(const fecha f){
 			inicio_=f;
 		}
-		inline struct fecha getFechaFinal()const{
+		inline fecha getFechaFinal()const{
 			return final_;
 		}
-		inline setFechaFinal(const struct fecha f){
+		inline void setFechaFinal(const fecha f){
 			final_=f;
 		}
 		inline int getEstado()const{
@@ -45,9 +54,9 @@
 		inline string getComentario()const{
 			return comentario_;
 		}
-		inline setFechaFinal(const string cad){
+		inline void setComentario(const string cad){
 			comentario_=cad;
 		}
 		//-Tratamiento();				//Destructor
-	}
+	};
 #endif

@@ -12,6 +12,6 @@
 		void mostrarRegistro() override;			//Muestra por pantalla los datos de la cita
 		bool modificable() override;
 		bool borrar() override;
-		-Cita();				//Destructor
-	}
+		//-Cita();				//Destructor
+	};
 #endif

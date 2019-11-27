@@ -32,7 +32,7 @@ Paciente buscarPaciente(){		//Sin completar -ni funciones
 				if(menu>0){ordenarPacientes(menu,pacientes);}
 			break;
 			case 3:			//Filtrar pacientes
-				printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n 4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Pacientes públicos\n9 Pacientes privados\n-1 Salir\n");
+				printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n 4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
 				do{
 					scanf("%d",&menu);
 				}while((menu>0)&&(filtrarPacientes(menu,pacientes)));
@@ -41,7 +41,7 @@ Paciente buscarPaciente(){		//Sin completar -ni funciones
 	}
 
 }
-void menuPaciente(Paciente p){
+void menuPaciente(Paciente p){  hoy
 	int menu;
 	mostrarPaciente();
 	/*
@@ -103,7 +103,7 @@ void menuPaciente(Paciente p){
 			printf("¿Desea guardar el tratamiento? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
 			cin>>c;
 			if(c=='s'){
-				if(addTratamiento(t)){
+				if(p.addTratamiento(t)){
 					printf("Tratamiento guardado correctamente\n");
 				}
 				else{
@@ -122,7 +122,8 @@ void menuPaciente(Paciente p){
 }
 
 int main(){
-	int menu;			
+	int menu;	
+	hoy(HOY);		
 	//modificable_=false;
 	/*
 	Inicio
