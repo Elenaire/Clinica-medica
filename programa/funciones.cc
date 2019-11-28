@@ -101,9 +101,44 @@ int minutos(struct hora h1,struct hora h2){
 	}
 	return m;
 }
-bool filtraPacientes(int filtro,list<Paciente> p){			//Sin probar
+list<Paciente> leerPacientes(){
+	Paciente aux(0);
+	list<Paciente> p;
+	list<Paciente>::iterator i;
+	ifstream file;
+	file.open("Pacientes.txt");
+	fecha f;
+	string cad;
+	for(i=p.begin();i!=p.end();i++){
+	    file.getline(cad,32,"||");
+	    aux.setID(stoi(cad));
+	    file.getline(cad,64,"||");
+	    aux.setNombre(cad);
+	    file.getline(cad,64,"||");
+	    aux.setApellidos(cad);
+	    file.getline(cad,64,"||");		//Fecha....
+	    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+	    aux.setFecha(f);
+	    file.getline(cad,64,"||");
+	    aux.setTelefono(stoi(cad));
+	    file.getline(cad,64,"||");
+	    aux.setCodPostal(stoi(cad));
+	    file.getline(cad,64,"\n");
+	    aux.setTipo(stoi(cad));
+	    p.push_back(aux);
+	}
+	file.close();;
+	return p;
+}
+void mostrarPacientes(list<Paciente> &p){					//Sin probar
+	list<Paciente>::iterator i;
+	for(i=p.begin();i!=p.end();++i){
+		(*i).mostrarPaciente();
+	}
+}
+bool filtraPacientes(int filtro,list<Paciente> &p){			//Sin probar
 	if((p.empty())||(filtro==0)){
-		//lee lista de pacientes
+		p=leerPacientes();
 	}
 	else{
 		string aux;
@@ -215,20 +250,15 @@ bool filtraPacientes(int filtro,list<Paciente> p){			//Sin probar
 		return true;
 	}
 }
-/*
-void ordenarPacientes(int parametro,list<Paciente> p){			//Necesito crear funciones de ordenación (ojalá pudiera declararlas pero si lo hago alguien me borrara el .h)
+
+void ordenarPacientes(int parametro,list<Paciente> &p){		//Sin terminar  --Quiero probarlo
 	int orden;
 	switch(parametro){
 		case 1:		//Nombre y apellidos
-			printf("¿Orden ascendente(1) o descendente(-1)? \n");  	//Ordena si es positivo ascendente, si es negativo descendente y si es 0 cancela
-			scanf("%d",&orden);
-				if(orden!=0){
-					//p.sort(funcion);
-					if(orden<0){p.reverse();}
-				}
+			p.sort(Nombre_Apellidos);
 		break;
-		case 2:
-																---------------------------------
+		case 2:		//Apellidos y nombre
+			p.sort(Apellidos_Nombre);
 		break;
 		case 3:
 
@@ -237,47 +267,4 @@ void ordenarPacientes(int parametro,list<Paciente> p){			//Necesito crear funcio
 
 		break;
 	}
-}				*/
-/*
-list<Paciente> leerPacientes(){
-	list <Paciente> aux;
-	ifstream file;
-	file.open("Pacientes.txt");
-	string cad
-	for(t=aux.begin();t!=aux.end();t++)
-	{
-	  	getline(file,cad,"/");
-	    (t->fecha_)->d=stoi(cad);
-	    getline(file,cad,"/");
-	    (t->fecha_)->m=stoi(cad);
-	    getline(file,cad,"||");
-	    (t->fecha_)->a=stoi(cad);
-	    getline(file,cad,":");
-	    (t->hora_)->h=stoi(cad);
-	    getline(file,cad,":");
-	    (t->hora_)->m=stoi(cad);
-	    getline(file,cad,"||");
-	    (t->hora_)->s=stoi(cad);
-	    getline(file,cad,"||");
-	    t->paciente_=stoi(cad);
-	    getline(file,(t->medicamento_),"||");
-	    getline(file,(t->concentracion_),"||");
-	    getline(file,(t->regularidad_),"||");
-	    getline(file,cad,"/");
-	    (t->fecha_inicio_)->d=stoi(cad);
-	    getline(file,cad,"/");
-	    (t->fecha_inicio_)->m=stoi(cad);
-	    getline(file,cad,"||");
-	    (t->fecha_inicio_)->a=stoi(cad);
-	    getline(file,cad,"/");
-	    (t->fecha_final_)->d=stoi(cad);
-	    getline(file,cad,"/");
-	    (t->fecha_final_)->m=stoi(cad);
-	    getline(file,cad,"||");
-	    (t->fecha_final_)->a=stoi(cad);
-	    getline(file,cad,"\n");
-	    t->estado=stoi(cad);
-	    aux.push_back(t);
-	  }
-	  file.close();
-	}*/
+}

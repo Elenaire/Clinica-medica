@@ -1,6 +1,6 @@
 #include "Paciente.h"
 
-Paciente buscarPaciente(){		//Sin completar -ni funciones
+Paciente buscarPaciente(){		//Sin completar Sin probar
 	int menu;
 	list<paciente> pacientes;
 	printf("0 Listar pacientes\nBuscar paciente por:\n1 Nombre completo\n2 Nombre\n3 Apellidos\n 4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Pacientes públicos\n9 Pacientes privados\n-1 Salir\n");
@@ -9,9 +9,7 @@ Paciente buscarPaciente(){		//Sin completar -ni funciones
 		filtrarPacientes(menu,pacientes);
 	}
 	while(menu>0){				//se sale con -1 o con negativo?
-		//
-		//Mostrar lista
-		//
+		mostrarPacientes(pacientes);
 		printf("1 Seleccionar paciente\n2 Ordenar pacientes\n3 Filtra pacientes\n-1 Salir\n");
 		scanf("%d",&menu);
 		switch(menu){
@@ -29,7 +27,14 @@ Paciente buscarPaciente(){		//Sin completar -ni funciones
 			case 2:			//Ordenar pacientes
 				printf("Ordenar por:\n1 Nombre\n2 Apellidos\n3 Fecha de nacimiento");
 				scanf("%d",&menu);
-				if(menu>0){ordenarPacientes(menu,pacientes);}
+				if(menu>0){
+					printf("¿Orden ascendente(1) o descendente(-1)? \n");  	//Ordena si es positivo ascendente, si es negativo descendente y si es 0 cancela
+					scanf("%d",&orden);
+					if(orden!=0){
+						ordenarPacientes(menu,pacientes);
+						if(orden<0){pacientes.reverse();}
+					}
+				}
 			break;
 			case 3:			//Filtrar pacientes
 				printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n 4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
@@ -97,7 +102,7 @@ void menuPaciente(Paciente p){  hoy
 			}
 			t.setFechaInicio(f1);
 			t.setFechaFinal(f2);
-			printf("introduzca un comentario(opcional): ");
+			printf("Introduzca un comentario(opcional): ");
 			cin>>aux;
 			t.setComentario(aux);			//Termina de pedir datos
 			printf("¿Desea guardar el tratamiento? s/n\n");		//Pide confirmación (Si no confirma se sale)---------

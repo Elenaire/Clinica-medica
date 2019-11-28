@@ -2,8 +2,8 @@
 **Nombre**: Buscar paciente
 
 **Prioridad** (de 1 a 10): 10
-**Puntos estimado**: 4
-**Iteración**: 2
+**Puntos estimado**: 5
+**Iteración**: 1
 
 **Responsable**: Elena Martín
 

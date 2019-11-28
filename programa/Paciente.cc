@@ -26,14 +26,12 @@ int Paciente::getEdad(){
   return aux;
 }
 
-void Paciente::mostrarPaciente()
-{
+void Paciente::mostrarPaciente(){
   cout<<"ID: "<<id_<<endl;
   cout<<"NOMBRE: "<<nombre_<<endl;
   cout<<"APELLIDOS: "<<apellidos_<<endl;
   cout<<"DIRECCION: "<<direccion_<<endl;
-  char* fecha=escribeFecha(fechanacimiento_);
-  cout<<"FECHANACIMIENTO: "<<fecha<<endl;
+  cout<<"FECHANACIMIENTO: "<<escribeFecha(fechanacimiento_)<<endl;
   cout<<"TELEFONO: "<<telefono_<<endl;
   cout<<"CODIGO POSTAL: "<<codpostal_<<endl;
   if(tipo_=0)
@@ -165,36 +163,6 @@ void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
   archivo.close();
 }
 
-void Paciente::mostrarRegistro()
-{
-	list <Cita> aux;
-  list <Cita>::iterator c;
-  ifstream file;
-  file.open("citas.txt")
-  string cad
-  for(c=aux.begin();c!=aux.end();c++)
-  {
-  	getline(file,cad,"/");
-    (c->fecha_)->d=stoi(cad);
-    getline(file,cad,"/");
-    (c->fecha_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (c->fecha_)->a=stoi(cad);
-    getline(file,cad,":");
-    (c->hora_)->h=stoi(cad);
-    getline(file,cad,":");
-    (c->hora_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (c->hora_)->s=stoi(cad);
-    getline(file,cad,"||");
-    c->paciente_=stoi(cad);
-    getline(file,(c->comentario_),"\n");
-    aux.push_back(c);
-  }
-  file.close();
-     //??????????????????????????????????????????
-}
-
 void Paciente::mostrarHCitas()
 {
   list <Cita> aux;
@@ -243,7 +211,29 @@ void Paciente::mostrarHistorial()
 
 void Paciente::addTratamiento(const Tratamiento t){   //Sin probar
   fstream file;
-  file.open(to_string(id_)+"/Tratamientos.txt";,ios::in|ios::out|ios::app|ios::ate);
+  file.open(to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
   file<<escribeFecha(t.getFecha())<<"||"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
   file.close();
+}
+bool Nombre_Apellidos(Paciente p1,Paciente p2){
+  int i;
+  string s1,s2;
+    s1=p1.nombre_+p1.apellidos_;
+    s2=p2.nombre_+p2.apellidos_;
+  for(i=0;((i<s1.length())&&(i<s2.length()));i++){
+    if (tolower(s1[i])<tolower(s2[i])) return true;
+    else if (tolower(s1[i])>tolower(s2[i])) return false;
+  }
+  return ( s1.length() < s2.length() );
+}
+bool Apellidos_Nombre(Paciente p1,Paciente p2){
+  int i;
+  string s1,s2;
+    s1=p1.apellidos_+p1.nombre_;
+    s2=p2.apellidos_+p2.nombre_;
+  for(i=0;((i<s1.length())&&(i<s2.length()));i++){
+    if (tolower(s1[i])<tolower(s2[i])) return true;
+    else if (tolower(s1[i])>tolower(s2[i])) return false;
+  }
+  return ( s1.length() < s2.length() );
 }
