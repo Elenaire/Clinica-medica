@@ -5,6 +5,7 @@
 	class Registro{
 		static bool modificable_;
 	protected:
+		int id_;
 		fecha fecha_;	//Fecha de creación
 		hora hora_;		//Hora de creación
 		int paciente_;			//id del paciente del registro

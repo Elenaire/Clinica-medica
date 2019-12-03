@@ -20,7 +20,9 @@ Tratamiento::Tratamiento(int paciente):Registro(paciente){				//Constructor
 
 
 
-void Tratamiento::mostrarRegistro() override{
+void Tratamiento::mostrarRegistro() override{		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
+
+
 /*	cout<<"Tratamento de "<<medicamento_<<ennl<<"Concentración de "<<concentracion_<<endl<<"Con regularidad "<<regularidad_<<end;
 	printf("Iniciado el %d/%d/%d ",inicio_.d,inicio_.m,inicio_.a);
 	switch(estado_){
@@ -34,12 +36,17 @@ void Tratamiento::mostrarRegistro() override{
 			printf("y finalizado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
 	}
 	cout<<comentario_;*/
+	printf("Yuju, soy un tratamiento y estoy mostrandome :D\n");
 }
 bool modificable() override{
 	if(modificable_){
 		return modificable_
 	}
-	else if(){			//---------------
+	else if((estado_==0)||(dias(final_,HOY)<3)){			//---------------
+		retunr true;
+	}
+	else{
+		return false;
 	}
 }
 bool borrar() override;

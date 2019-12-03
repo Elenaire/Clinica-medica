@@ -72,7 +72,7 @@ list <Cita> Paciente::getCitas()
   return aux;
 }
 
-list <Tratamiento> Paciente::getTratamiento()   //Mal
+list <Tratamiento> Paciente::getTratamientos()   //Mal
 {
   list <Tratamiento> aux;
   list <Tratamiento>::iterator t;

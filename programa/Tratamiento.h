@@ -12,7 +12,7 @@
 		string comentario_;
 	public:
 		Tratamiento(int paciente);					//Constructor
-		void mostrarRegistro() override;		//Muestra por pantalla los datos del tratamiento
+		void mostrarRegistro() override;			//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
 		bool borrar() override;
 		inline string getMedicamento()const{

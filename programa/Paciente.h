@@ -27,7 +27,7 @@
     Paciente(int id_);
     friend bool filtraPacientes(int filtro,list<Paciente> p);
     friend void ordenarPacientes(int parametro,list<Paciente> p);
-    friend bool Nombre_Apellidos(Paciente p1,Paciente p2,);
+    friend bool Nombre_Apellidos(Paciente p1,Paciente p2);
     friend bool Apellidos_Nombre(Paciente p1,Paciente p2);
     inline int getID(){return id_;}
     inline string getNombre(){return nombre_;}
@@ -47,7 +47,7 @@
     inline void setTipo(int type){tipo_=type;}
     int getEdad();
     list <Cita> getCitas();//Javi esto te toca a ti no te fies mucho de lo que he escrito yo
-    list <Tratamiento> getTratamiento();
+    list <Tratamiento> getTratamientos();
     list <Nota> getNotas();//Javi esto te toca a ti no te fies mucho de lo que he escrito yo
     void mostrarPaciente();
     void mostarHistorial();
