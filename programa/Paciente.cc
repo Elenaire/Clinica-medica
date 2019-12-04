@@ -1,4 +1,5 @@
 #include "Paciente.h"
+#include "funciones.h"
 
 Paciente::Paciente(int telefono)
 {

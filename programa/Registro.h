@@ -1,15 +1,16 @@
 #ifndef REGISTRO_H
 	#define REGISTRO_H
 	#include "funciones.h"
+	#include "fecha_hora.h"
 	using namespace std;
 	class Registro{
-		static bool modificable_;
 	protected:
 		int id_;
 		fecha fecha_;	//Fecha de creación
 		hora hora_;		//Hora de creación
 		int paciente_;			//id del paciente del registro
 	public:
+	static bool modificable_;
 	Registro(int paciente){				//Constructor
 		paciente_=paciente;
 		hoy(fecha_);

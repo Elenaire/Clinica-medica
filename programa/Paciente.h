@@ -5,7 +5,7 @@
   #include <fstream>
   #include <string>
   #include <list>
-  #include "funciones.h"
+  #include "fecha_hora.h"
   #include "Cita.h"
   #include "Tratamiento.h"
   #include "Nota.h"
@@ -51,7 +51,7 @@
     list <Nota> getNotas();//Javi esto te toca a ti no te fies mucho de lo que he escrito yo
     void mostrarPaciente();
     void mostarHistorial();
-    void addTratamiento(const Tratamiento t);	//Sin probar
+    bool addTratamiento(const Tratamiento t);	//Sin probar
   };
 
   #endif

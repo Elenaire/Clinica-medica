@@ -20,7 +20,7 @@ Paciente buscarPaciente(){		//Sin completar Sin probar
 			case 1:			//Seleccionar paciente
 				printf("Introduzca el id del paciente\n");
 				scanf("%d",&id);
-				for(i=p.begin();i!=pacientes.end();++i){
+				for(i=pacientes.begin();i!=pacientes.end();++i){
 					if((*i).getID()==id){
 						return *i;
 					}
@@ -58,7 +58,7 @@ Paciente buscarPaciente(){		//Sin completar Sin probar
 void menuPaciente(Paciente p){
 	int menu=0;
 	while(menu>=0){
-		mostrarPaciente();
+		p.mostrarPaciente();
 		/*
 		bla bla menu
 		*/
@@ -68,89 +68,10 @@ void menuPaciente(Paciente p){
 				cin>>menu;
 			break;
 			case 3:	//Consultar tratamientos			
-				int i;
-				list <Tratamiento> tratamientos;
-		 		list <Tratamiento>::iterator t;
-				tratamientos=p.getTratamientos();		//Modificar getTratamientos
-				t=tratamientos.begin();
-				while(t!=tratamientos.end()){
-					if((*t).getEstado()!=0){
-						tratamientos.erase(t);
-					}
-					else{t++;}
-				}
-				i=1;
-				for(t=tratamientos.begin();t!=tratamientos.end();t++){			//Super mal
-					printf("%d.\n",i);
-					(*t).mostrarRegistro();
-					i++;
-				}
-				printf("Selecione un tratamiento o introduzca 0:");
-				cin>>i;
-				if(i>0){
-					if(i<=(tratamientos.size()+1)){
-						modificarTratamiento(*t);			//Sin terminar		//Mal
-					}
-				}
+				consultarTramientos(p);
 			break;
 			case 2:		//Añadir tratamiento +Hecho  -Funciones					ID="fichero.size"
-				Tratamiento t(p.getID());
-				char c;
-				bool bucle=true;
-				string aux;
-				fecha f,f1,f2;
-				hoy(f);
-				printf("Medicamento: ");		//Empieza a pedir datos
-				getline(cin,aux);
-				t.setMedicamento(aux);
-				printf("Concentración: ");
-				getline(cin,aux);
-				t.setConcentracion(aux);
-				printf("Regularidad: ");
-				getline(cin,aux);
-				t.setRegularidad(aux);
-				while(bucle){
-					printf("Fecha de inicio: ");
-					while(bucle){
-						if(leerFecha(f1)!=true){
-						printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
-						}
-						else if(dias(f,f1)<0||modificable_==false){			//Modificable_
-							printf("Esa fecha ya ha pasado\n");
-						}
-						else{
-							bucle=false;
-						}
-					}
-					printf("Fecha de finalización: ");
-					bucle=true;
-					while(bucle){
-						if(leerFecha(f2)!=true){
-							printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
-						}
-						else if(dias(f1,f2)){
-							printf("El tratamiento no puede finalizar antes de empezar\n");
-						}
-						else{
-							bucle=false;
-						}
-					}
-				}
-				t.setFechaInicio(f1);
-				t.setFechaFinal(f2);
-				printf("Introduzca un comentario(opcional): ");
-				cin>>aux;
-				t.setComentario(aux);			//Termina de pedir datos
-				printf("¿Desea guardar el tratamiento? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
-				cin>>c;
-				if(c=='s'){
-					if(p.addTratamiento(t)){
-						printf("Tratamiento guardado correctamente\n");
-					}
-					else{
-						printf("Ha ocurrido un error inesperado\n");
-					}
-				}
+				anadirTratamiento(p);
 			break;
 			default:
 				if(menu>0){
@@ -165,7 +86,7 @@ void menuPaciente(Paciente p){
 int main(){
 	int menu=0;	
 	hoy(HOY);		
-	//modificable_=false;
+	Registro::modificable_=false;
 	/*
 	Inicio
 	*/
@@ -177,8 +98,7 @@ int main(){
 				cin>>menu;
 			break;
 			case 1:		//Buscar paciente +Hecho  -Funciones
-				Paciente p=buscarPaciente();
-				menuPaciente(p);
+				menuPaciente(buscarPaciente());
 				menu=0;
 			break;
 			case 2:		//Añadir paciente
