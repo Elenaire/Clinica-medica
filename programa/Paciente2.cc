@@ -289,3 +289,58 @@ bool Apellidos_Nombre(Paciente p1,Paciente p2){
   }
   return ( s1.length() < s2.length() );
 }
+
+void eliminarPaciente()
+{
+  ifstream file;
+  file.open("Pacientes.txt");
+  list<Paciente> aux;
+  list<Paciente>::iterator i;
+  Paciente p(3333,4444);
+  string cad;
+  while(getline(file,cad,"||"))
+  {
+    p->id_=stoi(cad);
+    getline(file,cad,"||")
+    p->nombre_=cad;
+    getline(file,cad,"||")
+    p->apellidos_=cad;
+    getline(file,cad,"||")
+    p->direccion_=cad;
+    //Aqui va fecha que no se como ponerlo
+    getline(file,cad,"||")
+    p->telefono_=stoi(cad);
+    p->codpostal_=stoi(cad);
+    p->tipo_=stoi(cad);
+    aux.push_back(p);
+  }
+  file.close();
+  for(i=aux.begin();i!=aux.end();i++)
+  {
+    if(i->id_==id_)
+    {
+      i->id_=-1;
+    }
+  }
+  char elec;
+  cout<<"Está seguro de querer elimina el paciente "<<nombre_<<" (S/N)"<<endl;
+  cin>>elec;
+  if(elec=='S')
+  {
+    ofstream archivo;
+    archivo.open("Pacientes.txt")
+    for(i=aux.begin();i!=aux.end();i++)
+    {
+      if(i->id_!=-1)
+      {
+        archivo<<i->id_<<"||";
+        archivo<<i->nombre_<<"||";
+        archivo<<i->apellidos_<<"||";
+        archivo<<escribeFecha(i->fechanacimiento_)<<"||";
+        archivo<<i->telefono_<<"||";
+        archivo<<i->codpostal_<<"||";
+        archivo<<i->tipo_<<endl;
+      }
+    }
+  }
+}
