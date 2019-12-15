@@ -85,7 +85,7 @@ void AgregaP()
 	p.setDireccion(adress);
 	string name;
 	cout<<"Introdzuca la fecha de nacimiento del paciente"<<endl;
-	sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+	leerFecha(f);
 	p.setFechanacimiento(f);
 	int tlf;
 	cout<<"Introdzuca el telefono del paciente"<<endl;
@@ -134,7 +134,7 @@ void menuPaciente(Paciente p){
 int main(){
 	int menu=0;	
 	hoy(HOY);		
-	bool Registro::modificable_=false;
+	//bool Registro::modificable_=false;
 	/*
 	Inicio
 	*/
