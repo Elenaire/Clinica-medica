@@ -10,7 +10,6 @@
   #include "Tratamiento.h"
   #include "Nota.h"
 
-  using namespace std;
 
   class Paciente
   {
@@ -25,7 +24,7 @@
   	int tipo_;
   public:
     Paciente(int id_);
-    friend bool filtraPacientes(int filtro,list<Paciente> p);
+    friend bool filtrarPacientes(int filtro,list<Paciente> p);
     friend void ordenarPacientes(int parametro,list<Paciente> p);
     friend bool Nombre_Apellidos(Paciente p1,Paciente p2);
     friend bool Apellidos_Nombre(Paciente p1,Paciente p2);
@@ -51,7 +50,7 @@
     list <Nota> getNotas();//Javi esto te toca a ti no te fies mucho de lo que he escrito yo
     void mostrarPaciente();
     void mostarHistorial();
-    bool addTratamiento(const Tratamiento t);	//Sin probar
+    bool addTratamiento(const Tratamiento t);	//Sin probar 
   };
 
   #endif

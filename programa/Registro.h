@@ -1,6 +1,7 @@
 #ifndef REGISTRO_H
 	#define REGISTRO_H
 	#include "fecha_hora.h"
+	#include <string>
 	class Registro{
 	protected:
 		int id_;

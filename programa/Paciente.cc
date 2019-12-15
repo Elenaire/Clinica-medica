@@ -1,16 +1,18 @@
 #include "Paciente.h"
 #include "funciones.h"
+#include <iostream>
 
-Paciente::Paciente(int telefono)
+using namespace std;
+Paciente::Paciente(int id)
 {
-  id_=0;
-  telefono_=telefono;
+  id_=id;
+  telefono_=0;
   nombre_="";
   apellidos_="";
   direccion_="";
-  fechanacimiento_->a=0;
-  fechanacimiento_->m=0;
-  fechanacimiento_->d=0;
+  fechanacimiento_.a=0;
+  fechanacimiento_.m=0;
+  fechanacimiento_.d=0;
   codpostal_=0;
   tipo_=-1;
 }
@@ -42,31 +44,31 @@ void Paciente::mostrarPaciente(){
     cout<<"TIPO: PRIVADO"<<endl;
   }
 }
-
+/*
 list <Cita> Paciente::getCitas()
 {
   list <Cita> aux;
   list <Cita>::iterator c;
   ifstream file;
-  file.open("citas.txt")
-  string cad
+  file.open("citas.txt");
+  string cad;
   for(c=aux.begin();c!=aux.end();c++)
   {
-  	getline(file,cad,"/");
-    (c->fecha_)->d=stoi(cad);
-    getline(file,cad,"/");
-    (c->fecha_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (c->fecha_)->a=stoi(cad);
-    getline(file,cad,":");
-    (c->hora_)->h=stoi(cad);
-    getline(file,cad,":");
-    (c->hora_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (c->hora_)->s=stoi(cad);
-    getline(file,cad,"||");
+  	getline(file,cad,'|');
+    (c->fecha_).d=stoi(cad);
+    getline(file,cad,'|');
+    (c->fecha_).m=stoi(cad);
+    getline(file,cad,'|');
+    (c->fecha_).a=stoi(cad);
+    getline(file,cad,':');
+    (c->hora_).h=stoi(cad);
+    getline(file,cad,':');
+    (c->hora_).m=stoi(cad);
+    getline(file,cad,'|');
+    (c->hora_).s=stoi(cad);
+    getline(file,cad,'|');
     c->paciente_=stoi(cad);
-    getline(file,(c->comentario_),"\n");
+    getline(file,(c->comentario_),'\n');
     aux.push_back(c);
   }
   file.close();
@@ -154,12 +156,12 @@ void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
 {
   fstream archivo;
   archivo.open("Pacientes.txt",std::fstream::app);
-  archivo<<p.id_<<"||";
-  archivo<<p.nombre_<<"||";
-  archivo<<p.apellidos_<<"||";
+  archivo<<p.id_<<'|';
+  archivo<<p.nombre_<<'|';
+  archivo<<p.apellidos_<<'|';
   archivo<<escribeFecha(p.fechanacimiento_)<<"||";
-  archivo<<p.telefono_<<"||";
-  archivo<<p.codpostal_<<"||";
+  archivo<<p.telefono_<<'|';
+  archivo<<p.codpostal_<<'|';
   archivo<<p.tipo_<<endl;
   archivo.close();
 }
@@ -209,12 +211,18 @@ void Paciente::mostrarHistorial()
   // se imprimen en mostaerRegistro
   //si todo -> get citas, gt, tratamientos y get notas
 }
-
-void Paciente::addTratamiento(const Tratamiento t){   //Sin probar
+*/
+bool Paciente::addTratamiento(const Tratamiento t){   //Sin probar
   fstream file;
   file.open(to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
-  file<<escribeFecha(t.getFecha())<<"||"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
-  file.close();
+  if(file){
+    file<<escribeFecha(t.getFecha())<<"||"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
+    file.close();
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 bool Nombre_Apellidos(Paciente p1,Paciente p2){
   int i;
