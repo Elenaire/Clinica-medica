@@ -2,6 +2,7 @@
 #include "iostream"
 #include "Tratamiento.h"
 
+
 using namespace std;
 Paciente buscarPaciente(){		//Sin completar Sin probar
 	int menu,id,orden;
@@ -55,6 +56,40 @@ Paciente buscarPaciente(){		//Sin completar Sin probar
 	}
 
 }
+
+void AgregaP()
+{
+	Paciente p(id);
+	string name;
+	cout<<"Introdzuca nombre del paciente"<<endl;
+	cin>>name;
+	p.setNombre(name);
+	string apellidos;
+	cout<<"Introdzuca apellidos del paciente"<<endl;
+	cin>>apellidos;
+	p.setApellidos(apellidos);
+	string adress;
+	cout<<"Introdzuca la dirección del paciente"<<endl;
+	cin>>adress;
+	p.setDireccion(adress);
+	string name;
+	//FECHANACIMIENTO QUE NO SE COMO VA
+	int tlf;
+	cout<<"Introdzuca el telefono del paciente"<<endl;
+	cin>>tlf;
+	p.setTelefono(tlf);
+	int cp;
+	cout<<"Introdzuca el cod.postal del paciente"<<endl;
+	cin>>cp;
+	p.setCodPostal(cp);
+	int type;
+	cout<<"Introdzuca el tipo del paciente"<<endl;
+	cin>>type;
+	p.setTipo(type);
+	AddPaciente(p);
+}
+
+
 void menuPaciente(Paciente p){
 	int menu=0;
 	while(menu>=0){
@@ -67,7 +102,7 @@ void menuPaciente(Paciente p){
 				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n7 Eliminar paciente\n-1 Atras");
 				cin>>menu;
 			break;
-			case 3:	//Consultar tratamientos			
+			case 3:	//Consultar tratamientos
 				consultarTramientos(p);
 			break;
 			case 2:		//Añadir tratamiento +Hecho  -Funciones					ID="fichero.size"
@@ -84,8 +119,8 @@ void menuPaciente(Paciente p){
 }
 
 int main(){
-	int menu=0;	
-	hoy(HOY);		
+	int menu=0;
+	hoy(HOY);
 	Registro::modificable_=false;
 	/*
 	Inicio
@@ -102,7 +137,7 @@ int main(){
 				menu=0;
 			break;
 			case 2:		//Añadir paciente
-
+				AgregaP();
 			break;
 			case 3:		//Añadir cita
 
