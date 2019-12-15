@@ -1,6 +1,16 @@
 #include "Paciente.h"
 #include "iostream"
 #include "Tratamiento.h"
+#include "funciones.h"
+#include <list>
+
+	list<Paciente> leerPacientes();								//Sin probar
+	void mostrarPacientes(list<Paciente> &p);					//Sin probar
+	bool filtrarPacientes(int filtro,list<Paciente> p);			//Sin probar
+	void ordenarPacientes(int parametro,list<Paciente> p);		//Sin completar
+	bool modificarTratamiento(Tratamiento &t);					//Sin hacer   //Mal, tiene que ser de tratamiento
+	void consultarTramientos(Paciente &p);
+	void anadirTratamiento(Paciente &p);
 
 using namespace std;
 Paciente buscarPaciente(){		//Sin completar Sin probar
@@ -86,7 +96,7 @@ void menuPaciente(Paciente p){
 int main(){
 	int menu=0;	
 	hoy(HOY);		
-	Registro::modificable_=false;
+	bool Registro::modificable_=false;
 	/*
 	Inicio
 	*/

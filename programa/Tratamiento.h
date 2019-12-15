@@ -1,13 +1,16 @@
 #ifndef TRATAMIENTO_H
 	#define TRATAMIENTO_H
 	#include "Registro.h"
-	class Tratamiento:public Registro{
+	#include "fecha_hora.h"
+	#include <string>
+	using namespace std;
+	class Tratamiento: public Registro{
 	private:
 		string medicamento_;
 		string concentracion_;
 		string regularidad_;
-		fecha inicio_;
-		fecha final_;
+		struct fecha inicio_;
+		struct fecha final_;
 		int estado_;			//Sin concluir 0,finalizado con exito 1, concluido -1
 		string comentario_;
 	public:
@@ -33,16 +36,16 @@
 		inline void setRegularidad(const string reg){
 			regularidad_=reg;
 		}
-		inline fecha getFechaInicio()const{
+		inline struct fecha getFechaInicio()const{
 			return inicio_;
 		}
-		inline void setFechaInicio(const fecha f){
+		inline void setFechaInicio(const struct fecha f){
 			inicio_=f;
 		}
-		inline fecha getFechaFinal()const{
+		inline struct fecha getFechaFinal()const{
 			return final_;
 		}
-		inline void setFechaFinal(const fecha f){
+		inline void setFechaFinal(const struct fecha f){
 			final_=f;
 		}
 		inline int getEstado()const{

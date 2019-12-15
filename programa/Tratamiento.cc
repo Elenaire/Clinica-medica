@@ -1,4 +1,8 @@
 #include "Tratamiento.h"
+#include "funciones.h"
+#include "fecha_hora.h"
+#include <cstdio>
+
 
 Tratamiento::Tratamiento(int paciente):Registro(paciente){				//Constructor
 	medicamento_="";
@@ -8,19 +12,7 @@ Tratamiento::Tratamiento(int paciente):Registro(paciente){				//Constructor
 	comentario_="";
 }
 
-
-	private:
-		string medicamento_;
-		string concentracion_;
-		string regularidad_;
-		struct fecha inicio_;
-		struct fecha final_;
-		int estado_;			//Sin concluir 0,finalizado con exito 1, concluido -1
-		strict comentario_;
-
-
-
-void Tratamiento::mostrarRegistro() override{		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
+void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
 
 
 /*	cout<<"Tratamento de "<<medicamento_<<ennl<<"Concentración de "<<concentracion_<<endl<<"Con regularidad "<<regularidad_<<end;
@@ -38,15 +30,18 @@ void Tratamiento::mostrarRegistro() override{		//Comprobar el estado del tratami
 	cout<<comentario_;*/
 	printf("Yuju, soy un tratamiento y estoy mostrandome :D\n");
 }
-bool modificable() override{
+bool Tratamiento::modificable(){
 	if(modificable_){
-		return modificable_
+		return modificable_;
 	}
 	else if((estado_==0)||(dias(final_,HOY)<3)){			//---------------
-		retunr true;
+		return true;
 	}
 	else{
 		return false;
 	}
 }
-bool borrar() override;
+bool Tratamiento::borrar(){
+	printf("Me estoy borrando\n");
+	return false;
+}

@@ -1,7 +1,8 @@
 #ifndef CITA_H
 	#define CITA_H
 	#include "Registro.h"			//Contiene struct fecha y struct hora
-	class Cita:public Registro{	
+	using namespace std;
+	class Cita: public Registro{	
 	private:
 		string comentario_;
 	public:

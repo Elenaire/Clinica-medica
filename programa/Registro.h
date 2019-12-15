@@ -1,13 +1,11 @@
 #ifndef REGISTRO_H
 	#define REGISTRO_H
-	#include "funciones.h"
 	#include "fecha_hora.h"
-	using namespace std;
 	class Registro{
 	protected:
 		int id_;
-		fecha fecha_;	//Fecha de creación
-		hora hora_;		//Hora de creación
+		struct fecha fecha_;	//Fecha de creación
+		struct hora hora_;		//Hora de creación
 		int paciente_;			//id del paciente del registro
 	public:
 	static bool modificable_;
@@ -16,7 +14,7 @@
 		hoy(fecha_);
 		hoy(hora_);
 	}
-	inline fecha getFecha()const{
+	inline struct fecha getFecha()const{
 			return fecha_;
 		}
 	inline hora getHora()const{

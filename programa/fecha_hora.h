@@ -18,12 +18,14 @@
 					return false;
 				}
 			}
-			/*public fecha operator-(fecha f){
+			/*
+			public fecha operator-(fecha f){
 				int mes[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 				struct fecha aux;
 				if((aux=f1-f2)<0){}
 
-			}*/
+			}
+			*/
 			bool operator<(fecha f){
 				if(a<f.a){return true;}
 				else if(a>f.a){return false;}

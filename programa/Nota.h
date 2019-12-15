@@ -1,6 +1,7 @@
 #ifndef NOTA_H
 	#define NOTA_H
 	#include "Registro.h"
+	using namespace std;
 	class Nota:public Registro{
 	private:
 		string contenido_;
