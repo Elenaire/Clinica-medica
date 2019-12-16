@@ -115,11 +115,11 @@ void menuPaciente(Paciente p){
 				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n7 Eliminar paciente\n-1 Atras");
 				cin>>menu;
 			break;
-			case 3:	//Consultar tratamientos
-				consultarTramientos(p);
-			break;
 			case 2:		//Añadir tratamiento +Hecho  -Funciones					ID="fichero.size"
 				anadirTratamiento(p);
+			break;
+			case 3:	//Consultar tratamientos
+				consultarTramientos(p);
 			break;
 			default:
 				if(menu>0){
@@ -130,11 +130,10 @@ void menuPaciente(Paciente p){
 	}
 	//......
 }
-
+bool Registro::modificable_=false;
 int main(){
 	int menu=0;	
 	hoy(HOY);		
-	//bool Registro::modificable_=false;
 	/*
 	Inicio
 	*/
