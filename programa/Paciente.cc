@@ -44,7 +44,7 @@ void Paciente::mostrarPaciente(){
     cout<<"TIPO: PRIVADO"<<endl;
   }
 }
-/*
+
 list <Cita> Paciente::getCitas()
 {
   list <Cita> aux;
@@ -55,26 +55,25 @@ list <Cita> Paciente::getCitas()
   for(c=aux.begin();c!=aux.end();c++)
   {
   	getline(file,cad,'|');
-    (c->fecha_).d=stoi(cad);
+    (c.fecha_).d=stoi(cad);
     getline(file,cad,'|');
-    (c->fecha_).m=stoi(cad);
+    (c.fecha_).m=stoi(cad);
     getline(file,cad,'|');
-    (c->fecha_).a=stoi(cad);
+    (c.fecha_).a=stoi(cad);
     getline(file,cad,':');
-    (c->hora_).h=stoi(cad);
+    (c.hora_).h=stoi(cad);
     getline(file,cad,':');
-    (c->hora_).m=stoi(cad);
+    (c.hora_).m=stoi(cad);
     getline(file,cad,'|');
-    (c->hora_).s=stoi(cad);
+    (c.hora_).s=stoi(cad);
     getline(file,cad,'|');
-    c->paciente_=stoi(cad);
-    getline(file,(c->comentario_),'\n');
+    c.paciente_=stoi(cad);
+    getline(file,(c.comentario_),'\n');
     aux.push_back(c);
   }
   file.close();
   return aux;
 }
-
 list <Tratamiento> Paciente::getTratamientos()   //Mal
 {
   list <Tratamiento> aux;
@@ -84,43 +83,42 @@ list <Tratamiento> Paciente::getTratamientos()   //Mal
   string cad
   for(t=aux.begin();t!=aux.end();t++)
   {
-  	getline(file,cad,"/");
-    (t->fecha_)->d=stoi(cad);
-    getline(file,cad,"/");
-    (t->fecha_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (t->fecha_)->a=stoi(cad);
+  	getline(file,cad,'/');
+    (t.fecha_).d=stoi(cad);
+    getline(file,cad,'/');
+    (t.fecha_).m=stoi(cad);
+    getline(file,cad,'|');
+    (t.fecha_).a=stoi(cad);
+    getline(file,cad,':');
+    (t.hora_).h=stoi(cad);
     getline(file,cad,":");
-    (t->hora_)->h=stoi(cad);
-    getline(file,cad,":");
-    (t->hora_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (t->hora_)->s=stoi(cad);
-    getline(file,cad,"||");
-    t->paciente_=stoi(cad);
-    getline(file,(t->medicamento_),"||");
-    getline(file,(t->concentracion_),"||");
-    getline(file,(t->regularidad_),"||");
+    (t.hora_).m=stoi(cad);
+    getline(file,cad,'|'');
+    (t.hora_).s=stoi(cad);
+    getline(file,cad,'|');
+    t.paciente_=stoi(cad);
+    getline(file,(t.medicamento_),'|');
+    getline(file,(t.concentracion_),'|');
+    getline(file,(t.regularidad_),'|');
     getline(file,cad,"/");
-    (t->fecha_inicio_)->d=stoi(cad);
+    (t.fecha_inicio_).d=stoi(cad);
     getline(file,cad,"/");
-    (t->fecha_inicio_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (t->fecha_inicio_)->a=stoi(cad);
-    getline(file,cad,"/");
-    (t->fecha_final_)->d=stoi(cad);
-    getline(file,cad,"/");
-    (t->fecha_final_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (t->fecha_final_)->a=stoi(cad);
+    (t.fecha_inicio_).m=stoi(cad);
+    getline(file,cad,'|');
+    (t.fecha_inicio_).a=stoi(cad);
+    getline(file,cad,'|');
+    (t.fecha_final_).d=stoi(cad);
+    getline(file,cad,'/');
+    (t.fecha_final_).m=stoi(cad);
+    getline(file,cad,'|');
+    (t.fecha_final_).a=stoi(cad);
     getline(file,cad,"\n");
-    t->estado=stoi(cad);
+    t.estado=stoi(cad);
     aux.push_back(t);
   }
   file.close();
   return aux;
 }
-
 list <Nota> Paciente::getNotas()
 {
   list <Nota> aux;
@@ -130,28 +128,26 @@ list <Nota> Paciente::getNotas()
   string cad
   for(n=aux.begin();n!=aux.end();n++)
   {
-  	getline(file,cad,"/");
-    (n->fecha_)->d=stoi(cad);
-    getline(file,cad,"/");
-    (n->fecha_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (n->fecha_)->a=stoi(cad);
-    getline(file,cad,":");
-    (n->hora_)->h=stoi(cad);
-    getline(file,cad,":");
-    (n->hora_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (n->hora_)->s=stoi(cad);
-    getline(file,cad,"||");
-    n->paciente_=stoi(cad);
-    getline(file,(n->nota_),"\n");
+  	getline(file,cad,'/');
+    (n.fecha_).d=stoi(cad);
+    getline(file,cad,'/');
+    (n.fecha_).m=stoi(cad);
+    getline(file,cad,'|');
+    (n.fecha_).a=stoi(cad);
+    getline(file,cad,':');
+    (n.hora_).h=stoi(cad);
+    getline(file,cad,':');
+    (n.hora_).m=stoi(cad);
+    getline(file,cad,'|');
+    (n.hora_).s=stoi(cad);
+    getline(file,cad,'|');
+    n.paciente_=stoi(cad);
+    getline(file,(n.nota_),"\n");
     aux.push_back(n);
   }
   file.close();
   return aux;
 }
-
-
 void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
 {
   fstream archivo;
@@ -159,13 +155,12 @@ void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
   archivo<<p.id_<<'|';
   archivo<<p.nombre_<<'|';
   archivo<<p.apellidos_<<'|';
-  archivo<<escribeFecha(p.fechanacimiento_)<<"||";
+  archivo<<escribeFecha(p.fechanacimiento_)<<"|";
   archivo<<p.telefono_<<'|';
   archivo<<p.codpostal_<<'|';
   archivo<<p.tipo_<<endl;
   archivo.close();
 }
-
 void Paciente::mostrarHCitas()
 {
   list <Cita> aux;
@@ -175,48 +170,47 @@ void Paciente::mostrarHCitas()
   string cad
   for(c=aux.begin();c!=aux.end();c++)
   {
-  	getline(file,cad,"/");
-    (c->fecha_)->d=stoi(cad);
-    getline(file,cad,"/");
-    (c->fecha_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (c->fecha_)->a=stoi(cad);
-    getline(file,cad,":");
-    (c->hora_)->h=stoi(cad);
-    getline(file,cad,":");
-    (c->hora_)->m=stoi(cad);
-    getline(file,cad,"||");
-    (c->hora_)->s=stoi(cad);
-    getline(file,cad,"||");
-    c->paciente_=stoi(cad);
-    getline(file,(c->comentario_),"\n"); //Javier, esto lo tienes que modificar, para que compare el numero del paciente con el ID  del paciente y solo copie los datos del paciente
+  	getline(file,cad,'/');
+    (c.fecha_).d=stoi(cad);
+    getline(file,cad,'/');
+    (c.fecha_).m=stoi(cad);
+    getline(file,cad,'|');
+    (c.fecha_).a=stoi(cad);
+    getline(file,cad,':');
+    (c.hora_).h=stoi(cad);
+    getline(file,cad,':');
+    (c.hora_).m=stoi(cad);
+    getline(file,cad,'|');
+    (c.hora_).s=stoi(cad);
+    getline(file,cad,'|');
+    c.paciente_=stoi(cad);
+    getline(file,(c.comentario_),"\n"); //Javier, esto lo tienes que modificar, para que compare el numero del paciente con el ID  del paciente y solo copie los datos del paciente
     aux.push_back(c);
   }
   file.close();
   for(c=aux.begin();c!=aux.end();c++)
   {
-  	if(id_=(c->paciente_))
+  	if(id_=(c.paciente_))
   	{
-  		cout<<(c->fecha_)->d<<endl;
-  		cout<<(c->fecha_)->m<<endl;
-  		cout<<(c->fecha_)->a<<endl;
+  		cout<<(c.fecha_).d<<endl;
+  		cout<<(c.fecha_).m<<endl;
+  		cout<<(c.fecha_).a<<endl;
   	}
   }
 }
-
 void Paciente::mostrarHistorial()
 {
   // pide k kiere hase
   // llama a funcion getListaX
   // se imprimen en mostaerRegistro
-  //si todo -> get citas, gt, tratamientos y get notas
+  //si todo . get citas, gt, tratamientos y get notas
 }
-*/
+
 bool Paciente::addTratamiento(const Tratamiento t){   //Sin probar
   fstream file;
   file.open(to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
   if(file){
-    file<<escribeFecha(t.getFecha())<<"||"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
+    file<<escribeFecha(t.getFecha())<<"|"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
     file.close();
     return true;
   }
