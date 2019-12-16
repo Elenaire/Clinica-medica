@@ -31,8 +31,8 @@ void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la
 	printf("Yuju, soy un tratamiento y estoy mostrandome :D\n");
 }
 bool Tratamiento::modificable(){
-	if(modificable_){
-		return modificable_;
+	if(Registro::modificable_){
+		return true;
 	}
 	else if((estado_==0)||(dias(final_,HOY)<3)){			//---------------
 		return true;

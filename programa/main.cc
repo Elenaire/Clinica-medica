@@ -71,34 +71,29 @@ void AgregaP()
 {
 	Paciente p(id);
 	fecha f;
-	string name;
+	string auxs;
+	int auxi;
 	cout<<"Introdzuca nombre del paciente"<<endl;
-	cin>>name;
-	p.setNombre(name);
-	string apellidos;
+	cin>>auxs;
+	p.setNombre(auxs);
 	cout<<"Introdzuca apellidos del paciente"<<endl;
-	cin>>apellidos;
-	p.setApellidos(apellidos);
-	string adress;
+	cin>>auxs;
+	p.setApellidos(auxs);
 	cout<<"Introdzuca la dirección del paciente"<<endl;
-	cin>>adress;
-	p.setDireccion(adress);
-	string name;
+	cin>>auxs;
+	p.setDireccion(auxs);
 	cout<<"Introdzuca la fecha de nacimiento del paciente"<<endl;
 	leerFecha(f);
 	p.setFechanacimiento(f);
-	int tlf;
 	cout<<"Introdzuca el telefono del paciente"<<endl;
-	cin>>tlf;
-	p.setTelefono(tlf);
-	int cp;
+	cin>>auxi;
+	p.setTelefono(auxi);
 	cout<<"Introdzuca el cod.postal del paciente"<<endl;
-	cin>>cp;
-	p.setCodPostal(cp);
-	int type;
+	cin>>auxi;
+	p.setCodPostal(auxi);
 	cout<<"Introdzuca el tipo del paciente"<<endl;
-	cin>>type;
-	p.setTipo(type);
+	cin>>auxi;
+	p.setTipo(auxi);
 	AddPaciente(p);
 }
 

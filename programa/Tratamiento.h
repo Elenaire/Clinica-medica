@@ -2,7 +2,6 @@
 	#define TRATAMIENTO_H
 	#include "Registro.h"
 	#include "fecha_hora.h"
-	#include <string>
 	using namespace std;
 	class Tratamiento: public Registro{
 	private:

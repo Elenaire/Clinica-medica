@@ -174,9 +174,68 @@ void ordenarPacientes(int parametro,list<Paciente> p){		//Sin terminar  --Quiero
 		break;
 	}*/
 }
-bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin terminar
+bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin terminar  ----------------------------------------
 	if(t.modificable()){
+		char c;
+		string aux;
+		fecha f1,f2;
 		printf("Aqui pregunta que modificar y bla bla bla\n");
+		int menu=0;
+		while(menu>=0){
+			t.mostrarRegistro();
+			/*
+			bla bla menu
+			*/
+			switch(menu){
+				case 0:
+					printf("1 Finalizar tratamiento\n2 Moficicar tratamiento\n3 Modificar fechas de inicio y finalización\n4 Modificar comentario\n-1 Atras");
+					cin>>menu;
+				break;
+				case 1:		//Finalizar tratamiento
+					printf("Hacer esto significa que el tratamiento no ha finalizado correctamente.\n¿Desea continuar?(s/n)\n");
+					cin>>c;
+					if(c=='s'){
+						t.setEstado(-1);
+					}
+				break;
+				case 2:	//Moficicar tratamiento
+					printf("Medicamento: ");		
+					getline(cin,aux);
+					t.setMedicamento(aux);
+					printf("Concentración: ");
+					getline(cin,aux);
+					t.setConcentracion(aux);
+					printf("Regularidad: ");
+					getline(cin,aux);
+					t.setRegularidad(aux);
+				break;
+				case 3:	//Modificar fechas de inicio y finalización
+					printf("Hola\n");
+				default:
+					if(menu>0){
+						printf("Error, introduzca:\n");
+						menu=0;
+					}
+				}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 	else{
 		printf("No está permitido modificar este tratamiento\n");
@@ -215,8 +274,7 @@ void anadirTratamiento(Paciente &p){
 	char c;
 	bool bucle=true;
 	string aux;
-	fecha f,f1,f2;
-	hoy(f);
+	fecha f1,f2;
 	printf("Medicamento: ");		//Empieza a pedir datos
 	getline(cin,aux);
 	t.setMedicamento(aux);
@@ -232,7 +290,7 @@ void anadirTratamiento(Paciente &p){
 			if(leerFecha(f1)!=true){
 			printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 			}
-			else if(dias(f,f1)<0||Registro::modificable_==false){			//Modificable_
+			else if(dias(HOY,f1)<0||Registro::modificable_==false){			//Modificable_
 			printf("Esa fecha ya ha pasado\n");
 		}
 		else{
