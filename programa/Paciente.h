@@ -49,8 +49,8 @@
     list <Tratamiento> getTratamientos();
     list <Nota> getNotas();//Javi esto te toca a ti no te fies mucho de lo que he escrito yo
     void mostrarPaciente();
-    void mostarHistorial();
-    bool addTratamiento(const Tratamiento t);	//Sin probar 
+    void mostrarHistorial();
+    bool addTratamiento(const Tratamiento t);	//Sin probar
   };
 
   #endif
