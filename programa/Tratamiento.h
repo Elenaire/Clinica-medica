@@ -13,7 +13,13 @@
 		int estado_;			//Sin concluir 0,finalizado con exito 1, concluido -1
 		string comentario_;
 	public:
-		Tratamiento(int paciente);					//Constructor
+		Tratamiento(int paciente):Registro(paciente){				//Constructor
+			medicamento_="";
+			comentario_="";
+			regularidad_="";
+			estado_=0;
+			comentario_="";
+		}
 		void mostrarRegistro() override;			//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
 		bool borrar() override;

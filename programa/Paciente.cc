@@ -29,6 +29,7 @@ int Paciente::getEdad(){
   return aux;
 }
 
+
 void Paciente::mostrarPaciente(){
   cout<<"ID: "<<id_<<endl;
   cout<<"NOMBRE: "<<nombre_<<endl;
@@ -44,15 +45,15 @@ void Paciente::mostrarPaciente(){
     cout<<"TIPO: PRIVADO"<<endl;
   }
 }
-
-/*list <Cita> Paciente::getCitas()
+/*
+list <Cita> Paciente::getCitas()
 {
   list <Cita> aux;
   list <Cita>::iterator c;
   ifstream file;
   file.open("citas.txt");
   string cad;
-  for(c=aux.begin();c!=aux.end();c++)
+  for(c=aux.begin();c!=aux.end();c++)     //Mal
   {
   	getline(file,cad,'|');
     (c->fecha_).d=stoi(cad);
@@ -73,52 +74,55 @@ void Paciente::mostrarPaciente(){
   }
   file.close();
   return aux;
+
+file.getline(cad,64,'|'); 
+    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+    file.getline(cad,64,'|'); 
+    sscanf(cad,"%2d:%2d",&h.h,&h.m);
+    getline(file,cad,'|');
+
+
+
 }
-list <Tratamiento> Paciente::getTratamientos()   //Mal
-{
+*/
+list <Tratamiento> Paciente::getTratamientos(){
   list <Tratamiento> aux;
-  list <Tratamiento>::iterator t;
+  Tratamiento t(id_);
+  fecha f;
+  hora h;
+  char cad[256];
+  string str;
   ifstream file;
-  file.open("Tratamientos.txt");
-  string cad;
-  for(t=aux.begin();t!=aux.end();t++)
-  {
-  	getline(file,cad,'/');
-    (t->fecha_).d=stoi(cad);
-    getline(file,cad,'/');
-    (t->fecha_).m=stoi(cad);
-    getline(file,cad,'|');
-    (t->fecha_).a=stoi(cad);
-    getline(file,cad,':');
-    (t->hora_).h=stoi(cad);
-    getline(file,cad,':');
-    (t->hora_).m=stoi(cad);
-    getline(file,cad,'|');
-    (t->hora_).s=stoi(cad);
-    getline(file,cad,'|');
-    t.paciente_=stoi(cad);
-    getline(file,(t.medicamento_),'|');
-    getline(file,(t.concentracion_),'|');
-    getline(file,(t.regularidad_),'|');
-    getline(file,cad,'/');
-    (t.fecha_inicio_).d=stoi(cad);
-    getline(file,cad,'/');
-    (t.fecha_inicio_).m=stoi(cad);
-    getline(file,cad,'|');
-    (t.fecha_inicio_).a=stoi(cad);
-    getline(file,cad,'|');
-    (t.fecha_final_).d=stoi(cad);
-    getline(file,cad,'/');
-    (t.fecha_final_).m=stoi(cad);
-    getline(file,cad,'|');
-    (t.fecha_final_).a=stoi(cad);
-    getline(file,cad,"\n");
-    t.estado=stoi(cad);
+  file.open(to_string(id_)+"/Tratamientos.txt");
+  while(!file.eof()){
+    file.getline(cad,64,'|');                 //No lo entiendo
+    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+    t.setFecha(f);
+    file.getline(cad,64,'|');   //Hora....
+    sscanf(cad,"%2d:%2d",&h.h,&h.m);
+    t.setHora(h);
+    file.getline(cad,64,'|');
+    t.setMedicamento(str);
+    file.getline(cad,64,'|');
+    t.setConcentracion(str);
+    file.getline(cad,64,'|');
+    t.setRegularidad(str);
+    file.getline(cad,64,'|');   //Fecha....
+    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+    t.setFechaInicio(f);
+    file.getline(cad,64,'|');   //Fecha....
+    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+    t.setFechaFinal(f);
+    file.getline(cad,64,'|');
+    file.getline(cad,32,'|');
+    t.setEstado(stoi(cad));
+    file.getline(cad,64,'|');
+    t.setComentario(str);
     aux.push_back(t);
-  }
-  file.close();
+    }
   return aux;
 }
+/*
 list <Nota> Paciente::getNotas()
 {
   list <Nota> aux;
@@ -126,7 +130,7 @@ list <Nota> Paciente::getNotas()
   ifstream file;
   file.open("citas.txt")
   string cad
-  for(n=aux.begin();n!=aux.end();n++)
+  for(n=aux.begin();n!=aux.end();n++)       //Mal
   {
   	getline(file,cad,'/');
     (n.fecha_).d=stoi(cad);
@@ -147,8 +151,8 @@ list <Nota> Paciente::getNotas()
   }
   file.close();
   return aux;
-}*/
 
+*/
 void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
 {
   fstream archivo;
@@ -202,7 +206,7 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
   }
 }
 */
-
+/*
 void Paciente::mostrarHistorial()
 {
   int elec;
@@ -261,13 +265,25 @@ void Paciente::mostrarHistorial()
     }
   }
 }
-/*
+*/
 
 bool Paciente::addTratamiento(const Tratamiento t){   //Sin probar
   fstream file;
   file.open(to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
   if(file){
     file<<escribeFecha(t.getFecha())<<"|"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
+    file.close();
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+bool Paciente::addNota(const Nota n){
+  fstream file;
+  file.open(to_string(id_)+"/Notas.txt",ios::out|ios::app|ios::ate);
+  if(file){
+    file<<escribeFecha(n.getFecha())<<"|"<<escribeHora(n.getHora())<<n.getContenido()<<endl;
     file.close();
     return true;
   }
@@ -297,233 +313,33 @@ bool Apellidos_Nombre(Paciente p1,Paciente p2){
   }
   return ( s1.length() < s2.length() );
 }
-*/
 
-void eliminarPaciente()
+void AgregaP()
 {
-  ifstream file;
-  file.open("Pacientes.txt");
-  list<Paciente> aux;
-  list<Paciente>::iterator i;
-  string cad;
-  while(getline(file,cad,'|'))
-  {
-    i->setID(stoi(cad));
-    getline(file,cad,'|');
-    i->setNombre(cad);
-    getline(file,cad,'|');
-    i->setApellidos(cad);
-    getline(file,cad,'|');
-    i->setDireccion(cad);
-    //Aqui va fecha que no se como ponerlo //ELENA SI LEES ESTO PONLO TU QUE NO ME ACUERDO COMO IBA ESO
-    getline(file,cad,'|');
-    i->setTelefono(stoi(cad));
-    i->setCodPostal(stoi(cad));
-    i->setTipo(stoi(cad));
-    i->mostrarPaciente();
-    aux.push_back(*i);
-  }
-  file.close();
-  cout<<"Introduzca el ID del paciente a eliminar"<<endl;
-  int auxid;
-  cin>>auxid;
-  Paciente p(auxid);
-  for(i=aux.begin();i!=aux.end();i++)
-  {
-    if((i->getID())==p.getID())
-    {
-      p=*i;
-      i->setID(-1);
-    }
-  }
-  char elec;
-  cout<<"Está seguro de querer elimina el paciente "<<p.getNombre()<<" (S/N)"<<endl;
-  cin>>elec;
-  if(elec=='S')
-  {
-    ofstream archivo;
-    archivo.open("Pacientes.txt");
-    for(i=aux.begin();i!=aux.end();i++)
-    {
-      if((i->getID())!=-1)
-      {
-        archivo<<i->getID()<<'|';
-        archivo<<i->getNombre()<<'|';
-        archivo<<i->getApellidos()<<'|';
-        archivo<<escribeFecha(i->getFechanacimiento())<<'|';
-        archivo<<i->getTelefono()<<'|';
-        archivo<<i->getCodPostal()<<'|';
-        archivo<<i->getTipo()<<endl;
-      }
-    }
-  }
-}
-
-void ModificarPaciente()
-{
-  ifstream file;
-  file.open("Pacientes.txt");
-  list<Paciente> aux;
-  list<Paciente>::iterator i;
-  string cad;
-  while(getline(file,cad,'|'))
-  {
-    i->setID(stoi(cad));
-    getline(file,cad,'|');
-    i->setNombre(cad);
-    getline(file,cad,'|');
-    i->setApellidos(cad);
-    getline(file,cad,'|');
-    i->setDireccion(cad);
-    //Aqui va fecha que no se como ponerlo //ELENA SI LEES ESTO PONLO TU QUE NO ME ACUERDO COMO IBA ESO
-    getline(file,cad,'|');
-    i->setTelefono(stoi(cad));
-    i->setCodPostal(stoi(cad));
-    i->setTipo(stoi(cad));
-    i->mostrarPaciente();
-    aux.push_back(*i);
-  }
-  file.close();
-  cout<<"Introduzca el ID del paciente a modificar"<<endl;
-  int auxid;
-  cin>>auxid;
-  Paciente p(auxid);
-  int elec;
-  cout<<"Indique que campos quiere modificar"<<endl<<"1.Nombre\n2.Apellidos\n3.Direccion\n4.Fecha de nacimiento\n5.Telefono\n6.Codigo Postal\n7.Tipo\n8.Modificar todos los campos"<<endl;
-  cin>>elec;
-  switch(elec)
-  {
-    case 1:
-    {
-      string name;
-      cout<<"Indique el nuevo nombre del paciente"<<endl;
-      cin>>name;
-      for(i=aux.begin();i!=aux.end();i++)
-      {
-        if(i->getID()==p.getID())
-        {
-          i->setNombre(name);
-        }
-      }
-    }break;
-    case 2:
-    {
-      string surname;
-      cout<<"Indique el nuevo apellido del paciente"<<endl;
-      cin>>surname;
-      for(i=aux.begin();i!=aux.end();i++)
-      {
-        if((i->getID()==p.getID()))
-        {
-          i->setApellidos(surname);
-        }
-      }
-    }break;
-    case 3:
-    {
-      string adress;
-      cout<<"Indique la nueva direccion del paciente"<<endl;
-      cin>>adress;
-      for(i=aux.begin();i!=aux.end();i++)
-      {
-        if((i->getID()==p.getID()))
-        {
-          i->setDireccion(adress);
-        }
-      }
-    }break;
-    case 4:
-    {
-      //AQUI VA LA FECHA PERO NO SE COMO PONERLA
-    }break;
-    case 5:
-    {
-      int tlf;
-      cout<<"Indique el nuevo telefono del paciente"<<endl;
-      cin>>tlf;
-      for(i=aux.begin();i!=aux.end();i++)
-      {
-        if((i->getID()==p.getID()))
-        {
-          i->setTelefono(tlf);
-        }
-      }
-    }break;
-    case 6:
-    {
-      int cp;
-      cout<<"Indique el nuevo codigo postal del paciente"<<endl;
-      cin>>cp;
-      for(i=aux.begin();i!=aux.end();i++)
-      {
-        if((i->getID()==p.getID()))
-        {
-          i->setCodPostal(cp);
-        }
-      }
-    }break;
-    case 7:
-    {
-      int type;
-      cout<<"Indique el nuevo tipo del paciente"<<endl;
-      cin>>type;
-      for(i=aux.begin();i!=aux.end();i++)
-      {
-        if((i->getID()==p.getID()))
-        {
-          i->setTipo(type);
-        }
-      }
-    }break;
-    case 8:
-    {
-      string name,surname,adress;
-      int tlf,cp,type;
-      cout<<"Indique el nuevo nombre del paciente"<<endl;
-      cin>>name;
-      cout<<"Indique el nuevo apellido del paciente"<<endl;
-      cin>>surname;
-      cout<<"Indique la nueva direccion del paciente"<<endl;
-      cin>>adress;
-      cout<<"Indique el nuevo telefono del paciente"<<endl;
-      cin>>tlf;
-      cout<<"Indique el nuevo codigo postal del paciente"<<endl;
-      cin>>cp;
-      cout<<"Indique el nuevo tipo del paciente"<<endl;
-      cin>>type;
-      for(i=aux.begin();i!=aux.end();i++)
-      {
-        if(i->getID()==p.getID())
-        {
-          i->setNombre(name);
-          i->setApellidos(surname);
-          i->setDireccion(adress);
-          i->setTelefono(tlf);
-          i->setCodPostal(cp);
-          i->setTipo(type);
-        }
-      }
-    }break;
-  }
-  cout<<"¿Está seguro de querer modificar estos campos? (S/N)"<<endl;
-  char c;
-  cin>>c;
-  if(c=='S')
-  {
-    ofstream archivo;
-    archivo.open("Pacientes.txt");
-    for(i=aux.begin();i!=aux.end();i++)
-    {
-      if(i->getID()!=-1)
-      {
-        archivo<<i->getID()<<'|';
-        archivo<<i->getNombre()<<'|';
-        archivo<<i->getApellidos()<<'|';
-        archivo<<escribeFecha(i->getFechanacimiento())<<'|';
-        archivo<<i->getTelefono()<<'|';
-        archivo<<i->getCodPostal()<<'|';
-        archivo<<i->getTipo()<<endl;
-      }
-    }
-  }
+  Paciente p(0);
+  fecha f;
+  string auxs;
+  int auxi;
+  cout<<"Introdzuca nombre del paciente"<<endl;
+  cin>>auxs;
+  p.setNombre(auxs);
+  cout<<"Introdzuca apellidos del paciente"<<endl;
+  cin>>auxs;
+  p.setApellidos(auxs);
+  cout<<"Introdzuca la dirección del paciente"<<endl;
+  cin>>auxs;
+  p.setDireccion(auxs);
+  cout<<"Introdzuca la fecha de nacimiento del paciente"<<endl;
+  leerFecha(f);
+  p.setFechanacimiento(f);
+  cout<<"Introdzuca el telefono del paciente"<<endl;
+  cin>>auxi;
+  p.setTelefono(auxi);
+  cout<<"Introdzuca el cod.postal del paciente"<<endl;
+  cin>>auxi;
+  p.setCodPostal(auxi);
+  cout<<"Introdzuca el tipo del paciente"<<endl;
+  cin>>auxi;
+  p.setTipo(auxi);
+  AddPaciente(p);
 }

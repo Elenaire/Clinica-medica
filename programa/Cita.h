@@ -6,11 +6,16 @@
 	private:
 		string comentario_;
 	public:
-		Cita();					//Constructor
-
-		// get y set
-
-		void mostrarRegistro() override;			//Muestra por pantalla los datos de la cita
+		Cita(int paciente):Registro(paciente){				//Constructor
+			comentario_="";
+		}
+		inline string getComentario()const{
+			return comentario_;
+		}
+		inline void setComentario(const string cad){
+			comentario_=cad;
+		}
+		void mostrarRegistro() override;			//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
 		bool borrar() override;
 		//-Cita();				//Destructor

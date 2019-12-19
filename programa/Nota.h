@@ -6,11 +6,16 @@
 	private:
 		string contenido_;
 	public:
-		Nota();					//Constructor
-
-		// get y set
-
-		void mostrarRegistro() override;			//Muestra por pantalla los datos de la nota
+		Nota(int paciente):Registro(paciente){				//Constructor
+			contenido_="";
+		}
+		inline string getContenido()const{
+			return contenido_;
+		}
+		inline void setContenido(const string cad){
+			contenido_=cad;
+		}
+		void mostrarRegistro() override;			//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
 		bool borrar() override;
 		//-Nota();				//Destructor

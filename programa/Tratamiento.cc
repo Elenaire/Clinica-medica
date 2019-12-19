@@ -3,17 +3,7 @@
 #include "fecha_hora.h"
 #include <cstdio>
 
-
-Tratamiento::Tratamiento(int paciente):Registro(paciente){				//Constructor
-	medicamento_="";
-	comentario_="";
-	regularidad_="";
-	estado_=0;
-	comentario_="";
-}
-
 void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
-
 
 /*	cout<<"Tratamento de "<<medicamento_<<ennl<<"Concentración de "<<concentracion_<<endl<<"Con regularidad "<<regularidad_<<end;
 	printf("Iniciado el %d/%d/%d ",inicio_.d,inicio_.m,inicio_.a);
@@ -31,7 +21,8 @@ void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la
 	printf("Yuju, soy un tratamiento y estoy mostrandome :D\n");
 }
 bool Tratamiento::modificable(){
-	if(Registro::modificable_){
+	bool modificable_=true;
+	if(modificable_){
 		return true;
 	}
 	else if((estado_==0)||(dias(final_,HOY)<3)){			//---------------

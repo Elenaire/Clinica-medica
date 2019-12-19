@@ -1,5 +1,5 @@
 CXXFLAGS += -g -Wall -Wextra -std=gnu++11
-all : main.exe
+all : main.x
 
 clean :
 	rm -f $(TESTS) gtest.a gtest_main.a *.o
@@ -22,6 +22,6 @@ Nota.o : Nota.cc Nota.h Registro.h funciones.o fecha_hora.o
 Paciente.o : Paciente.cc Paciente.h funciones.o fecha_hora.o Cita.o Tratamiento.o Nota.o
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c Paciente.cc funciones.o fecha_hora.o Cita.o Tratamiento.o Nota.o
 
-main.exe : main.cc Paciente.o Cita.o Tratamiento.o Nota.o funciones.o fecha_hora.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c main.cc Paciente.o funciones.o fecha_hora.o Cita.o Tratamiento.o Nota.o
+main.x : main.cc Paciente.o Cita.o Tratamiento.o Nota.o funciones.o fecha_hora.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o main.x main.cc Paciente.o funciones.o fecha_hora.o Tratamiento.o
 

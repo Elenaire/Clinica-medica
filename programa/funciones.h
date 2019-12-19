@@ -12,8 +12,10 @@
 	bool filtrarPacientes(int filtro,list<Paciente> p);			//Sin probar
 	void ordenarPacientes(int parametro,list<Paciente> p);		//Sin completar
 	bool modificarTratamiento(Tratamiento &t);					//Sin hacer   //Mal, tiene que ser de tratamiento
-	void consultarTramientos(Paciente &p);
+//	void consultarTramientos(Paciente &p);
+	void anadirCita(Paciente &p);
 	void anadirTratamiento(Paciente &p);
+	void anadirNota(Paciente &p);
 	
 
 #endif

@@ -3,6 +3,6 @@
 
 **Cita:** ......
 
-**Tratamiento:**  Fecha_|Hora_ \n Medicamento \n Concentracion \n Regulariodad \n F.inicio \n F.final \n Estado \n Comentario \n
+**Tratamiento:**  Fecha_|Hora_ \n Medicamento \n Concentracion \n Regularidad \n F.inicio \n F.final \n Estado \n Comentario \n
 
-**Nota:** ......
+**Nota:** Fecha_|Hora_|Comentario \n
