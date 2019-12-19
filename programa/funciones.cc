@@ -14,7 +14,7 @@ list<Paciente> leerPacientes(){
 	file.open("Pacientes.txt");
 	fecha f;
 	char cad[256];
-	for(i=p.begin();i!=p.end();i++){		//Mal tiene que ser fin del fichero
+	for(i=p.begin();i!=p.end();i++){
 	    file.getline(cad,32,'|');
 	    aux.setID(stoi(cad));
 	    file.getline(cad,64,'|');
@@ -32,7 +32,7 @@ list<Paciente> leerPacientes(){
 	    aux.setTipo(stoi(cad));
 	    p.push_back(aux);
 	}
-	file.close();
+	file.close();;
 	return p;
 }
 void mostrarPacientes(list<Paciente> &p){					//Sin probar
@@ -82,7 +82,7 @@ bool filtrarPacientes(int filtro,list<Paciente> p){			//Sin probar
 					}
 				}
 			break;
-			case 4:	
+			case 4:
 				scanf("%d",&n);
 				for(i=p.begin();i!=p.end();++i){
 					if(n==i->getEdad()){
@@ -199,7 +199,7 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 					}
 				break;
 				case 2:	//Moficicar tratamiento
-					printf("Medicamento: ");		
+					printf("Medicamento: ");
 					getline(cin,aux);
 					t.setMedicamento(aux);
 					printf("Concentración: ");
@@ -211,7 +211,6 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 				break;
 				case 3:	//Modificar fechas de inicio y finalización
 					printf("Hola\n");
-				break;
 				default:
 					if(menu>0){
 						printf("Error, introduzca:\n");
@@ -220,13 +219,30 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 				}
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 	else{
 		printf("No está permitido modificar este tratamiento\n");
 		return false;
 	}
 }
-/*
+
 void consultarTramientos(Paciente &p){
   	int i;
 	list <Tratamiento> tratamientos;
@@ -253,55 +269,7 @@ void consultarTramientos(Paciente &p){
 		}
 	}
 }
-*/
-/*
-void anadirCita(Paciente &p){
-	Cita c(p.getID());
-	char c;
-	bool bucle=true;
-	string aux;
-	fecha f1,f2;
-	printf("Día:");
-	while(bucle){
-		if(leerFecha(f1)!=true){
-		printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
-		}
-		else if(dias(HOY,f1)<0||Registro::modificable_==false){			//Modificable_
-		printf("Ese día ya ha pasado\n");
-		}
-		else{
-			bucle=false;
-		}
-	}
-	printf("Hora:");
-	while(bucle){
-		if(leerHora(f1)!=true){
-		printf("Formato de hora incorrecto, introduzca hh:mm\n");
-		}
-		else if(){
-				//Comprobar muchas cosas------------------------------------
-		}
-		else{
-			bucle=false;
-		}
-	}
-	printf("Introduzca un comentario(opcional): ");
-	cin>>aux;
-	t.setComentario(aux);			//Termina de pedir datos
-	printf("¿Desea guardar la cita? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
-	cin>>c;
-	if(c=='s'){
-		if(p.addCita(c)){
-			printf("Cita guardada correctamente\n");
-		}
-		else{
-			printf("Ha ocurrido un error inesperado\n");
-		}
-	}
-}
-*/
 void anadirTratamiento(Paciente &p){
-	bool modificable_=true;		//-------------
 	Tratamiento t(p.getID());
 	char c;
 	bool bucle=true;
@@ -322,7 +290,7 @@ void anadirTratamiento(Paciente &p){
 			if(leerFecha(f1)!=true){
 			printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 			}
-			else if(dias(HOY,f1)<0||modificable_==false){			//Modificable_
+			else if(dias(HOY,f1)<0||Registro::modificable_==false){			//Modificable_
 			printf("Esa fecha ya ha pasado\n");
 		}
 		else{
@@ -359,23 +327,21 @@ void anadirTratamiento(Paciente &p){
 		}
 	}
 }
-/*
-void anadirNota(Paciente &p){
-	Nota n(p.getID());
-	char c;
-	string aux;
-	printf("Nota:\n");
-	cin>>aux;
-	n.setContenido(aux);			//Termina de pedir datos
-	printf("¿Desea guardar la nota? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
-	cin>>c;
-	if(c=='s'){
-		if(p.addNota(n)){
-			printf("Nota guardada correctamente\n");
-		}
-		else{
-			printf("Ha ocurrido un error inesperado\n");
+
+bool ContieneA(string cad1,string cad2)
+{
+	int n=strlen(cad1);
+	int cont=0;
+	for (int i = 0; i < n; i++) {
+		if(cad1[i]==cad2[i])
+		{
+			cont++;
 		}
 	}
+	if(cont==n)
+	{
+		return true;
+	}else{
+		return false;
+	}
 }
-*/
