@@ -11,7 +11,7 @@
 	void consultarTramientos(Paciente &p);
 	void anadirTratamiento(Paciente &p);
 	void AddPaciente(Paciente p);
-    void AgregaP();
+    	void AgregaP();
 
 using namespace std;
 bool buscarPaciente(Paciente &p){		//Sin completar Sin probar
@@ -66,6 +66,36 @@ bool buscarPaciente(Paciente &p){		//Sin completar Sin probar
 		}
 	}
 	return false;
+}
+
+void AgregaP()
+{
+	Paciente p;
+	fecha f;
+	string auxs;
+	int auxi;
+	cout<<"Introdzuca nombre del paciente"<<endl;
+	cin>>auxs;
+	p.setNombre(auxs);
+	cout<<"Introdzuca apellidos del paciente"<<endl;
+	cin>>auxs;
+	p.setApellidos(auxs);
+	cout<<"Introdzuca la dirección del paciente"<<endl;
+	cin>>auxs;
+	p.setDireccion(auxs);
+	cout<<"Introdzuca la fecha de nacimiento del paciente"<<endl;
+	leerFecha(f);
+	p.setFechanacimiento(f);
+	cout<<"Introdzuca el telefono del paciente"<<endl;
+	cin>>auxi;
+	p.setTelefono(auxi);
+	cout<<"Introdzuca el cod.postal del paciente"<<endl;
+	cin>>auxi;
+	p.setCodPostal(auxi);
+	cout<<"Introdzuca el tipo del paciente"<<endl;
+	cin>>auxi;
+	p.setTipo(auxi);
+	AddPaciente(p);
 }
 
 
