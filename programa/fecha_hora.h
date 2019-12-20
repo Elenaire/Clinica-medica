@@ -33,7 +33,7 @@
 					if(m<f.m){return true;}
 					else if(m>f.m){return false;}
 					else{
-						if(d>f.d){return false;}
+						if(d>=f.d){return false;}
 						else {return true;}
 					}
 				}

@@ -21,7 +21,7 @@ void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la
 
 }
 bool Tratamiento::modificable(){
-	bool modificable_=true;
+	bool modificable_=false;
 	if(modificable_){
 		return true;
 	}

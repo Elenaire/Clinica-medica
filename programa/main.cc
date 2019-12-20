@@ -4,17 +4,22 @@
 #include "funciones.h"
 #include <list>
 
-	void mostrarPacientes(list<Paciente> &p);					//Muestra los datos de la lista de pacientes
+	void leerPacientes(list<Paciente> &p);						//Lee un paciente del fichero de pacientes -Sin probar
+	void mostrarPacientes(list<Paciente> &p);					//Muestra los datos de la lista de pacientes -Sin probar
 	bool filtrarPacientes(int filtro,list<Paciente> &p);		//Sin probar
 	void ordenarPacientes(int parametro,list<Paciente> &p);		//Sin completar
 	bool modificarTratamiento(Tratamiento &t);					//Sin hacer   //Mal, tiene que ser de tratamiento
 	void consultarTramientos(Paciente &p);
+	list<Cita> getCitas(fecha f1,fecha f2);						//Devuelve una lista con las citas de la fecha 1 a la fecha 2
+	void anadirCita(Paciente &p);
 	void anadirTratamiento(Paciente &p);
-	void AddPaciente(Paciente p);
-    void AgregaP();
+	void anadirNota(Paciente &p);
+	//bool addCita(Cita &c);
+	void anadirCita(Paciente &p);
+	bool ContieneA(string cad1,string cad2);
 
 using namespace std;
-bool buscarPaciente(Paciente &p){		//Sin completar Sin probar
+bool buscarPaciente(Paciente &p){		//Sin completar filtrar y ordenar
 	int menu,id,orden;
 	list<Paciente> pacientes;
 	list<Paciente>::iterator i;
@@ -78,10 +83,10 @@ void menuPaciente(Paciente p){
 		*/
 		switch(menu){
 			case 0:
-				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n7 Eliminar paciente\n-1 Atras\n");
+				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n6 Añadir nota\n7 Eliminar paciente\n-1 Atras\n");
 				cin>>menu;
 			break;
-			case 2:		//Añadir tratamiento +Hecho  -Funciones					ID="fichero.size"
+			case 2:		//Añadir tratamiento +Hecho  -Funciones
 				anadirTratamiento(p);
 				menu=0;
 			break;
@@ -89,9 +94,23 @@ void menuPaciente(Paciente p){
 				consultarTramientos(p);
 				menu=0;
 			break;
-			case 4:
+			case 4:	//Añadir cita
+			anadirCita(p);
+				menu=0;
+			break;
+			case 5:	//Modificar datos del paciente
+
+				//-----------------------
+
+				menu=0;
+			break;
+			case 6:
+				anadirNota(p);
+				menu=0;
+			break;
+			case 7:	//Eliminar paciente
 			printf("Hola\n");
-				//anadirNota(p);
+				//Eliminar paciente?
 				menu=0;
 			break;
 			default:
@@ -125,13 +144,12 @@ int main(){
 				menu=0;
 			break;
 			case 2:		//Añadir paciente
-				AgregaP();
+				//AgregaP();
 			break;
 			case 3:		//Añadir cita
-			/*
 				buscarPaciente(p);
 				anadirCita(p);
-				*/
+				menu=0;
 			break;
 			case 4:		//Consultar agenda
 

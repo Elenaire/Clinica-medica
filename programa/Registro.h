@@ -9,7 +9,7 @@
 		struct hora hora_;		//Hora de creación
 		int paciente_;			//id del paciente del registro
 	public:
-	static bool modificable_;
+	//static bool modificable_;
 	Registro(int paciente){				//Constructor
 		paciente_=paciente;
 		hoy(fecha_);
@@ -31,4 +31,5 @@
 	virtual bool modificable()=0; //Devuelve true si el registro puede modificarse y false si no puede
 	virtual bool borrar()=0;		//Borra el registro del historial
 	};
+	//bool Registro::modificable_=false;
 #endif

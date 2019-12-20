@@ -4,27 +4,14 @@
 #include <cstdio>
 #include <list>
 #include <fstream>
+#include <iostream>
 list<Cita> getCitas(fecha f1,fecha f2);
 
 void Cita::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
-
-/*	cout<<"Tratamento de "<<medicamento_<<ennl<<"Concentración de "<<concentracion_<<endl<<"Con regularidad "<<regularidad_<<end;
-	printf("Iniciado el %d/%d/%d ",inicio_.d,inicio_.m,inicio_.a);
-	switch(estado_){
-		case -1:
-			printf("y cancelado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
-			break;
-		case 0:
-			printf("y con previsión de finalizarse el %d/%d/%d\n",final_.d,final_.m,final_.a);
-		break;
-		default:
-			printf("y finalizado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
-	}
-	cout<<comentario_;*/
-	printf("Yuju, soy una cita y estoy mostrandome :D\n");
+	cout<<comentario_<<endl;						//No esta bien---------------
 }
 bool Cita::modificable(){
-	bool modificable_=true;
+	bool modificable_=false;
 	if(modificable_){
 		return true;
 	}
@@ -39,6 +26,7 @@ bool Cita::borrar(){
 	printf("Me estoy borrando\n");
 	return false;
 }
+
 bool Cita::addCita(){
 	bool insertado=false;
 	list<Cita> lista;
@@ -51,7 +39,7 @@ bool Cita::addCita(){
 	lista=getCitas(f1,f2);
 	fstream file;
 	for(i=lista.begin();((i!=lista.end())&&(!insertado));i++){
-
+		(*i).mostrarRegistro();
 		if(fecha_<(*i).getFecha()){			//Si la fecha de la cita es anterior no hace nada
 		}
 		else if((*i).getFecha()<fecha_){		//Si es posterior se guarda antes
@@ -68,10 +56,10 @@ bool Cita::addCita(){
 	if(insertado==false){
 		lista.push_back(*this);
 	}
-	file.open("Agenda/"+to_string(fecha_.m)+"/"+to_string(fecha_.a)+".txt",ios::out|ios::trunc);
-	for(i=lista.begin();((i!=lista.end())&&(!insertado));i++){
-
-		file<<(*i).getID()<<"|"<<escribeFecha((*i).getFecha())<<"|"<<escribeHora((*i).getHora())<<(*i).getComentario()<<endl;
+	file.open("Agenda/"+to_string(fecha_.m)+"_"+to_string(fecha_.a)+".txt",ofstream::out|ofstream::trunc);
+	for(i=lista.begin();i!=lista.end();i++){
+		file<<(*i).getID()<<"|"<<escribeFecha((*i).getFecha())<<"|"<<escribeHora((*i).getHora())<<"|"<<(*i).getComentario()<<endl;
 	}
 	file.close();
+	return true;
 }

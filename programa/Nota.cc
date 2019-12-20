@@ -2,6 +2,7 @@
 #include "funciones.h"
 #include "fecha_hora.h"
 #include <cstdio>
+#include <iostream>
 
 void Nota::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
 
@@ -21,7 +22,7 @@ void Nota::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha 
 	printf("Yuju, soy una nota y estoy mostrandome :D\n");
 }
 bool Nota::modificable(){
-	bool modificable_=true;
+	bool modificable_=false;
 	if(modificable_){
 		return true;
 	}
