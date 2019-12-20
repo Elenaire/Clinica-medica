@@ -53,8 +53,8 @@
     bool addCita(const Nota n);
     bool addTratamiento(const Tratamiento t);	//Sin probar
     bool addNota(const Nota n);
-    void AddPaciente(Paciente p);
-    void AgregaP();
+    void eliminarPaciente();
+    void modificarPaciente();
   };
 
   #endif
