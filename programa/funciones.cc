@@ -475,7 +475,7 @@ bool addCita(Cita c){
 }
 */
 /*
-bool ContieneA(string cad1,string cad2)
+bool ContieneA(char* cad1,char* cad2)
 {
 	int n=strlen(cad1);
 	int cont=0;
