@@ -57,4 +57,6 @@
     void modificarPaciente();
   };
 
+  void AddPaciente(Paciente p);
+
   #endif
