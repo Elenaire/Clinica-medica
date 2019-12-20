@@ -1,8 +1,8 @@
 
-**Paciente:** Id|Nombre|Apellidos|dd/mm/aaaa|Telefono|Codigopostal|Tipo\n
+**Paciente:** Id|Nombre|Apellidos|dd/mm/aaaa|Telefono|Codigopostal|Dirección|Tipo\n
 
-**Cita:** ......
+**Cita:** Idpaciente|Fecha_|Hora_|Comentario \n
 
-**Tratamiento:**  Fecha_|Hora_ \n Medicamento \n Concentracion \n Regularidad \n F.inicio \n F.final \n Estado \n Comentario \n
+**Tratamiento:**  Fecha_|Hora_|Medicamento|Concentracion|Regularidad|F.inicio|F.final|Estado|Comentario \n
 
-**Nota:** Fecha_|Hora_|Comentario \n
+**Nota:** Fecha_|Hora_|Contenido \n

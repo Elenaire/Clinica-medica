@@ -4,26 +4,23 @@
 #include "funciones.h"
 #include <list>
 
-	list<Paciente> leerPacientes();								//Sin probar
-	void mostrarPacientes(list<Paciente> &p);					//Sin probar
-	bool filtrarPacientes(int filtro,list<Paciente> p);			//Sin probar
-	void ordenarPacientes(int parametro,list<Paciente> p);		//Sin completar
+	void mostrarPacientes(list<Paciente> &p);					//Muestra los datos de la lista de pacientes
+	bool filtrarPacientes(int filtro,list<Paciente> &p);		//Sin probar
+	void ordenarPacientes(int parametro,list<Paciente> &p);		//Sin completar
 	bool modificarTratamiento(Tratamiento &t);					//Sin hacer   //Mal, tiene que ser de tratamiento
 	void consultarTramientos(Paciente &p);
 	void anadirTratamiento(Paciente &p);
 	void AddPaciente(Paciente p);
     void AgregaP();
 
-
 using namespace std;
 bool buscarPaciente(Paciente &p){		//Sin completar Sin probar
 	int menu,id,orden;
 	list<Paciente> pacientes;
 	list<Paciente>::iterator i;
-	printf("0 Listar pacientes\nBuscar paciente por:\n1 Nombre completo\n2 Nombre\n3 Apellidos\n 4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Pacientes públicos\n9 Pacientes privados\n-1 Salir\n");
+	printf("0 Listar pacientes\nBuscar paciente por:\n1 Nombre completo\n2 Nombre\n3 Apellidos\n4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Pacientes públicos\n9 Pacientes privados\n-1 Salir\n");
 	scanf("%d",&menu);
-	printf("menu=%d\n",menu);
-	if(menu>0){
+	if(menu>=0){
 		filtrarPacientes(menu,pacientes);
 	}
 	while(menu>=0){				//se sale con -1 o con negativo?
@@ -81,19 +78,21 @@ void menuPaciente(Paciente p){
 		*/
 		switch(menu){
 			case 0:
-				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n7 Eliminar paciente\n-1 Atras");
+				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n7 Eliminar paciente\n-1 Atras\n");
 				cin>>menu;
 			break;
 			case 2:		//Añadir tratamiento +Hecho  -Funciones					ID="fichero.size"
 				anadirTratamiento(p);
+				menu=0;
 			break;
 			case 3:	//Consultar tratamientos
-			printf("Consultar tratamientos\n");
-				//consultarTramientos(p);
+				consultarTramientos(p);
+				menu=0;
 			break;
 			case 4:
 			printf("Hola\n");
 				//anadirNota(p);
+				menu=0;
 			break;
 			default:
 				if(menu>0){
@@ -129,7 +128,10 @@ int main(){
 				AgregaP();
 			break;
 			case 3:		//Añadir cita
-
+			/*
+				buscarPaciente(p);
+				anadirCita(p);
+				*/
 			break;
 			case 4:		//Consultar agenda
 

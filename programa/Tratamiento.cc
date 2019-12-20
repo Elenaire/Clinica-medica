@@ -2,10 +2,10 @@
 #include "funciones.h"
 #include "fecha_hora.h"
 #include <cstdio>
-
+#include <iostream>
+using namespace std;
 void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
-
-/*	cout<<"Tratamento de "<<medicamento_<<ennl<<"Concentración de "<<concentracion_<<endl<<"Con regularidad "<<regularidad_<<end;
+	cout<<"Tratamento: "<<medicamento_<<endl<<"Concentración: "<<concentracion_<<endl<<"Regularidad: "<<regularidad_<<endl;
 	printf("Iniciado el %d/%d/%d ",inicio_.d,inicio_.m,inicio_.a);
 	switch(estado_){
 		case -1:
@@ -17,8 +17,8 @@ void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la
 		default:
 			printf("y finalizado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
 	}
-	cout<<comentario_;*/
-	printf("Yuju, soy un tratamiento y estoy mostrandome :D\n");
+	cout<<comentario_<<endl;
+
 }
 bool Tratamiento::modificable(){
 	bool modificable_=true;

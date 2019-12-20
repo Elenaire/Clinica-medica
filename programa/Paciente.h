@@ -24,8 +24,8 @@
   	int tipo_;
   public:
     Paciente(int id_=0);
-    friend bool filtrarPacientes(int filtro,list<Paciente> p);
-    friend void ordenarPacientes(int parametro,list<Paciente> p);
+    friend bool filtrarPacientes(int filtro,list<Paciente> &p);
+    friend void ordenarPacientes(int parametro,list<Paciente> &p);
     friend bool Nombre_Apellidos(Paciente p1,Paciente p2);
     friend bool Apellidos_Nombre(Paciente p1,Paciente p2);
     inline int getID(){return id_;}
@@ -39,7 +39,7 @@
     inline void setID(int id){id_=id;}
     inline void setNombre(string name){nombre_=name;}
     inline void setApellidos(string surname){apellidos_=surname;}
-    inline void setDireccion(string adress){nombre_=adress;}
+    inline void setDireccion(string adress){direccion_=adress;}
     inline void setFechanacimiento(struct fecha date){fechanacimiento_=date;}
     inline void setTelefono(int tlf){telefono_=tlf;}
     inline void setCodPostal(int cp){codpostal_=cp;}
@@ -50,6 +50,7 @@
     list <Nota> getNotas();//Javi esto te toca a ti no te fies mucho de lo que he escrito yo
     void mostrarPaciente();
     void mostrarHistorial();
+    bool addCita(const Nota n);
     bool addTratamiento(const Tratamiento t);	//Sin probar
     bool addNota(const Nota n);
     void AddPaciente(Paciente p);

@@ -9,15 +9,21 @@
 		Cita(int paciente):Registro(paciente){				//Constructor
 			comentario_="";
 		}
+		inline int getID()const{
+			return paciente_;
+		}
+		inline void setID(const int id){
+			paciente_=id;
+		}
 		inline string getComentario()const{
 			return comentario_;
 		}
 		inline void setComentario(const string cad){
 			comentario_=cad;
 		}
+		bool addCita();
 		void mostrarRegistro() override;			//Muestra por pantalla los datos del tratamiento
 		bool modificable() override;
 		bool borrar() override;
-		//-Cita();				//Destructor
 	};
 #endif

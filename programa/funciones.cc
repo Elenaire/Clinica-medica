@@ -6,34 +6,46 @@
 
 using namespace std;
 
-list<Paciente> leerPacientes(){
+bool addCita(Cita c);
+
+void leerPacientes(list<Paciente> &p){
 	Paciente aux(0);
-	list<Paciente> p;
-	list<Paciente>::iterator i;
 	ifstream file;
 	file.open("Pacientes.txt");
 	fecha f;
-	char cad[256];
-	for(i=p.begin();i!=p.end();i++){		//Mal tiene que ser fin del fichero
-	    file.getline(cad,32,'|');
+	char fech[32];
+	string cad;
+	while(!file.eof()){
+	    getline(file,cad,'|');
 	    aux.setID(stoi(cad));
-	    file.getline(cad,64,'|');
+	    getline(file,cad,'|');
 	    aux.setNombre(cad);
-	    file.getline(cad,64,'|');
+	    getline(file,cad,'|');
 	    aux.setApellidos(cad);
-	    file.getline(cad,64,'|');		//Fecha....
-	    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+	    file.getline(fech,32,'|');		//Fecha....
+	    sscanf(fech,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
 	    aux.setFechanacimiento(f);
-	    file.getline(cad,64,'|');
-	    aux.setTelefono(stoi(cad));
-	    file.getline(cad,64,'|');
-	    aux.setCodPostal(stoi(cad));
-	    file.getline(cad,64,'\n');
+	    getline(file,cad,'|');
+	    if(cad.size()>1){
+	    	aux.setTelefono(stoi(cad));
+	    }
+	    else{
+	    	aux.setTelefono(-1);
+		}
+		getline(file,cad,'|');
+	    if(cad.size()>1){
+	    	aux.setCodPostal(stoi(cad));
+	    }
+	    else{
+	    	aux.setCodPostal(-1);
+		}
+		getline(file,cad,'|');
+	    aux.setDireccion(cad);
+	    getline(file,cad,'\n');
 	    aux.setTipo(stoi(cad));
 	    p.push_back(aux);
 	}
 	file.close();
-	return p;
 }
 void mostrarPacientes(list<Paciente> &p){					//Sin probar
 	list<Paciente>::iterator i;
@@ -41,11 +53,11 @@ void mostrarPacientes(list<Paciente> &p){					//Sin probar
 		(*i).mostrarPaciente();
 	}
 }
-bool filtrarPacientes(int filtro,list<Paciente> p){			//Sin probar
+bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin probar
 	if((p.empty())||(filtro==0)){
-		p=leerPacientes();
+		leerPacientes(p);
 	}
-	else{
+	//Aqui habia un else
 		string aux;
 		string aux2;
 		fecha f;
@@ -53,7 +65,7 @@ bool filtrarPacientes(int filtro,list<Paciente> p){			//Sin probar
 		list<Paciente> lista;
 		list<Paciente>::iterator i;
 		bool bucle=false;
-		switch(filtro){
+		switch(filtro){					//Compare no funcona
 			case 0:
 				return true;
 			break;
@@ -67,9 +79,12 @@ bool filtrarPacientes(int filtro,list<Paciente> p){			//Sin probar
 				}
 			break;
 			case 2:
+			cout<<"Escribe:"<<endl;
+				getline(cin,aux);						//No lee
 				getline(cin,aux);
+				printf("despues de escribir\n");
 				for(i=p.begin();i!=p.end();++i){
-					if(aux.compare((*i).getNombre())){
+					if(0<=aux.compare((*i).getNombre())){
 						lista.push_back(*i);
 					}
 				}
@@ -152,11 +167,11 @@ bool filtrarPacientes(int filtro,list<Paciente> p){			//Sin probar
 		else{
 			p=lista;
 		}
+		printf("Salir de swtch\n");
 		return true;
-	}
 }
 
-void ordenarPacientes(int parametro,list<Paciente> p){		//Sin terminar  --Quiero probarlo
+void ordenarPacientes(int parametro,list<Paciente> &p){		//Sin terminar  --Quiero probarlo
 	printf("Estoy ordenand pacientes, si\n");
 	/*
 	switch(parametro){
@@ -226,7 +241,7 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 		return false;
 	}
 }
-/*
+
 void consultarTramientos(Paciente &p){
   	int i;
 	list <Tratamiento> tratamientos;
@@ -240,7 +255,7 @@ void consultarTramientos(Paciente &p){
 		else{t++;}
 	}
 	i=1;
-	for(t=tratamientos.begin();t!=tratamientos.end();t++){			//Super mal
+	for(t=tratamientos.begin();t!=tratamientos.end();t++){
 		printf("%d.\n",i);
 		(*t).mostrarRegistro();
 		i++;
@@ -253,45 +268,104 @@ void consultarTramientos(Paciente &p){
 		}
 	}
 }
-*/
+
 /*
+list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
+	list<Cita> C;
+	Cita aux(0);
+	fecha i,f;
+	hora h;
+	ifstream file;
+	char cad[16];
+	string comentario;
+	bool bucle=true;
+	if(dias(f1,f2)>=0){
+		i.a=f1.a;
+		i.m=f1.m;
+		i.d=0;
+		while(i<f2){
+			file.open("Agenda/"+to_string(i.m)+"/"+to_string(i.a)+".txt");
+			while((!file.eof())&&(bucle)){
+				file.getline(cad,16,'|');		
+	    		aux.setID(atoi(cad));
+				file.getline(cad,16,'|');		
+	    		sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+	    		file.getline(cad,16,'|');		
+	    		sscanf(cad,"%2d:%2d",&h.h,&h.m);
+	    		getline(file,comentario,'\n');
+	    		aux.setFecha(f);
+	    		aux.setHora(h);
+	    		aux.setComentario(comentario);
+				if(f2<aux.getFecha()){
+					bucle=false;
+				}
+				else{
+					C.push_back(aux);
+				}
+			}
+			file.close();
+			i.m=i.m+1;				//Siguiente fichero
+			if(i.m>12){
+				i.m=1;
+				i.a=i.a+1;
+			}
+		}
+	}
+	else{
+		printf("Intervalo no valido\n");
+	}
+	return C;
+}
+
 void anadirCita(Paciente &p){
-	Cita c(p.getID());
+	bool modificable_=false;					//---------------------------------------------
+	Cita C(p.getID());
 	char c;
+	list<Cita> agenda;
+	list<Cita>::iterator i;
 	bool bucle=true;
 	string aux;
-	fecha f1,f2;
+	fecha f;
+	hora h;
 	printf("Día:");
 	while(bucle){
-		if(leerFecha(f1)!=true){
+		if(leerFecha(f)!=true){
 		printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 		}
-		else if(dias(HOY,f1)<0||Registro::modificable_==false){			//Modificable_
+		else if(dias(HOY,f)<0||modificable_==false){			//Modificable_
 		printf("Ese día ya ha pasado\n");
 		}
 		else{
 			bucle=false;
 		}
 	}
+	bucle=true;
 	printf("Hora:");
 	while(bucle){
-		if(leerHora(f1)!=true){
+		if(leerHora(h)!=true){
 		printf("Formato de hora incorrecto, introduzca hh:mm\n");
 		}
-		else if(){
-				//Comprobar muchas cosas------------------------------------
-		}
-		else{
+		else {
+			agenda=getCitas(f,f);
 			bucle=false;
+			for(i=agenda.begin();((i!=agenda.end())&&(!bucle));i++){
+				if(abs(minutos(h,(*i).getHora()))<5){
+					printf("Ya tiene una cita a esa hora:\n");
+					(*i).mostrarRegistro();
+					bucle=true;
+				}
+			}
 		}
 	}
 	printf("Introduzca un comentario(opcional): ");
 	cin>>aux;
-	t.setComentario(aux);			//Termina de pedir datos
-	printf("¿Desea guardar la cita? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
+	C.setFecha(f);
+	C.setHora(h);
+	C.setComentario(aux);			//Termina de pedir datos
+	printf("¿Desea guardar la cita? s/n\n");		//Pide confirmación (Si no confirma se sale)
 	cin>>c;
 	if(c=='s'){
-		if(p.addCita(c)){
+		if(addCita(C)){													//No esta hecho------------------
 			printf("Cita guardada correctamente\n");
 		}
 		else{
@@ -307,6 +381,7 @@ void anadirTratamiento(Paciente &p){
 	bool bucle=true;
 	string aux;
 	fecha f1,f2;
+	getline(cin,aux);
 	printf("Medicamento: ");		//Empieza a pedir datos
 	getline(cin,aux);
 	t.setMedicamento(aux);
@@ -328,6 +403,7 @@ void anadirTratamiento(Paciente &p){
 		else{
 			bucle=false;
 		}
+		printf("Dias desde:%d\n",dias(HOY,f1));
 	}
 	printf("Fecha de finalización: ");
 	bucle=true;
@@ -335,8 +411,9 @@ void anadirTratamiento(Paciente &p){
 		if(leerFecha(f2)!=true){
 			printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 			}
-			else if(dias(f1,f2)){
+			else if(dias(f1,f2)<0){
 				printf("El tratamiento no puede finalizar antes de empezar\n");
+				printf("Dias desde:%d\n",dias(f1,f2));
 			}
 			else{
 				bucle=false;
@@ -377,5 +454,43 @@ void anadirNota(Paciente &p){
 			printf("Ha ocurrido un error inesperado\n");
 		}
 	}
+}
+*/
+/*
+bool addCita(Cita c){
+	bool insertado=false;
+	list<Cita> lista;
+	list<Cita>::iterator i;
+	fecha f1,f2;
+	f1=c.getFecha();
+	f2=f1;
+	f1.d=0;
+	f2.d=32;
+	lista=getCitas(f1,f2);
+	fstream file;
+	for(i=lista.begin();((i!=lista.end())&&(!insertado));i++){
+
+		if(c.getFecha()<(*i).getFecha()){			//Si la fecha de la cita es anterior no hace nada
+		}
+		else if((*i).getFecha()<c.getFecha()){		//Si es posterior se guarda antes
+			lista.insert(i,c);
+			insertado=true;
+		}
+		else{								//Si son iguales se comprueba la hora
+			if(minutos(c.getHora(),(*i).getHora())>0){
+				lista.insert(i,c);
+				insertado=true;
+			}
+		}
+	}
+	if(insertado==false){
+		lista.push_back(c);
+	}
+	file.open("Agenda/"+to_string((c.getFecha()).m)+"/"+to_string((c.getFecha()).a)+".txt",ios::out|ios::trunc);
+	for(i=lista.begin();((i!=lista.end())&&(!insertado));i++){
+
+		file<<(*i).getID()<<"|"<<escribeFecha((*i).getFecha())<<"|"<<escribeHora((*i).getHora())<<(*i).getComentario()<<endl;
+	}
+	file.close();
 }
 */

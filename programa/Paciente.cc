@@ -6,14 +6,14 @@ using namespace std;
 Paciente::Paciente(int id)
 {
   id_=id;
-  telefono_=0;
+  telefono_=-1;
   nombre_="";
   apellidos_="";
   direccion_="";
   fechanacimiento_.a=0;
   fechanacimiento_.m=0;
   fechanacimiento_.d=0;
-  codpostal_=0;
+  codpostal_=-10;
   tipo_=-1;
 }
 int Paciente::getEdad(){
@@ -31,13 +31,23 @@ int Paciente::getEdad(){
 
 
 void Paciente::mostrarPaciente(){
-  cout<<"ID: "<<id_<<endl;
+  cout<<endl<<"ID: "<<id_<<endl;
   cout<<"NOMBRE: "<<nombre_<<endl;
   cout<<"APELLIDOS: "<<apellidos_<<endl;
-  cout<<"DIRECCION: "<<direccion_<<endl;
   cout<<"FECHANACIMIENTO: "<<escribeFecha(fechanacimiento_)<<endl;
-  cout<<"TELEFONO: "<<telefono_<<endl;
+  if(telefono_>=0){
+    cout<<"TELEFONO: "<<telefono_<<endl;
+  }
+  else{
+    cout<<"TELEFONO: "<<endl;
+  }
+  if(codpostal_>=0){
   cout<<"CODIGO POSTAL: "<<codpostal_<<endl;
+  }
+  else{
+    cout<<"CODIGO POSTAL: "<<endl;
+  }
+  cout<<"DIRECCION: "<<direccion_<<endl;
   if(tipo_==0)
   {
     cout<<"TIPO: PUBLICO"<<endl;
@@ -94,33 +104,33 @@ list <Tratamiento> Paciente::getTratamientos(){
   string str;
   ifstream file;
   file.open(to_string(id_)+"/Tratamientos.txt");
-  while(!file.eof()){
-    file.getline(cad,64,'|');                 //No lo entiendo
-    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-    t.setFecha(f);
-    file.getline(cad,64,'|');   //Hora....
-    sscanf(cad,"%2d:%2d",&h.h,&h.m);
-    t.setHora(h);
-    file.getline(cad,64,'|');
-    t.setMedicamento(str);
-    file.getline(cad,64,'|');
-    t.setConcentracion(str);
-    file.getline(cad,64,'|');
-    t.setRegularidad(str);
-    file.getline(cad,64,'|');   //Fecha....
-    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-    t.setFechaInicio(f);
-    file.getline(cad,64,'|');   //Fecha....
-    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-    t.setFechaFinal(f);
-    file.getline(cad,64,'|');
-    file.getline(cad,32,'|');
-    t.setEstado(stoi(cad));
-    file.getline(cad,64,'|');
-    t.setComentario(str);
-    aux.push_back(t);
-    }
-  return aux;
+    while(!file.eof()){
+      file.getline(cad,64,'|'); 
+      sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+      t.setFecha(f);
+      file.getline(cad,64,'|');   //Hora....
+      sscanf(cad,"%2d:%2d",&h.h,&h.m);
+      t.setHora(h);
+      getline(file,str,'|');
+      t.setMedicamento(str);
+      getline(file,str,'|');
+      t.setConcentracion(str);
+      getline(file,str,'|');
+      t.setRegularidad(str);
+      file.getline(cad,64,'|');   //Fecha....
+      sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+      t.setFechaInicio(f);
+      file.getline(cad,64,'|');   //Fecha....
+      sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+      t.setFechaFinal(f);
+      file.getline(cad,32,'|');
+      t.setEstado(atoi(cad));
+      getline(file,str,'\n');
+      t.setComentario(str);
+      aux.push_back(t);
+      }
+      aux.pop_back();     //Esto es porque me lee uno mas de la cuenta y no se como hacer para que no lo lea
+    return aux;
 }
 /*
 list <Nota> Paciente::getNotas()
@@ -266,12 +276,12 @@ void Paciente::mostrarHistorial()
   }
 }
 */
-
 bool Paciente::addTratamiento(const Tratamiento t){   //Sin probar
   fstream file;
   file.open(to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
+  printf("Abriendo fichero\n");
   if(file){
-    file<<escribeFecha(t.getFecha())<<"|"<<escribeHora(t.getHora())<<endl<<t.getMedicamento()<<endl<<t.getConcentracion()<<endl<<t.getRegularidad()<<endl<<escribeFecha(t.getFechaInicio())<<endl<<escribeFecha(t.getFechaFinal())<<endl<<t.getEstado()<<endl<<t.getComentario()<<endl;
+    file<<escribeFecha(t.getFecha())<<"|"<<escribeHora(t.getHora())<<'|'<<t.getMedicamento()<<'|'<<t.getConcentracion()<<'|'<<t.getRegularidad()<<'|'<<escribeFecha(t.getFechaInicio())<<'|'<<escribeFecha(t.getFechaFinal())<<'|'<<t.getEstado()<<'|'<<t.getComentario()<<endl;
     file.close();
     return true;
   }
