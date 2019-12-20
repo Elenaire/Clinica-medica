@@ -97,7 +97,7 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin probar
 					}
 				}
 			break;
-			case 4:	
+			case 4:
 				scanf("%d",&n);
 				for(i=p.begin();i!=p.end();++i){
 					if(n==i->getEdad()){
@@ -214,7 +214,7 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 					}
 				break;
 				case 2:	//Moficicar tratamiento
-					printf("Medicamento: ");		
+					printf("Medicamento: ");
 					getline(cin,aux);
 					t.setMedicamento(aux);
 					printf("Concentración: ");
@@ -226,7 +226,6 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 				break;
 				case 3:	//Modificar fechas de inicio y finalización
 					printf("Hola\n");
-				break;
 				default:
 					if(menu>0){
 						printf("Error, introduzca:\n");
@@ -234,6 +233,7 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 					}
 				}
 		}
+
 
 	}
 	else{
@@ -317,8 +317,7 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 	return C;
 }
 
-void anadirCita(Paciente &p){
-	bool modificable_=false;					//---------------------------------------------
+void anadirCita(Paciente &p){				//---------------------------------------------
 	Cita C(p.getID());
 	char c;
 	list<Cita> agenda;
@@ -332,7 +331,7 @@ void anadirCita(Paciente &p){
 		if(leerFecha(f)!=true){
 		printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 		}
-		else if(dias(HOY,f)<0||modificable_==false){			//Modificable_
+		else if(dias(HOY,f)<0||Resgistro::modificable_==false){			//Modificable_
 		printf("Ese día ya ha pasado\n");
 		}
 		else{
@@ -375,7 +374,7 @@ void anadirCita(Paciente &p){
 }
 */
 void anadirTratamiento(Paciente &p){
-	bool modificable_=true;		//-------------
+	bool modificable_=false;
 	Tratamiento t(p.getID());
 	char c;
 	bool bucle=true;
@@ -436,26 +435,7 @@ void anadirTratamiento(Paciente &p){
 		}
 	}
 }
-/*
-void anadirNota(Paciente &p){
-	Nota n(p.getID());
-	char c;
-	string aux;
-	printf("Nota:\n");
-	cin>>aux;
-	n.setContenido(aux);			//Termina de pedir datos
-	printf("¿Desea guardar la nota? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
-	cin>>c;
-	if(c=='s'){
-		if(p.addNota(n)){
-			printf("Nota guardada correctamente\n");
-		}
-		else{
-			printf("Ha ocurrido un error inesperado\n");
-		}
-	}
-}
-*/
+
 /*
 bool addCita(Cita c){
 	bool insertado=false;
@@ -492,5 +472,24 @@ bool addCita(Cita c){
 		file<<(*i).getID()<<"|"<<escribeFecha((*i).getFecha())<<"|"<<escribeHora((*i).getHora())<<(*i).getComentario()<<endl;
 	}
 	file.close();
+}
+*/
+/*
+bool ContieneA(string cad1,string cad2)
+{
+	int n=strlen(cad1);
+	int cont=0;
+	for (int i = 0; i < n; i++) {
+		if(cad1[i]==cad2[i])
+		{
+			cont++;
+		}
+	}
+	if(cont==n)
+	{
+		return true;
+	}else{
+		return false;
+	}
 }
 */

@@ -18,5 +18,9 @@
 	void anadirTratamiento(Paciente &p);
 	void anadirNota(Paciente &p);
 	//bool addCita(Cita c);
+	void anadirTratamiento(Paciente &p);
+	bool ContieneA(string cad1,string cad2);
+
+
 
 #endif
