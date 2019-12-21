@@ -2,7 +2,7 @@
 #include "funciones.h"
 #include <iostream>
 //#include <direct.h>
-
+void leerPacientes(list<Paciente> &p);
 
 //Para crear una carpeta es con mkdir("Nombredelacarpeta");
 
@@ -312,11 +312,11 @@ void Paciente::eliminarPaciente()
 {
   list<Paciente> aux;
   list<Paciente>::iterator i;
-  leerPacientes(&aux);
+  leerPacientes(aux);
   char elec;
-  cout<<"Está seguro de querer elimina el paciente "<<nombre_<<" (S/N)"<<endl;
+  cout<<"Está seguro de querer elimina el paciente "<<nombre_<<" (s/n)"<<endl;
   cin>>elec;
-  if(elec=='S')
+  if(elec=='s')
   {
     ofstream archivo;
     archivo.open("Pacientes.txt");
@@ -341,7 +341,7 @@ void Paciente::modificarPaciente()
 {
   list<Paciente> aux;
   list<Paciente>::iterator i;
-  leerPacientes(&aux);
+  leerPacientes(aux);
   int elec;
   cout<<"Indique que campos quiere modificar"<<endl<<"1.Nombre\n2.Apellidos\n3.Direccion\n4.Fecha de nacimiento\n5.Telefono\n6.Codigo Postal\n7.Tipo\n8.Modificar todos los campos"<<endl;
   cin>>elec;
