@@ -58,7 +58,8 @@ void mostrarPacientes(list<Paciente> &p){					//Sin probar
 		(*i).mostrarPaciente();
 	}
 }
-bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin probar
+bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe tal cosa:
+	printf("Hola1\n");
 	if((p.empty())||(filtro==0)){
 		leerPacientes(p);
 	}
@@ -172,6 +173,7 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin probar
 		else{
 			p=lista;
 		}
+		printf("Return true\n");
 		return true;
 }
 

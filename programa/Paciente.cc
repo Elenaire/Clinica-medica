@@ -167,17 +167,18 @@ list <Nota> Paciente::getNotas()
   return aux;
 
 */
-void AddPaciente(Paciente p)//ESTO HAY QUE CAMBIARLO TO
+void AddPaciente(Paciente p)
 {
   fstream archivo;
   archivo.open("Pacientes.txt",std::fstream::app);
-  archivo<<p.getID()<<'|';
+  archivo<<endl<<p.getID()<<'|';
   archivo<<p.getNombre()<<'|';
   archivo<<p.getApellidos()<<'|';
   archivo<<escribeFecha(p.getFechanacimiento())<<"|";
   archivo<<p.getTelefono()<<'|';
   archivo<<p.getCodPostal()<<'|';
-  archivo<<p.getTipo()<<endl;
+  archivo<<p.getDireccion()<<'|';
+  archivo<<p.getTipo();
   archivo.close();
 }
 

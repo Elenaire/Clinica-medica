@@ -3,7 +3,7 @@
 #include "Tratamiento.h"
 #include "funciones.h"
 #include <list>
-
+	int nuevoID();
 	void leerPacientes(list<Paciente> &p);						//Lee un paciente del fichero de pacientes -Sin probar
 	void mostrarPacientes(list<Paciente> &p);					//Muestra los datos de la lista de pacientes -Sin probar
 	bool filtrarPacientes(int filtro,list<Paciente> &p);		//Sin probar
@@ -79,32 +79,56 @@ void AgregaP()
 {
 	Paciente p;
 	fecha f;
-	string auxs;
-	int auxi;
+	string aux;
+	int n;
+	bool bucle=true;
+	getline(cin,aux);
 	cout<<"Introdzuca nombre del paciente"<<endl;
-	cin>>auxs;
-	p.setNombre(auxs);
+	getline(cin,aux);
+	p.setNombre(aux);
 	cout<<"Introdzuca apellidos del paciente"<<endl;
-	cin>>auxs;
-	p.setApellidos(auxs);
-	cout<<"Introdzuca la dirección del paciente"<<endl;
-	cin>>auxs;
-	p.setDireccion(auxs);
+	getline(cin,aux);
+	p.setApellidos(aux);
 	cout<<"Introdzuca la fecha de nacimiento del paciente"<<endl;
-	leerFecha(f);
+	while(bucle){
+		if(leerFecha(f)!=true){
+			printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+		}
+		else if(dias(f,HOY)<0){
+			printf("Esa fecha aun no ha pasado\n");
+		}
+		else{
+			bucle=false;
+		}
+	}
 	p.setFechanacimiento(f);
 	cout<<"Introdzuca el telefono del paciente"<<endl;
-	cin>>auxi;
-	p.setTelefono(auxi);
-	cout<<"Introdzuca el cod.postal del paciente"<<endl;
-	cin>>auxi;
-	p.setCodPostal(auxi);
-	cout<<"Introdzuca el tipo del paciente"<<endl;
-	cin>>auxi;
-	p.setTipo(auxi);
-	cout<<"¿Está seguro de querer guardar este Paciente? (S/N)"<<endl;
+	getline(cin,aux);
+	getline(cin,aux);
+	if(aux.size()>0){
+		p.setTelefono(stoi(aux));
+	}
+	else{
+		p.setTelefono(0);
+	}
+	cout<<"Introdzuca el cododico postal del paciente"<<endl;
+	getline(cin,aux);
+	if(aux.size()>0){
+		p.setCodPostal(stoi(aux));
+	}
+	else{
+		p.setCodPostal(0);
+	}
+	cout<<"Introdzuca la dirección del paciente"<<endl;
+	getline(cin,aux);
+	p.setDireccion(aux);
+	cout<<"Introdzuca el tipo del paciente(0 Publico/1 Privado)"<<endl;
+	cin>>n;
+	p.setTipo(n);
 	p.mostrarPaciente();
+	cout<<"¿Está seguro de querer guardar este Paciente? (s/n)"<<endl;
 	char elec;
+	cin>>elec;
 	if(elec=='s')
 	{
 		p.setID(nuevoID());
@@ -183,7 +207,8 @@ int main(){
 				menu=0;
 			break;
 			case 2:		//Añadir paciente
-				//AgregaP();
+				AgregaP();
+				menu=0;
 			break;
 			case 3:		//Añadir cita
 				buscarPaciente(p);

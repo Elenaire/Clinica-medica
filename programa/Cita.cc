@@ -8,7 +8,8 @@
 list<Cita> getCitas(fecha f1,fecha f2);
 
 void Cita::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
-	printf("El día: %s a las %s tiene una cita con el paciente %d\n%s\n",escribeFecha(fecha_),escribeHora(hora_),paciente_,comentario_);
+	//printf("El día: %s a las %s tiene una cita con el paciente %d\n%s\n",escribeFecha(fecha_),escribeHora(hora_),paciente_,comentario_);
+	cout<<"El día: "<<escribeFecha(fecha_)<<" a las "<<escribeHora(hora_)<<"tiene una cita con el paciente"<<paciente_<<endl<<comentario_<<endl;
 }
 bool Cita::modificable(){
 	bool modificable_=false;
