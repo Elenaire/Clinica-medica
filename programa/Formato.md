@@ -1,5 +1,5 @@
 
-**Paciente:** Id|Nombre|Apellidos|dd/mm/aaaa|Telefono|Codigopostal|Dirección|Tipo\n
+**Paciente:** \n Id|Nombre|Apellidos|dd/mm/aaaa|Telefono|Codigopostal|Dirección|Tipo
 
 **Cita:** Idpaciente|Fecha_|Hora_|Comentario \n
 

@@ -5,7 +5,7 @@
 #include <iostream>
 
 void Nota::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha de finalización y si deberia haber finalizado guardarlo
-	printf("\n%s\n",contenido_);
+	cout<<endl<<contenido_<<endl;
 }
 bool Nota::modificable(){
 	bool modificable_=false;

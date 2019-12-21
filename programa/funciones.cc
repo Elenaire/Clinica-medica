@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <unistd.h>
 bool Nombre_Apellidos(Paciente p1,Paciente p2);
 bool Apellidos_Nombre(Paciente p1,Paciente p2);
 
@@ -20,6 +21,7 @@ void leerPacientes(list<Paciente> &p){
 	fecha f;
 	char fech[32];
 	string cad;
+	getline(file,cad,'\n');
 	while(!file.eof()){
 	    getline(file,cad,'|');
 	    aux.setID(stoi(cad));
@@ -59,7 +61,6 @@ void mostrarPacientes(list<Paciente> &p){					//Sin probar
 	}
 }
 bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe tal cosa:
-	printf("Hola1\n");
 	if((p.empty())||(filtro==0)){
 		leerPacientes(p);
 	}
@@ -75,35 +76,39 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 			case 0:
 				return true;
 			break;
-			case 1:
+			case 1:			//Nombre completo
+				getline(cin,aux);
+				printf("Nombre y Apellidos:\n");
 				getline(cin,aux);
 				for(i=p.begin();i!=p.end();++i){		//Podria no leer el ultimo paciente
-					aux2=(*i).getNombre()+(*i).getApellidos();
-					if(aux.compare(aux2)){				//Si en aux se encuentra aux2 es positivo, si no coincide algun caracter es negativo
+					aux2=(*i).getNombre()+" "+(*i).getApellidos();
+					if(aux2.find(aux)!=string::npos){				//Si en aux se encuentra aux2 es positivo, si no coincide algun caracter es negativo
 						lista.push_back(*i);
 					}
 				}
 			break;
-			case 2:
-			cout<<"Escribe:"<<endl;
-				getline(cin,aux);						//No lee
+			case 2:			//Nombre
 				getline(cin,aux);
-				printf("despues de escribir\n");
-				for(i=p.begin();i!=p.end();++i){
-					if(0<=aux.compare((*i).getNombre())){
-						lista.push_back(*i);
-					}
-				}
-			break;
-			case 3:
+				printf("Nombre:\n");
 				getline(cin,aux);
 				for(i=p.begin();i!=p.end();++i){
-					if(aux.compare((*i).getApellidos())){
+					if(((*i).getNombre()).find(aux)!=string::npos){
 						lista.push_back(*i);
 					}
 				}
 			break;
-			case 4:
+			case 3:			//Apellidos
+				getline(cin,aux);
+				printf("Apellidos:\n");
+				getline(cin,aux);
+				for(i=p.begin();i!=p.end();++i){
+					if(((*i).getApellidos()).find(aux)!=string::npos){
+						lista.push_back(*i);
+					}
+				}
+			break;
+			case 4:			//Edad
+				printf("Edad:\n");
 				scanf("%d",&n);
 				for(i=p.begin();i!=p.end();++i){
 					if(n==i->getEdad()){
@@ -111,7 +116,8 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 					}
 				}
 			break;
-			case 5:
+			case 5:			//Fecha de nacimiento
+				printf("Fecha de nacimiento:\n");
 				do{
 					if(leerFecha(f)==false){
 						printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
@@ -124,7 +130,9 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 					}
 				}
 			break;
-			case 6:
+			case 6:			//Dirección
+				getline(cin,aux);
+				printf("Dirección:\n");
 				getline(cin,aux);
 				for(i=p.begin();i!=p.end();++i){
 					if(aux.compare(i->getDireccion())){
@@ -132,15 +140,17 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 					}
 				}
 			break;
-			case 7:
-			scanf("%d",&n);
-			for(i=p.begin();i!=p.end();++i){
-				if(n==i->getCodPostal()){
-					lista.push_back(*i);
+			case 7:		//Código postal
+				printf("Código postal\n");
+				scanf("%d",&n);
+				for(i=p.begin();i!=p.end();++i){
+					if(n==i->getCodPostal()){
+						lista.push_back(*i);
+					}
 				}
-			}
 			break;
-			case 8:
+			case 8:		//Telefono
+				printf("Telefono\n");
 				scanf("%d",&n);
 				for(i=p.begin();i!=p.end();++i){
 					if(n==i->getTelefono()){
@@ -148,14 +158,14 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 					}
 				}
 			break;
-			case 9:
+			case 9:		//Pacientes públicos
 			for(i=p.begin();i!=p.end();++i){
 				if(i->getTipo()==0){
 					lista.push_back(*i);
 				}
 			}
 			break;
-			case 10:
+			case 10:	//Pacientes privados
 			for(i=p.begin();i!=p.end();++i){
 				if(i->getTipo()==1){
 					lista.push_back(*i);
@@ -168,12 +178,12 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 		}
 		if(lista.empty()){
 			printf("Error, ningun paciente corresponde con su busqueda\n");
+			sleep(1);
 			return false;
 		}
 		else{
 			p=lista;
 		}
-		printf("Return true\n");
 		return true;
 }
 
@@ -505,25 +515,6 @@ bool addCita(Cita &c){
 		file<<(*i).getID()<<"|"<<escribeFecha((*i).getFecha())<<"|"<<escribeHora((*i).getHora())<<(*i).getComentario()<<endl;
 	}
 	file.close();
-}
-*/
-/*
-bool ContieneA(char* cad1,char* cad2)
-{
-	int n=strlen(cad1);
-	int cont=0;
-	for (int i = 0; i < n; i++) {
-		if(cad1[i]==cad2[i])
-		{
-			cont++;
-		}
-	}
-	if(cont==n)
-	{
-		return true;
-	}else{
-		return false;
-	}
 }
 */
 bool Nombre_Apellidos(Paciente p1,Paciente p2){
