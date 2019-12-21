@@ -327,35 +327,9 @@ bool Apellidos_Nombre(Paciente p1,Paciente p2){
 
 void Paciente::eliminarPaciente()
 {
-  ifstream file;
-  file.open("Pacientes.txt");
   list<Paciente> aux;
   list<Paciente>::iterator i;
-  string cad;
-  while(getline(file,cad,'|'))
-  {
-    i->setID(stoi(cad));
-    getline(file,cad,'|');
-    i->setNombre(cad);
-    getline(file,cad,'|');
-    i->setApellidos(cad);
-    getline(file,cad,'|');
-    i->setDireccion(cad);
-    //Aqui va fecha que no se como ponerlo //ELENA SI LEES ESTO PONLO TU QUE NO ME ACUERDO COMO IBA ESO
-    getline(file,cad,'|');
-    i->setTelefono(stoi(cad));
-    i->setCodPostal(stoi(cad));
-    i->setTipo(stoi(cad));
-    aux.push_back(*i);
-  }
-  file.close();
-  for(i=aux.begin();i!=aux.end();i++)
-  {
-    if((i->getID())==id_)
-    {
-      i->setID(-1);
-    }
-  }
+  leerPacientes(&aux);
   char elec;
   cout<<"Está seguro de querer elimina el paciente "<<nombre_<<" (S/N)"<<endl;
   cin>>elec;
@@ -365,7 +339,7 @@ void Paciente::eliminarPaciente()
     archivo.open("Pacientes.txt");
     for(i=aux.begin();i!=aux.end();i++)
     {
-      if((i->getID())!=-1)
+      if((i->getID())!=id_)
       {
         archivo<<i->getID()<<'|';
         archivo<<i->getNombre()<<'|';
@@ -379,30 +353,12 @@ void Paciente::eliminarPaciente()
   }
 }
 
+
 void Paciente::modificarPaciente()
 {
-  ifstream file;
-  file.open("Pacientes.txt");
   list<Paciente> aux;
   list<Paciente>::iterator i;
-  string cad;
-  while(getline(file,cad,'|'))
-  {
-    i->setID(stoi(cad));
-    getline(file,cad,'|');
-    i->setNombre(cad);
-    getline(file,cad,'|');
-    i->setApellidos(cad);
-    getline(file,cad,'|');
-    i->setDireccion(cad);
-    //Aqui va fecha que no se como ponerlo //ELENA SI LEES ESTO PONLO TU QUE NO ME ACUERDO COMO IBA ESO
-    getline(file,cad,'|');
-    i->setTelefono(stoi(cad));
-    i->setCodPostal(stoi(cad));
-    i->setTipo(stoi(cad));
-    aux.push_back(*i);
-  }
-  file.close();
+  leerPacientes(&aux);
   int elec;
   cout<<"Indique que campos quiere modificar"<<endl<<"1.Nombre\n2.Apellidos\n3.Direccion\n4.Fecha de nacimiento\n5.Telefono\n6.Codigo Postal\n7.Tipo\n8.Modificar todos los campos"<<endl;
   cin>>elec;
@@ -529,8 +485,6 @@ void Paciente::modificarPaciente()
     archivo.open("Pacientes.txt");
     for(i=aux.begin();i!=aux.end();i++)
     {
-      if(i->getID()!=-1)
-      {
         archivo<<i->getID()<<'|';
         archivo<<i->getNombre()<<'|';
         archivo<<i->getApellidos()<<'|';
@@ -538,7 +492,7 @@ void Paciente::modificarPaciente()
         archivo<<i->getTelefono()<<'|';
         archivo<<i->getCodPostal()<<'|';
         archivo<<i->getTipo()<<endl;
-      }
+
     }
   }
 }
