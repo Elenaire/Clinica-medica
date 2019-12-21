@@ -4,7 +4,8 @@
 //#include <direct.h>
 void leerPacientes(list<Paciente> &p);
 
-//Para crear una carpeta es con mkdir("Nombredelacarpeta");
+//Para crear una carpeta es con mkdir Nombredelacarpeta;
+//Para borrarla rmdir Nombredelacarpeta;
 
 using namespace std;
 Paciente::Paciente(int id)
@@ -107,33 +108,36 @@ list <Tratamiento> Paciente::getTratamientos(){
   char cad[256];
   string str;
   ifstream file;
-  file.open(to_string(id_)+"/Tratamientos.txt");
-    while(!file.eof()){
-      file.getline(cad,64,'|'); 
-      sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-      t.setFecha(f);
-      file.getline(cad,64,'|');   //Hora....
-      sscanf(cad,"%2d:%2d",&h.h,&h.m);
-      t.setHora(h);
-      getline(file,str,'|');
-      t.setMedicamento(str);
-      getline(file,str,'|');
-      t.setConcentracion(str);
-      getline(file,str,'|');
-      t.setRegularidad(str);
-      file.getline(cad,64,'|');   //Fecha....
-      sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-      t.setFechaInicio(f);
-      file.getline(cad,64,'|');   //Fecha....
-      sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-      t.setFechaFinal(f);
-      file.getline(cad,32,'|');
-      t.setEstado(atoi(cad));
-      getline(file,str,'\n');
-      t.setComentario(str);
-      aux.push_back(t);
-      }
+  file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt");
+    if(file.is_open()){
+      while(!file.eof()){
+        file.getline(cad,64,'|'); 
+        sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+        t.setFecha(f);
+        file.getline(cad,64,'|');   //Hora....
+        sscanf(cad,"%2d:%2d",&h.h,&h.m);
+        t.setHora(h);
+        getline(file,str,'|');
+        t.setMedicamento(str);
+        getline(file,str,'|');
+        t.setConcentracion(str);
+        getline(file,str,'|');
+        t.setRegularidad(str);
+        file.getline(cad,64,'|');   //Fecha....
+        sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+        t.setFechaInicio(f);
+        file.getline(cad,64,'|');   //Fecha....
+        sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+        t.setFechaFinal(f);
+        file.getline(cad,32,'|');
+        t.setEstado(atoi(cad));
+        getline(file,str,'\n');
+        t.setComentario(str);
+        aux.push_back(t);
+        }
+      file.close();
       aux.pop_back();     //Esto es porque me lee uno mas de la cuenta y no se como hacer para que no lo lea
+    }
     return aux;
 }
 /*
@@ -283,7 +287,7 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
 */
 bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;
-  file.open(to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
+  file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
   printf("Abriendo fichero\n");
   if(file){
     file<<escribeFecha(t.getFecha())<<"|"<<escribeHora(t.getHora())<<'|'<<t.getMedicamento()<<'|'<<t.getConcentracion()<<'|'<<t.getRegularidad()<<'|'<<escribeFecha(t.getFechaInicio())<<'|'<<escribeFecha(t.getFechaFinal())<<'|'<<t.getEstado()<<'|'<<t.getComentario()<<endl;
@@ -296,7 +300,7 @@ bool Paciente::addTratamiento(const Tratamiento t){
 }
 bool Paciente::addNota(const Nota n){
   fstream file;
-  file.open(to_string(id_)+"/Notas.txt",ios::out|ios::app|ios::ate);
+  file.open("Pacientes/"+to_string(id_)+"/Notas.txt",ios::out|ios::app|ios::ate);
   if(file){
     file<<escribeFecha(n.getFecha())<<"|"<<escribeHora(n.getHora())<<n.getContenido()<<endl;
     file.close();

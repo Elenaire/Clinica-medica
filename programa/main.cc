@@ -4,29 +4,14 @@
 #include "funciones.h"
 #include <list>
 #include <cstdlib>
-	int nuevoID();
-	void leerPacientes(list<Paciente> &p);						//Lee un paciente del fichero de pacientes -Sin probar
-	void mostrarPacientes(list<Paciente> &p);					//Muestra los datos de la lista de pacientes -Sin probar
-	bool filtrarPacientes(int filtro,list<Paciente> &p);		//Sin probar
-	void ordenarPacientes(int parametro,list<Paciente> &p);		//Sin completar
-	bool modificarTratamiento(Tratamiento &t);					//Sin hacer   //Mal, tiene que ser de tratamiento
-	void consultarTramientos(Paciente &p);
-	list<Cita> getCitas(fecha f1,fecha f2);						//Devuelve una lista con las citas de la fecha 1 a la fecha 2
-	void anadirCita(Paciente &p);
-	void anadirTratamiento(Paciente &p);
-	void anadirNota(Paciente &p);
-	//bool addCita(Cita &c);
-	void anadirCita(Paciente &p);
-	bool ContieneA(string cad1,string cad2);
-	void AddPaciente(Paciente p);
-    	void AgregaP();
-
+#include <unistd.h>
+#include <dirent.h>
 using namespace std;
 bool buscarPaciente(Paciente &p){		//Sin completar filtrar y ordenar
 	int menu,id,orden;
 	list<Paciente> pacientes;
 	list<Paciente>::iterator i;
-	printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
+	printf("0 Listar pacientes\nBuscar por:\n1 Nombre completo\n2 Nombre\n3 Apellidos\n4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
 	scanf("%d",&menu);
 	if(menu>=0){
 		filtrarPacientes(menu,pacientes);
@@ -47,6 +32,7 @@ bool buscarPaciente(Paciente &p){		//Sin completar filtrar y ordenar
 					}
 				}
 				printf("El paciente seleccionado no coincide con los que se muestran por pantalla\n");
+				sleep(1);
 				menu=0;
 			break;
 			case 2:			//Ordenar pacientes
@@ -135,6 +121,8 @@ void AgregaP()
 	{
 		p.setID(nuevoID());
 		AddPaciente(p);
+		aux="mkdir Pacientes/"+to_string(p.getID());
+		system(aux.c_str());
 	}
 }
 
@@ -192,13 +180,35 @@ void menuPaciente(Paciente p){
 int main(){
 	int menu=0;
 	Paciente p;	
-	hoy(HOY);		
-	/*
-	Inicio
-	*/
-	printf("Hola, bla bla bla\n");
+	hoy(HOY);
+	DIR * carpeta;
+	string saludo;
+	fstream ajustes;
+	ajustes.open("Ajustes.txt",ios::in);
+	if(carpeta=opendir("Pacientes")){
+		closedir(carpeta);
+	}
+	else{
+		system("mkdir Pacientes");
+	}
+	if(carpeta=opendir("Agenda")){
+		closedir(carpeta);
+	}
+	else{
+		system("mkdir Agenda");
+	}
+	if(!ajustes.is_open()){
+		printf("Buenos días usuario.¿Como le gustaria que le llamara?\n");
+		getline(cin,saludo);
+		ajustes.open("Ajustes.txt",ios::out);
+		ajustes<<"Buenos días "<<saludo<<endl<<1;
+		ajustes.close();
+	}
+	else{
+		getline(ajustes,saludo,'\n');
+		cout<<saludo<<endl;
+	}
 	while(menu>=0){
-		if(menu==0){system("clear");}
 		switch(menu){
 			case 0:
 			printf("1 Seleccionar paciente\n2 Añair paciente\n3 Añadir cita\n4 Consultar agenda\n");
@@ -209,18 +219,23 @@ int main(){
 					menuPaciente(p);
 				}
 				menu=0;
+				system("clear");
 			break;
 			case 2:		//Añadir paciente
 				AgregaP();
 				menu=0;
+				system("clear");
 			break;
 			case 3:		//Añadir cita
 				buscarPaciente(p);
 				anadirCita(p);
 				menu=0;
+				system("clear");
 			break;
 			case 4:		//Consultar agenda
-
+				consultarAgenda();
+				menu=0;
+				system("clear");
 			break;
 			default:
 			if(menu>0){

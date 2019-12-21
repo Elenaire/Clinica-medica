@@ -24,5 +24,6 @@
 	bool Nombre_Apellidos(Paciente p1,Paciente p2);
     bool Apellidos_Nombre(Paciente p1,Paciente p2);
     bool ordenarporFecha(Paciente p1,Paciente p2);
+    void consultarAgenda();
 
 #endif

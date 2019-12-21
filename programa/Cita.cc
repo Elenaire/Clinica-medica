@@ -37,7 +37,7 @@ bool Cita::addCita(){
 	f2=fecha_;
 	f1.d=0;
 	f2.d=32;
-	lista=getCitas(f1,f2);
+	lista=getCitas(f1,f2);					//Obtengo las citas de todo el mes
 	fstream file;
 	for(i=lista.begin();((i!=lista.end())&&(!insertado));i++){
 		(*i).mostrarRegistro();

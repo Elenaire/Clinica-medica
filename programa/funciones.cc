@@ -269,23 +269,27 @@ void consultarTramientos(Paciente &p){
 		else{t++;}
 	}
 	i=1;
-	for(t=tratamientos.begin();t!=tratamientos.end();t++){
-		printf("%d.\n",i);
-		(*t).mostrarRegistro();
-		i++;
+	if(tratamientos.empty()){
+		printf("El paciente no está siguiendo ningun tratamiento actualmente\n");
 	}
-	printf("Selecione un tratamiento o introduzca 0:");
-	cin>>i;
-	if(i>0){
-		if(i<=(tratamientos.size()+1)){
-			modificarTratamiento(*t);			//Sin terminar		//Mal
+	else{
+		for(t=tratamientos.begin();t!=tratamientos.end();t++){
+			printf("%d.\n",i);
+			(*t).mostrarRegistro();
+			i++;
+		}
+		printf("Selecione un tratamiento o introduzca 0:");
+		cin>>i;
+		if(i>0){
+			if(i<=(tratamientos.size()+1)){
+				modificarTratamiento(*t);			//Sin terminar		//Mal
+			}
 		}
 	}
 }
 
 
 list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
-	printf("GetCitas\n");
 	list<Cita> C;
 	struct Cita aux(0);
 	fecha i,f;
@@ -320,11 +324,9 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 						C.push_back(aux);
 					}
 				}
-				//printf("Pop\n");
-				//C.pop_back();
+				C.pop_back();
 			}
 			file.close();
-			printf("Cierro fichero\n");
 			i.m=i.m+1;				//Siguiente fichero
 			if(i.m>12){
 				i.m=1;
@@ -424,21 +426,19 @@ void anadirTratamiento(Paciente &p){
 			}
 			else if(dias(HOY,f1)<0&&modificable_==false){			//Modificable_
 			printf("Esa fecha ya ha pasado\n");
+			}
+			else{
+				bucle=false;
+			}
 		}
-		else{
-			bucle=false;
-		}
-		printf("Dias desde:%d\n",dias(HOY,f1));
-	}
-	printf("Fecha de finalización: ");
-	bucle=true;
-	while(bucle){
-		if(leerFecha(f2)!=true){
-			printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+		printf("Fecha de finalización: ");
+		bucle=true;
+		while(bucle){
+			if(leerFecha(f2)!=true){
+				printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 			}
 			else if(dias(f1,f2)<0){
 				printf("El tratamiento no puede finalizar antes de empezar\n");
-				printf("Dias desde:%d\n",dias(f1,f2));
 			}
 			else{
 				bucle=false;
@@ -558,4 +558,44 @@ int nuevoID(){
 	f2<<aux<<endl<<n<<endl;
 	f2.close();
 	return n;
+}
+
+void consultarAgenda(){
+	int n;
+	string aux;
+	list<Cita> citas;
+	list<Cita>::iterator c;
+	printf("1 Mostrar citas del día\n2 Mostrar citas en intervalo\n");
+	cin>>n;
+	if((n==1)||(n==2)){
+		if(n==1){
+			citas=getCitas(HOY,HOY);
+			if(citas.size()==0){printf("No hay citas programadas para hoy\n");}
+		}
+		if(n==2){
+			bool bucle;
+			fecha f1,f2;
+			printf("Mostrar citas desde:\n");
+			if(leerFecha(f1)!=true){			//Lee fecha 1
+				printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+			}
+			printf("Hasta:\n");
+			if(leerFecha(f2)!=true){			//Lee fecha 2
+				printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+			}
+			if(dias(f1,f2)<0){
+				printf("Intervalo no valido\n");
+			}
+			else{
+				citas=getCitas(f1,f2);
+				if(citas.size()==0){printf("No hay citas programadas para ese intervalo\n");}
+			}
+		}
+		for(c=citas.begin();c!=citas.end();c++){
+			(*c).mostrarRegistro();
+		}
+	}
+	printf("Pulse enter para volver al menu\n");
+	getline(cin,aux);
+	getline(cin,aux);
 }

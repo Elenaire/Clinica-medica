@@ -1,5 +1,5 @@
-#ifndef FUNCIONES_H
-  #define FUNCIONES_H
+#ifndef FECHA_HORA_H
+  #define FECHA_HORA_H
 	struct fecha{
 			int d;					//Dia
 			int m;					//Mes
