@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+bool Nombre_Apellidos(Paciente p1,Paciente p2);
+bool Apellidos_Nombre(Paciente p1,Paciente p2);
 
 
 using namespace std;
@@ -174,8 +176,6 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin probar
 }
 
 void ordenarPacientes(int parametro,list<Paciente> &p){		//Sin terminar  --Quiero probarlo
-	printf("Estoy ordenand pacientes, si\n");
-	/*
 	switch(parametro){
 		case 1:		//Nombre y apellidos
 			p.sort(Nombre_Apellidos);
@@ -184,12 +184,12 @@ void ordenarPacientes(int parametro,list<Paciente> &p){		//Sin terminar  --Quier
 			p.sort(Apellidos_Nombre);
 		break;
 		case 3:
-
+			p.sort(ordenarporFecha);
 		break;
 		case 0:		//Ordena por id
 
 		break;
-	}*/
+	}
 }
 bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin terminar  ----------------------------------------
 	if(t.modificable()){
@@ -524,6 +524,31 @@ bool ContieneA(char* cad1,char* cad2)
 	}
 }
 */
+bool Nombre_Apellidos(Paciente p1,Paciente p2){
+  int i;
+  string s1,s2;
+    s1=p1.nombre_+p1.apellidos_;
+    s2=p2.nombre_+p2.apellidos_;
+  for(i=0;((i<s1.length())&&(i<s2.length()));i++){
+    if (tolower(s1[i])<tolower(s2[i])) return true;
+    else if (tolower(s1[i])>tolower(s2[i])) return false;
+  }
+  return ( s1.length() < s2.length() );
+}
+bool Apellidos_Nombre(Paciente p1,Paciente p2){
+  int i;
+  string s1,s2;
+    s1=p1.apellidos_+p1.nombre_;
+    s2=p2.apellidos_+p2.nombre_;
+  for(i=0;((i<s1.length())&&(i<s2.length()));i++){
+    if (tolower(s1[i])<tolower(s2[i])) return true;
+    else if (tolower(s1[i])>tolower(s2[i])) return false;
+  }
+  return ( s1.length() < s2.length() );
+}
+bool ordenarporFecha(Paciente p1,Paciente p2){
+  return ((p1.getFechanacimiento())<(p2.getFechanacimiento()));
+}
 
 int nuevoID(){
 	string aux,aux2;

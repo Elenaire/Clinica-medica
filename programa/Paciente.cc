@@ -1,12 +1,15 @@
 #include "Paciente.h"
 #include "funciones.h"
 #include <iostream>
+//#include <direct.h>
 
+
+//Para crear una carpeta es con mkdir("Nombredelacarpeta");
 
 using namespace std;
-Paciente::Paciente()
+Paciente::Paciente(int id)
 {
-  id_=nuevoID();
+  id_=id;
   telefono_=0;
   nombre_="";
   apellidos_="";
@@ -277,7 +280,7 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
   }
 }
 */
-bool Paciente::addTratamiento(const Tratamiento t){   //Sin probar
+bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;
   file.open(to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
   printf("Abriendo fichero\n");
@@ -302,28 +305,7 @@ bool Paciente::addNota(const Nota n){
     return false;
   }
 }
-bool Nombre_Apellidos(Paciente p1,Paciente p2){
-  int i;
-  string s1,s2;
-    s1=p1.nombre_+p1.apellidos_;
-    s2=p2.nombre_+p2.apellidos_;
-  for(i=0;((i<s1.length())&&(i<s2.length()));i++){
-    if (tolower(s1[i])<tolower(s2[i])) return true;
-    else if (tolower(s1[i])>tolower(s2[i])) return false;
-  }
-  return ( s1.length() < s2.length() );
-}
-bool Apellidos_Nombre(Paciente p1,Paciente p2){
-  int i;
-  string s1,s2;
-    s1=p1.apellidos_+p1.nombre_;
-    s2=p2.apellidos_+p2.nombre_;
-  for(i=0;((i<s1.length())&&(i<s2.length()));i++){
-    if (tolower(s1[i])<tolower(s2[i])) return true;
-    else if (tolower(s1[i])>tolower(s2[i])) return false;
-  }
-  return ( s1.length() < s2.length() );
-}
+
 
 void Paciente::eliminarPaciente()
 {

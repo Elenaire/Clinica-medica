@@ -23,7 +23,7 @@
   	int codpostal_;
   	int tipo_;
   public:
-    Paciente(int id_=0);
+    Paciente(int id=0);
     friend bool filtrarPacientes(int filtro,list<Paciente> &p);
     friend void ordenarPacientes(int parametro,list<Paciente> &p);
     friend bool Nombre_Apellidos(Paciente p1,Paciente p2);
@@ -58,5 +58,5 @@
   };
 
   void AddPaciente(Paciente p);
-
+  bool ordenarporFecha(Paciente p1,Paciente p2);
   #endif

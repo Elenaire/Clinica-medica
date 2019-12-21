@@ -127,7 +127,7 @@ void menuPaciente(Paciente p){
 				menu=0;
 			break;
 			case 4:	//Añadir cita
-			anadirCita(p);
+				anadirCita(p);
 				menu=0;
 			break;
 			case 5:	//Modificar datos del paciente
