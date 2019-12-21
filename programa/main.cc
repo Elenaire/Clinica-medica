@@ -102,7 +102,14 @@ void AgregaP()
 	cout<<"Introdzuca el tipo del paciente"<<endl;
 	cin>>auxi;
 	p.setTipo(auxi);
-	AddPaciente(p);
+	cout<<"¿Está seguro de querer guardar este Paciente? (S/N)"<<endl;
+	p.mostrarPaciente();
+	char elec;
+	if(elec=='s')
+	{
+		p.setID(nuevoID());
+		AddPaciente(p);
+	}
 }
 
 
