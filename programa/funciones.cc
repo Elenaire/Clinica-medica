@@ -14,7 +14,8 @@ using namespace std;
 
 bool addCita(Cita &c);
 
-void leerPacientes(list<Paciente> &p){
+void leerPacientes(list<Paciente> &P){
+	list<Paciente> p;
 	Paciente aux(0);
 	ifstream file;
 	file.open("Pacientes.txt");
@@ -53,6 +54,7 @@ void leerPacientes(list<Paciente> &p){
 	    p.push_back(aux);
 	}
 	file.close();
+	P=p;
 }
 void mostrarPacientes(list<Paciente> &p){					//Sin probar
 	list<Paciente>::iterator i;
@@ -178,7 +180,7 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 		}
 		if(lista.empty()){
 			printf("Error, ningun paciente corresponde con su busqueda\n");
-			sleep(1);
+			sleep(2);
 			return false;
 		}
 		else{
@@ -206,18 +208,19 @@ void ordenarPacientes(int parametro,list<Paciente> &p){		//Sin terminar  --Quier
 bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin terminar  ----------------------------------------
 	if(t.modificable()){
 		char c;
+		bool bucle;
 		string aux;
 		fecha f1,f2;
-		printf("Aqui pregunta que modificar y bla bla bla\n");
+		system("clear");
 		int menu=0;
+		t.mostrarRegistro();
 		while(menu>=0){
-			t.mostrarRegistro();
 			/*
 			bla bla menu
 			*/
 			switch(menu){
 				case 0:
-					printf("1 Finalizar tratamiento\n2 Moficicar tratamiento\n3 Modificar fechas de inicio y finalización\n4 Modificar comentario\n-1 Atras");
+					printf("1 Finalizar tratamiento\n2 Moficicar tratamiento\n3 Modificar fechas de inicio y finalización\n4 Modificar comentario\n5 Eliminar tratamiento\n-1 Atras\n");
 					cin>>menu;
 				break;
 				case 1:		//Finalizar tratamiento
@@ -226,9 +229,11 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 					if(c=='s'){
 						t.setEstado(-1);
 					}
+					return true;			//Aqui no preguntará si quiere seguir modificando
 				break;
 				case 2:	//Moficicar tratamiento
 					printf("Medicamento: ");
+					getline(cin,aux);
 					getline(cin,aux);
 					t.setMedicamento(aux);
 					printf("Concentración: ");
@@ -237,9 +242,70 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 					printf("Regularidad: ");
 					getline(cin,aux);
 					t.setRegularidad(aux);
+					printf("¿Desea seguir modificando?(s/n)\n");
+					cin>>c;
+					if(c!='s'){
+						return true;
+					}
+					menu=0;
 				break;
 				case 3:	//Modificar fechas de inicio y finalización
-					printf("Hola\n");
+					do{
+						bucle=true;
+						printf("Fecha de inicio: ");
+						while(bucle){
+							if(leerFecha(f1)!=true){
+							printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+							}
+							else if(dias(HOY,f1)<0&&Registro::modificable_==false){			//Modificable_
+							printf("Esa fecha ya ha pasado\n");
+							}
+							else{
+								bucle=false;
+							}
+						}
+						printf("Fecha de finalización: ");
+						bucle=true;
+						while(bucle){
+							if(leerFecha(f2)!=true){
+								printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+							}
+							else{
+								bucle=false;
+							}
+						}
+						if(dias(f1,f2)<0){
+							printf("El tratamiento no puede finalizar antes de empezar\n");
+							bucle=true;
+						}
+						else{
+							bucle=false;
+						}
+					}while(bucle);
+					t.setFechaInicio(f1);
+					t.setFechaFinal(f2);
+					printf("¿Desea seguir modificando?(s/n)\n");
+					cin>>c;
+					if(c!='s'){
+						return true;
+					}
+					menu=0;
+				break;
+				case 4:	//Modificar comentario
+					printf("Nuevo comentario:\n");
+					getline(cin,aux);
+					getline(cin,aux);
+					t.setComentario(aux);
+					printf("¿Desea seguir modificando?(s/n)\n");
+					cin>>c;
+					if(c!='s'){
+						return true;
+					}
+					menu=0;
+				break;
+				case 5:	//Eliminar tratamiento
+					t.setID(-1);
+				break;
 				default:
 					if(menu>0){
 						printf("Error, introduzca:\n");
@@ -247,6 +313,7 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 					}
 				}
 		}
+		return false;
 
 
 	}
@@ -258,8 +325,10 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 
 void consultarTramientos(Paciente &p){
   	int i;
+  	char c;
 	list <Tratamiento> tratamientos;
 	list <Tratamiento>::iterator t;
+	fstream file;
 	tratamientos=p.getTratamientos();		//Modificar getTratamientos
 	t=tratamientos.begin();
 	while(t!=tratamientos.end()){
@@ -282,7 +351,45 @@ void consultarTramientos(Paciente &p){
 		cin>>i;
 		if(i>0){
 			if(i<=(tratamientos.size()+1)){
-				modificarTratamiento(*t);			//Sin terminar		//Mal
+				t=tratamientos.begin();
+				advance(t,i-1);
+				if(modificarTratamiento(*t)){
+					if((i=(*t).getID())==-1){
+						tratamientos.erase(t);
+						printf("¿Seguro que desea eliminar el tratamiento?(s/n)\n");
+					}
+					else{
+						system("clear");
+						(*t).mostrarRegistro();
+						printf("¿Desea guardar los cambios?(s/n)\n");
+					}
+					cin>>c;
+					if(c=='s'){
+						file.open("Pacientes/"+to_string(p.getID())+"/Tratamientos.txt",ofstream::out|ofstream::trunc);
+						if(file.is_open()){
+							for(t=tratamientos.begin();t!=tratamientos.end();t++){
+							file<<escribeFecha((*t).getFecha())<<"|"<<escribeHora((*t).getHora())<<'|'<<(*t).getMedicamento()<<'|'<<(*t).getConcentracion()<<'|'<<(*t).getRegularidad()<<'|'<<escribeFecha((*t).getFechaInicio())<<'|'<<escribeFecha((*t).getFechaFinal())<<'|'<<(*t).getEstado()<<'|'<<(*t).getComentario()<<endl;
+							}
+							file.close();
+							if(i==-1){
+								printf("Tratamiento eliminado correctamente\n");
+							}
+							else{
+								printf("Tratamiento modificado correctamente\n");
+							}
+						}
+						else{
+							if(i==-1){
+								printf("Tratamiento no se ha podido eliminar\n");
+							}
+							else{
+								printf("Tratamiento no se ha podido modificar\n");
+							}
+						}
+						sleep(2);
+					}
+				}			
+
 			}
 		}
 	}
@@ -305,7 +412,6 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 		while(i<f2){
 			file.open("Agenda/"+to_string(i.m)+"_"+to_string(i.a)+".txt");
 			if(file.is_open()){	
-			printf("Fichero abierto\n");		
 				while((!file.eof())&&(bucle)){
 					file.getline(cad,16,'|');		
 			    	aux.setID(atoi(cad));
@@ -340,10 +446,8 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 	return C;
 }
 void anadirCita(Paciente &p){				//---------------------------------------------------------------
-	bool modificable_=false;
-	Cita C(0);
 	int num;
-	C.setID(p.getID());
+	Cita C(p.getID());
 	char c;
 	list<Cita> agenda;
 	list<Cita>::iterator i;
@@ -356,7 +460,7 @@ void anadirCita(Paciente &p){				//---------------------------------------------
 		if(leerFecha(f)!=true){
 		printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 		}
-		else if(dias(HOY,f)<0&&modificable_==false){			//Modificable_
+		else if(dias(HOY,f)<0&&Registro::modificable_==false){			//Modificable_
 		printf("Ese día ya ha pasado\n");
 		}
 		else{
@@ -385,7 +489,8 @@ void anadirCita(Paciente &p){				//---------------------------------------------
 		}
 	}
 	printf("Introduzca un comentario(opcional): ");
-	cin>>aux;
+	getline(cin,aux);
+	getline(cin,aux);
 	C.setFecha(f);
 	C.setHora(h);
 	C.setComentario(aux);			//Termina de pedir datos
@@ -402,7 +507,6 @@ void anadirCita(Paciente &p){				//---------------------------------------------
 }
 
 void anadirTratamiento(Paciente &p){
-	bool modificable_=false;
 	Tratamiento t(p.getID());
 	char c;
 	bool bucle=true;
@@ -418,13 +522,14 @@ void anadirTratamiento(Paciente &p){
 	printf("Regularidad: ");
 	getline(cin,aux);
 	t.setRegularidad(aux);
-	while(bucle){
+	do{
+		bucle=true;
 		printf("Fecha de inicio: ");
 		while(bucle){
 			if(leerFecha(f1)!=true){
 			printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 			}
-			else if(dias(HOY,f1)<0&&modificable_==false){			//Modificable_
+			else if(dias(HOY,f1)<0&&Registro::modificable_==false){			//Modificable_
 			printf("Esa fecha ya ha pasado\n");
 			}
 			else{
@@ -437,18 +542,23 @@ void anadirTratamiento(Paciente &p){
 			if(leerFecha(f2)!=true){
 				printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 			}
-			else if(dias(f1,f2)<0){
-				printf("El tratamiento no puede finalizar antes de empezar\n");
-			}
 			else{
 				bucle=false;
 			}
 		}
-	}
+		if(dias(f1,f2)<0){
+			printf("El tratamiento no puede finalizar antes de empezar\n");
+			bucle=true;
+		}
+		else{
+			bucle=false;
+		}
+	}while(bucle);
 	t.setFechaInicio(f1);
 	t.setFechaFinal(f2);
 	printf("Introduzca un comentario(opcional): ");
-	cin>>aux;
+	getline(cin,aux);
+	getline(cin,aux);
 	t.setComentario(aux);			//Termina de pedir datos
 	printf("¿Desea guardar el tratamiento? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
 	cin>>c;
@@ -459,6 +569,7 @@ void anadirTratamiento(Paciente &p){
 		else{
 			printf("Ha ocurrido un error inesperado\n");
 		}
+		sleep(2);
 	}
 }
 void anadirNota(Paciente &p){
@@ -479,44 +590,6 @@ void anadirNota(Paciente &p){
 		}
 	}
 }
-/*
-bool addCita(Cita &c){
-	bool insertado=false;
-	list<Cita> lista;
-	list<Cita>::iterator i;
-	fecha f1,f2;
-	f1=c.getFecha();
-	f2=f1;
-	f1.d=0;
-	f2.d=32;
-	lista=getCitas(f1,f2);
-	fstream file;
-	for(i=lista.begin();((i!=lista.end())&&(!insertado));i++){
-
-		if(c.getFecha()<(*i).getFecha()){			//Si la fecha de la cita es anterior no hace nada
-		}
-		else if((*i).getFecha()<c.getFecha()){		//Si es posterior se guarda antes
-			lista.insert(i,c);
-			insertado=true;
-		}
-		else{								//Si son iguales se comprueba la hora
-			if(minutos(c.getHora(),(*i).getHora())>0){
-				lista.insert(i,c);
-				insertado=true;
-			}
-		}
-	}
-	if(insertado==false){
-		lista.push_back(c);
-	}
-	file.open("Agenda/"+to_string((c.getFecha()).m)+"/"+to_string((c.getFecha()).a)+".txt",ios::out|ios::trunc);
-	for(i=lista.begin();((i!=lista.end())&&(!insertado));i++){
-
-		file<<(*i).getID()<<"|"<<escribeFecha((*i).getFecha())<<"|"<<escribeHora((*i).getHora())<<(*i).getComentario()<<endl;
-	}
-	file.close();
-}
-*/
 bool Nombre_Apellidos(Paciente p1,Paciente p2){
   int i;
   string s1,s2;

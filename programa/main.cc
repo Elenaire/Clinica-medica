@@ -21,6 +21,7 @@ bool buscarPaciente(Paciente &p){		//Sin completar filtrar y ordenar
 		mostrarPacientes(pacientes);
 		printf("1 Seleccionar paciente\n2 Ordenar pacientes\n3 Filtra pacientes\n-1 Salir\n");
 		scanf("%d",&menu);
+		system("clear");
 		switch(menu){
 			case 1:			//Seleccionar paciente
 				printf("Introduzca el id del paciente\n");
@@ -51,7 +52,8 @@ bool buscarPaciente(Paciente &p){		//Sin completar filtrar y ordenar
 				do{
 					printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
 					scanf("%d",&menu);
-				}while((menu<0)||!(filtrarPacientes(menu,pacientes)));
+					
+				}while((menu>=0)&&(!filtrarPacientes(menu,pacientes)));
 			break;
 			default:
 				if(menu>0){
@@ -129,43 +131,48 @@ void AgregaP()
 
 void menuPaciente(Paciente p){
 	int menu=0;
+	system("clear");
 	while(menu>=0){
 		p.mostrarPaciente();
-		/*
-		bla bla menu
-		*/
+		cout<<endl;
 		switch(menu){
 			case 0:
-				system("clear");
 				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n6 Añadir nota\n7 Eliminar paciente\n-1 Atras\n");
 				cin>>menu;
+				system("clear");
 			break;
 			case 2:		//Añadir tratamiento +Hecho  -Funciones
 				anadirTratamiento(p);
 				menu=0;
+				system("clear");
 			break;
 			case 3:	//Consultar tratamientos
 				consultarTramientos(p);
 				menu=0;
+				system("clear");
 			break;
 			case 4:	//Añadir cita
 				anadirCita(p);
 				menu=0;
+				system("clear");
 			break;
 			case 5:	//Modificar datos del paciente
 
 				//-----------------------
 
 				menu=0;
+				system("clear");
 			break;
 			case 6:
 				anadirNota(p);
 				menu=0;
+				system("clear");
 			break;
 			case 7:	//Eliminar paciente
 			printf("Hola\n");
 				//Eliminar paciente?
 				menu=0;
+				system("clear");
 			break;
 			default:
 				if(menu>0){
@@ -176,7 +183,7 @@ void menuPaciente(Paciente p){
 	}
 	//......
 }
-//bool Registro::modificable_=false;
+bool Registro::modificable_=false;
 int main(){
 	int menu=0;
 	Paciente p;	
@@ -206,13 +213,14 @@ int main(){
 	}
 	else{
 		getline(ajustes,saludo,'\n');
-		cout<<saludo<<endl;
+		cout<<saludo<<endl<<endl;
 	}
 	while(menu>=0){
 		switch(menu){
 			case 0:
-			printf("1 Seleccionar paciente\n2 Añair paciente\n3 Añadir cita\n4 Consultar agenda\n");
+			printf("1 Seleccionar paciente\n2 Añair paciente\n3 Añadir cita\n4 Consultar agenda\n-1 Salir\n");
 				cin>>menu;
+				system("clear");
 			break;
 			case 1:		//Buscar paciente +Hecho  -Funciones
 				if(buscarPaciente(p)){

@@ -12,8 +12,7 @@ void Cita::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha 
 	cout<<"El día: "<<escribeFecha(fecha_)<<" a las "<<escribeHora(hora_)<<"tiene una cita con el paciente"<<paciente_<<endl<<comentario_<<endl;
 }
 bool Cita::modificable(){
-	bool modificable_=false;
-	if(modificable_){
+	if(Registro::modificable_){
 		return true;
 	}
 	else if(dias(fecha_,HOY)<=1){			//---------------

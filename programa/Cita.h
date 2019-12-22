@@ -9,12 +9,6 @@
 		Cita(int paciente):Registro(paciente){				//Constructor
 			comentario_="";
 		}
-		inline int getID()const{
-			return paciente_;
-		}
-		inline void setID(const int id){
-			paciente_=id;
-		}
 		inline string getComentario()const{
 			return comentario_;
 		}

@@ -4,16 +4,22 @@
 	#include <string>
 	class Registro{
 	protected:
-		int id_;
 		struct fecha fecha_;	//Fecha de creación
 		struct hora hora_;		//Hora de creación
 		int paciente_;			//id del paciente del registro
 	public:
-	//static bool modificable_;
+	int id_;
+	static bool modificable_;
 	Registro(int paciente){				//Constructor
 		paciente_=paciente;
 		hoy(fecha_);
 		hoy(hora_);
+	}
+	inline int getID()const{
+		return paciente_;
+	}
+	inline void setID(const int id){
+		paciente_=id;
 	}
 	inline void setFecha(const fecha f){
 		fecha_=f;

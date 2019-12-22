@@ -8,8 +8,7 @@ void Nota::mostrarRegistro(){		//Comprobar el estado del tratamiento y la fecha 
 	cout<<endl<<contenido_<<endl;
 }
 bool Nota::modificable(){
-	bool modificable_=false;
-	if(modificable_){
+	if(Registro::modificable_){
 		return true;
 	}
 	else if(dias(fecha_,HOY)<3){			//---------------

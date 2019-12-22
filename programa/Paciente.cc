@@ -59,6 +59,7 @@ void Paciente::mostrarPaciente(){
   }else{
     cout<<"TIPO: PRIVADO"<<endl;
   }
+  cout<<endl;
 }
 /*
 list <Cita> Paciente::getCitas()
@@ -288,8 +289,7 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
 bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;
   file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
-  printf("Abriendo fichero\n");
-  if(file){
+  if(file.is_open()){
     file<<escribeFecha(t.getFecha())<<"|"<<escribeHora(t.getHora())<<'|'<<t.getMedicamento()<<'|'<<t.getConcentracion()<<'|'<<t.getRegularidad()<<'|'<<escribeFecha(t.getFechaInicio())<<'|'<<escribeFecha(t.getFechaFinal())<<'|'<<t.getEstado()<<'|'<<t.getComentario()<<endl;
     file.close();
     return true;
@@ -298,6 +298,7 @@ bool Paciente::addTratamiento(const Tratamiento t){
     return false;
   }
 }
+
 bool Paciente::addNota(const Nota n){
   fstream file;
   file.open("Pacientes/"+to_string(id_)+"/Notas.txt",ios::out|ios::app|ios::ate);

@@ -7,7 +7,7 @@
 	#include <list>
 	#include "Paciente.h"
 
-	void leerPacientes(list<Paciente> &p);						//Lee los pacientes del fichero de pacientes -Sin probar
+	void leerPacientes(list<Paciente> &P);						//Lee los pacientes del fichero de pacientes -Sin probar
 	void mostrarPacientes(list<Paciente> &p);					//Muestra los datos de la lista de pacientes -Sin probar
 	bool filtrarPacientes(int filtro,list<Paciente> &p);		//Sin probar
 	void ordenarPacientes(int parametro,list<Paciente> &p);		//Sin completar

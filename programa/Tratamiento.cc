@@ -17,12 +17,11 @@ void Tratamiento::mostrarRegistro(){		//Comprobar el estado del tratamiento y la
 		default:
 			printf("y finalizado el dia %d/%d/%d\n",final_.d,final_.m,final_.a);
 	}
-	cout<<comentario_<<endl;
+	cout<<comentario_<<endl<<endl;
 
 }
 bool Tratamiento::modificable(){
-	bool modificable_=false;
-	if(modificable_){
+	if(Registro::modificable_){
 		return true;
 	}
 	else if((estado_==0)||(dias(final_,HOY)<3)){			//---------------
