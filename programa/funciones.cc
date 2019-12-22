@@ -12,7 +12,180 @@ bool Apellidos_Nombre(Paciente p1,Paciente p2);
 
 using namespace std;
 
-bool addCita(Cita &c);
+bool buscarPaciente(Paciente &p){
+	int menu,id,orden;
+	list<Paciente> pacientes;
+	list<Paciente>::iterator i;
+	printf("0 Listar pacientes\nBuscar por:\n1 Nombre completo\n2 Nombre\n3 Apellidos\n4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
+	scanf("%d",&menu);
+	if(menu>=0){
+		filtrarPacientes(menu,pacientes);
+	}
+	while(menu>=0){				//se sale con -1 o con negativo?
+		system("clear");
+		mostrarPacientes(pacientes);
+		printf("1 Seleccionar paciente\n2 Ordenar pacientes\n3 Filtra pacientes\n-1 Salir\n");
+		scanf("%d",&menu);
+		switch(menu){
+			case 1:			//Seleccionar paciente
+				printf("Introduzca el id del paciente\n");
+				scanf("%d",&id);
+				for(i=pacientes.begin();i!=pacientes.end();++i){
+					if((*i).getID()==id){
+						p=*i;
+						return true;
+					}
+				}
+				printf("El paciente seleccionado no coincide con los que se muestran por pantalla\n");
+				sleep(1);
+				menu=0;
+			break;
+			case 2:			//Ordenar pacientes
+				printf("Ordenar por:\n1 Nombre\n2 Apellidos\n3 Fecha de nacimiento");
+				scanf("%d",&menu);
+				if(menu>0){
+					printf("¿Orden ascendente(1) o descendente(-1)? \n");  	//Ordena si es positivo ascendente, si es negativo descendente y si es 0 cancela
+					scanf("%d",&orden);
+					if(orden!=0){
+						ordenarPacientes(menu,pacientes);
+						if(orden<0){pacientes.reverse();}
+					}
+				}
+			break;
+			case 3:			//Filtrar pacientes
+				do{
+					printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
+					scanf("%d",&menu);
+					
+				}while((menu>=0)&&(!filtrarPacientes(menu,pacientes)));
+			break;
+			default:
+				if(menu>0){
+					printf("Error, introduzca:\n");
+					menu=0;
+				}
+		}
+	}
+	return false;
+}
+
+void AgregaP()
+{
+	Paciente p;
+	fecha f;
+	string aux;
+	int n;
+	bool bucle=true;
+	getline(cin,aux);
+	cout<<"Introdzuca nombre del paciente"<<endl;
+	getline(cin,aux);
+	p.setNombre(aux);
+	cout<<"Introdzuca apellidos del paciente"<<endl;
+	getline(cin,aux);
+	p.setApellidos(aux);
+	cout<<"Introdzuca la fecha de nacimiento del paciente"<<endl;
+	while(bucle){
+		if(leerFecha(f)!=true){
+			printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+		}
+		else if(dias(f,HOY)<0){
+			printf("Esa fecha aun no ha pasado\n");
+		}
+		else{
+			bucle=false;
+		}
+	}
+	p.setFechanacimiento(f);
+	cout<<"Introdzuca el telefono del paciente"<<endl;
+	getline(cin,aux);
+	getline(cin,aux);
+	if(aux.size()>0){
+		p.setTelefono(stoi(aux));
+	}
+	else{
+		p.setTelefono(0);
+	}
+	cout<<"Introdzuca el cododico postal del paciente"<<endl;
+	getline(cin,aux);
+	if(aux.size()>0){
+		p.setCodPostal(stoi(aux));
+	}
+	else{
+		p.setCodPostal(0);
+	}
+	cout<<"Introdzuca la dirección del paciente"<<endl;
+	getline(cin,aux);
+	p.setDireccion(aux);
+	cout<<"Introdzuca el tipo del paciente(0 Publico/1 Privado)"<<endl;
+	cin>>n;
+	p.setTipo(n);
+	p.mostrarPaciente();
+	cout<<"¿Está seguro de querer guardar este Paciente? (s/n)"<<endl;
+	char elec;
+	cin>>elec;
+	if(elec=='s')
+	{
+		p.setID(nuevoID());
+		AddPaciente(p);
+		aux="mkdir Pacientes/"+to_string(p.getID());
+		system(aux.c_str());
+	}
+}
+
+
+void menuPaciente(Paciente p){
+	int menu=0;
+	system("clear");
+	while(menu>=0){
+		p.mostrarPaciente();
+		cout<<endl;
+		switch(menu){
+			case 0:
+				printf("1 Mostrar historial\n2 Recetar tratamiento\n3 Consultar tratamientos\n4 Añadir cita\n5 Modificar datos del paciente\n6 Añadir nota\n7 Eliminar paciente\n-1 Atras\n");
+				cin>>menu;
+				system("clear");
+			break;
+			case 2:		//Añadir tratamiento +Hecho  -Funciones
+				anadirTratamiento(p);
+				menu=0;
+				system("clear");
+			break;
+			case 3:	//Consultar tratamientos
+				consultarTramientos(p);
+				menu=0;
+				system("clear");
+			break;
+			case 4:	//Añadir cita
+				anadirCita(p);
+				menu=0;
+				system("clear");
+			break;
+			case 5:	//Modificar datos del paciente
+
+				//-----------------------
+
+				menu=0;
+				system("clear");
+			break;
+			case 6:
+				anadirNota(p);
+				menu=0;
+				system("clear");
+			break;
+			case 7:	//Eliminar paciente
+			printf("Hola\n");
+				//Eliminar paciente?
+				menu=0;
+				system("clear");
+			break;
+			default:
+				if(menu>0){
+					printf("Error, introduzca:\n");
+					menu=0;
+				}
+			}
+	}
+}
 
 void leerPacientes(list<Paciente> &P){
 	list<Paciente> p;
@@ -189,7 +362,7 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 		return true;
 }
 
-void ordenarPacientes(int parametro,list<Paciente> &p){		//Sin terminar  --Quiero probarlo
+void ordenarPacientes(int parametro,list<Paciente> &p){
 	switch(parametro){
 		case 1:		//Nombre y apellidos
 			p.sort(Nombre_Apellidos);
@@ -205,7 +378,108 @@ void ordenarPacientes(int parametro,list<Paciente> &p){		//Sin terminar  --Quier
 		break;
 	}
 }
-bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin terminar  ----------------------------------------
+bool modificarCita(Cita &C){		//Sin probar
+	if(C.modificable()){
+		char c;
+		bool bucle=true;
+		string aux;
+		fecha f;
+		hora h;
+		list<Cita> agenda;
+		list<Cita>::iterator i;
+		system("clear");
+		int num,menu=0;
+		C.mostrarRegistro();
+		while(menu<=0){
+			if(menu==0){
+				printf("1 Modificar fecha\n2 Modificar paciente\n3 Modificar comentario\n4 Eliminar cita\n-1Salir\n");
+				cin>>menu;
+			}
+			if(menu==1){	//Modificar fecha y hora
+				while(bucle){
+					printf("Día:");
+					if(leerFecha(f)!=true){
+					printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+					}
+					else if(dias(HOY,f)<0&&Registro::modificable_==false){
+					printf("Ese día ya ha pasado\n");
+					}
+					else{
+						bucle=false;
+					}
+				}
+				bucle=true;
+				while(bucle){
+					printf("Hora:");
+					if(leerHora(h)!=true){
+					printf("Formato de hora incorrecto, introduzca hh:mm\n");
+					}
+					else {
+						agenda=getCitas(f,f);
+						bucle=false;
+						for(i=agenda.begin();((i!=agenda.end())&&(!bucle));i++){
+							num=minutos(h,(*i).getHora());
+							if(num<0){
+								num=num*-1;
+							}
+							if(num<5){
+								printf("No puede ser a esa hora porque tiene otra cita a las %s\n",escribeHora((*i).getHora()));
+								bucle=true;
+							}
+						}
+					}
+				}
+				C.setFecha(f);
+				C.setHora(h);
+				printf("¿Desea seguir modificando?(s/n)\n");
+				cin>>c;
+				if(c!='s'){
+					return true;
+				}
+				menu=0;
+			}
+			if(menu==2){	//Modificar paciente
+				Paciente p;
+				if(buscarPaciente(p)){
+					C.setID(p.getID());
+					printf("¿Desea seguir modificando?(s/n)\n");
+					cin>>c;
+					if(c!='s'){
+						return true;
+					}
+				}
+				menu=0;
+			}
+			if(menu==3){	//Modificar comentario
+				printf("Nuevo comentario:\n");
+				getline(cin,aux);
+				getline(cin,aux);
+				C.setComentario(aux);
+
+				printf("¿Desea seguir modificando?(s/n)\n");
+				cin>>c;
+				if(c!='s'){
+					return true;
+				}
+				menu=0;
+			}
+			if(menu==4){
+				C.setID(-1);
+				return true;
+			}
+		}
+	}
+		else{
+		printf("No está permitido modificar esta cita\n");
+		return false;
+	}
+	return false;
+}
+
+
+
+
+bool modificarTratamiento(Tratamiento &t){
 	if(t.modificable()){
 		char c;
 		bool bucle;
@@ -215,9 +489,6 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 		int menu=0;
 		t.mostrarRegistro();
 		while(menu>=0){
-			/*
-			bla bla menu
-			*/
 			switch(menu){
 				case 0:
 					printf("1 Finalizar tratamiento\n2 Moficicar tratamiento\n3 Modificar fechas de inicio y finalización\n4 Modificar comentario\n5 Eliminar tratamiento\n-1 Atras\n");
@@ -314,8 +585,6 @@ bool modificarTratamiento(Tratamiento &t){		//¿Tiene que ser bool?		//Sin termi
 				}
 		}
 		return false;
-
-
 	}
 	else{
 		printf("No está permitido modificar este tratamiento\n");
@@ -445,7 +714,7 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 	}
 	return C;
 }
-void anadirCita(Paciente &p){				//---------------------------------------------------------------
+void anadirCita(Paciente &p){
 	int num;
 	Cita C(p.getID());
 	char c;
@@ -460,7 +729,7 @@ void anadirCita(Paciente &p){				//---------------------------------------------
 		if(leerFecha(f)!=true){
 		printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
 		}
-		else if(dias(HOY,f)<0&&Registro::modificable_==false){			//Modificable_
+		else if(dias(HOY,f)<0&&Registro::modificable_==false){
 		printf("Ese día ya ha pasado\n");
 		}
 		else{
@@ -588,6 +857,7 @@ void anadirNota(Paciente &p){
 		else{
 			printf("Ha ocurrido un error inesperado\n");
 		}
+		sleep(1);
 	}
 }
 bool Nombre_Apellidos(Paciente p1,Paciente p2){
