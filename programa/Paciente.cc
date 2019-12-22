@@ -1,6 +1,7 @@
 #include "Paciente.h"
 #include "funciones.h"
 #include <iostream>
+#include <unistd.h>
 //#include <direct.h>
 void leerPacientes(list<Paciente> &p);
 
@@ -61,46 +62,37 @@ void Paciente::mostrarPaciente(){
   }
   cout<<endl;
 }
-/*
+
 list <Cita> Paciente::getCitas()
 {
   list <Cita> aux;
-  list <Cita>::iterator c;
+  Cita c(id_);
+  fecha f;
+  hora h;
+  char cad[256];
+  string str;
   ifstream file;
-  file.open("citas.txt");
-  string cad;
-  for(c=aux.begin();c!=aux.end();c++)     //Mal
+  file.open("Agenda/..."); //NO SE EL PATH
+  if(file.is_open())
   {
-  	getline(file,cad,'|');
-    (c->fecha_).d=stoi(cad);
-    getline(file,cad,'|');
-    (c->fecha_).m=stoi(cad);
-    getline(file,cad,'|');
-    (c->fecha_).a=stoi(cad);
-    getline(file,cad,':');
-    (c->hora_).h=stoi(cad);
-    getline(file,cad,':');
-    (c->hora_).m=stoi(cad);
-    getline(file,cad,'|');
-    (c->hora_).s=stoi(cad);
-    getline(file,cad,'|');
-    c->paciente_=stoi(cad);
-    getline(file,(c.comentario_),'\n');
-    aux.push_back(c);
+    while(!file.eof())
+    {
+      file.getline(cad,64,'|');
+      sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+      c.setFecha(f);
+      file.getline(cad,64,'|');
+      sscanf(cad,"%2d:%2d",&h.h,&h.m);
+      c.setHora(h);
+      getline(file,str,'|');
+      c.setComentario(str);
+      aux.push_back(c);
+    }
+    file.close();
+    //aux.pop_back()     //ESTO LO DEJO COMENTADO PORQUE NO SE SI DARA EL MISMO ERROR QUE EN TRATAMEINTOS
   }
-  file.close();
   return aux;
-
-file.getline(cad,64,'|'); 
-    sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-    file.getline(cad,64,'|'); 
-    sscanf(cad,"%2d:%2d",&h.h,&h.m);
-    getline(file,cad,'|');
-
-
-
 }
-*/
+
 list <Tratamiento> Paciente::getTratamientos(){
   list <Tratamiento> aux;
   Tratamiento t(id_);
@@ -112,7 +104,7 @@ list <Tratamiento> Paciente::getTratamientos(){
   file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt");
     if(file.is_open()){
       while(!file.eof()){
-        file.getline(cad,64,'|'); 
+        file.getline(cad,64,'|');
         sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
         t.setFecha(f);
         file.getline(cad,64,'|');   //Hora....
@@ -141,37 +133,36 @@ list <Tratamiento> Paciente::getTratamientos(){
     }
     return aux;
 }
-/*
+
 list <Nota> Paciente::getNotas()
 {
   list <Nota> aux;
-  list <Nota>::iterator n;
+  Nota n(id_);
+  fecha f;
+  hora h;
+  char cad[256];
+  string str;
   ifstream file;
-  file.open("citas.txt")
-  string cad
-  for(n=aux.begin();n!=aux.end();n++)       //Mal
-  {
-  	getline(file,cad,'/');
-    (n.fecha_).d=stoi(cad);
-    getline(file,cad,'/');
-    (n.fecha_).m=stoi(cad);
-    getline(file,cad,'|');
-    (n.fecha_).a=stoi(cad);
-    getline(file,cad,':');
-    (n.hora_).h=stoi(cad);
-    getline(file,cad,':');
-    (n.hora_).m=stoi(cad);
-    getline(file,cad,'|');
-    (n.hora_).s=stoi(cad);
-    getline(file,cad,'|');
-    n.paciente_=stoi(cad);
-    getline(file,(n.nota_),"\n");
-    aux.push_back(n);
-  }
-  file.close();
+  file.open("Pacientes/"+to_string(id_)+"/Notas.txt");
+    if(file.is_open()){
+      while(!file.eof())
+      {
+        file.getline(cad,64,'|');
+        sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+        n.setFecha(f);
+        file.getline(cad,64,'|');   //Hora....
+        sscanf(cad,"%2d:%2d",&h.h,&h.m);
+        n.setHora(h);
+        getline(file,str,'|');
+        n.setContenido(str);
+        aux.push_back(n);
+        }
+      file.close();
+      //aux.pop_back();     //LO pongo por si da el errror de TRatamientos
+    }
   return aux;
+}
 
-*/
 void AddPaciente(Paciente p)
 {
   fstream archivo;
@@ -226,8 +217,8 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
   }
 }
 */
-/*
-/*void Paciente::mostrarHistorial()
+
+void Paciente::mostrarHistorial()
 {
   int elec;
   cout<<"Indique que historial quiere visualizar"<<endl<<"1.Notas\n2.Tratamientos\n3.Notas y tratamientos"<<endl;
@@ -237,55 +228,74 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
     case 1:
     {
       list <Nota> notas;
+      list <Nota>::iterator n;
       notas=getNotas();
-      mostrarRegistro(notas);
-      cout<<"Elija la opción a realizar"<<endl;
-      cout<<"1.Modificar\n2.Eliminar\n3.Salir"<<endl;
-      int elec2;
-      switch(elec2)
+      int i=0;
+      for(n=notas.begin();n!=notas.end();n++)
       {
-        case 1:
-        {
-          modificarNota();
-        }break;
-        case 2:
-        {
-          eliminarNota();
-        }break;
+        cout<<i<<": ";
+        (*n).mostrarRegistro();
+        cout<<endl;
+      }
+      int k;
+      cout<<"Seleccione una Nota(SI DESEA SALIR, SELECCIONE: 0)"<<endl;
+      cin>>k;
+      if(k<0)
+      {
+            n=notas.begin();
+            advance(k,i-1);
+            (*n).modificarNota();
       }
     }break;
     case 2:
     {
       list <Tratamiento> tratamientos;
+      list <Tratamiento>::iterator t;
       tratamientos=getTratamientos();
-      mostrarRegistro(Tratamiento);
-      cout<<"Elija la opción a realizar"<<endl;
-      cout<<"1.Modificar\n2.Eliminar\n3.Salir"<<endl;
-      int elec3;
-      switch(elec3)
+      int i=0;
+      for(t=tratamientos.begin();t!=tratamientos.end();t++)
       {
-        case 1:
-        {
-          modificarCita();
-        }break;
-        case 2:
-        {
-          eliminarCita();
-        }break;
+        cout<<i<<": ";
+        (*t).mostrarRegistro();
+        cout<<endl;
+      }
+      int k;
+      cout<<"Seleccione un Tratamiento(SI DESEA SALIR, SELECCIONE: 0)"<<endl;
+      cin>>k;
+      if(k<0)
+      {
+          t=tratamientos.begin();
+          advance(k,i-1);
+          modificarTratamiento(*t);
       }
     }break;
     case 3:
     {
       list <Nota> notas;
+      list <Nota>::iterator n;
       notas=getNotas();
-      mostrarRegistro(notas);
-      list <Tratamiento> tratamientos_;
-      tratamientos_=getTratamientos();
-      mostrarRegistro(tratamientos_);
+      int i=0;
+      for(n=notas.begin();n!=notas.end();n++)
+      {
+        cout<<i<<": ";
+        (*n).mostrarRegistro();
+        cout<<endl;
+      }
+      list <Tratamiento> tratamientos;
+      list <Tratamiento>::iterator t;
+      tratamientos=getTratamientos();
+      i=0;
+      for(t=tratamientos.begin();t!=tratamientos.end();t++)
+      {
+        cout<<i<<": ";
+        (*t).mostrarRegistro();
+        cout<<endl;
+      }
+
     }
   }
 }
-*/
+
 bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;
   file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
@@ -338,6 +348,8 @@ void Paciente::eliminarPaciente()
         archivo<<i->getTipo()<<endl;
       }
     }
+    archivo.close();
+    rmdir(to_string(id_));
   }
 }
 
@@ -484,4 +496,3 @@ void Paciente::modificarPaciente()
     }
   }
 }
-

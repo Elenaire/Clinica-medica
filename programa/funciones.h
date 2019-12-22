@@ -17,6 +17,7 @@
 	bool modificarCita(Cita &C);
 	//Abre el menu de modificación de la cita y si se elimina la cita pone a -1 paciente_, devuelve false si el usuario decide no modificar la cita
 	//¡No modificar el fichero de las citas!//
+  void consultarCitas(Paciente &p);
 	bool modificarTratamiento(Tratamiento &t);
 	//Abre el menu de modificación del tratamiento y si se elimina el tratamiento pone a -1 paciente_, devuelve false si el usuario decide no modificar el tratamiento
 	//¡No modificar el fichero de tratamientos!//

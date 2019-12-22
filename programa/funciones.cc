@@ -2,6 +2,8 @@
 #include "funciones.h"
 #include "Paciente.h"
 #include "Registro.h"
+#include "Nota.h"
+#include "Cita.h"
 #include <iostream>
 #include <fstream>
 #include <string.h>
@@ -56,7 +58,7 @@ bool buscarPaciente(Paciente &p){
 				do{
 					printf("0 Reiniciar busqueda\n1 Nombre completo\n2 Nombre\n3 Apellidos\n4 Edad\n5 Fecha de nacimiento\n6 Dirección\n7 Código postal\n8 Telefono\n9 Pacientes públicos\n10 Pacientes privados\n-1 Salir\n");
 					scanf("%d",&menu);
-					
+
 				}while((menu>=0)&&(!filtrarPacientes(menu,pacientes)));
 			break;
 			default:
@@ -90,6 +92,8 @@ void AgregaP()
 		}
 		else if(dias(f,HOY)<0){
 			printf("Esa fecha aun no ha pasado\n");
+			printf("f:%s\nHoy: %s \n",escribeFecha(f),escribeFecha(HOY) );
+			printf("Dias: %d \n",dias(f,HOY));
 		}
 		else{
 			bucle=false;
@@ -145,6 +149,11 @@ void menuPaciente(Paciente p){
 				cin>>menu;
 				system("clear");
 			break;
+			case 1:
+				p.mostrarHistorial();
+				menu=0;
+				system("clear");
+				break;
 			case 2:		//Añadir tratamiento +Hecho  -Funciones
 				anadirTratamiento(p);
 				menu=0;
@@ -161,9 +170,7 @@ void menuPaciente(Paciente p){
 				system("clear");
 			break;
 			case 5:	//Modificar datos del paciente
-
-				//-----------------------
-
+				p.modificarPaciente();
 				menu=0;
 				system("clear");
 			break;
@@ -172,9 +179,8 @@ void menuPaciente(Paciente p){
 				menu=0;
 				system("clear");
 			break;
-			case 7:	//Eliminar paciente
-			printf("Hola\n");
-				//Eliminar paciente?
+			case 7:
+				p.eliminarPaciente();
 				menu=0;
 				system("clear");
 			break;
@@ -592,6 +598,29 @@ bool modificarTratamiento(Tratamiento &t){
 	}
 }
 
+void consultarCitas(Paciente &p)
+{
+	list <Cita> citas;
+	list <Cita>::iterator c;
+	fstream file;
+	citas=p.getCitas();
+	c=citas.begin();
+	if(citas.empty())
+	{
+		cout<<"No existen citas para este paciente"<<endl;
+	}else{
+		int i=0;
+		for(c=citas.begin();c!=citas.end();c++)
+		{
+			printf("%i: ",i);
+			(*c).mostrarRegistro();
+			printf("\n");
+			i++;
+		}
+
+	}
+}
+
 void consultarTramientos(Paciente &p){
   	int i;
   	char c;
@@ -657,7 +686,7 @@ void consultarTramientos(Paciente &p){
 						}
 						sleep(2);
 					}
-				}			
+				}
 
 			}
 		}
@@ -680,13 +709,13 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 		i.d=0;
 		while(i<f2){
 			file.open("Agenda/"+to_string(i.m)+"_"+to_string(i.a)+".txt");
-			if(file.is_open()){	
+			if(file.is_open()){
 				while((!file.eof())&&(bucle)){
-					file.getline(cad,16,'|');		
+					file.getline(cad,16,'|');
 			    	aux.setID(atoi(cad));
-					file.getline(cad,16,'|');		
+					file.getline(cad,16,'|');
 			    	sscanf(cad,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-			    	file.getline(cad,16,'|');		
+			    	file.getline(cad,16,'|');
 			    	sscanf(cad,"%2d:%2d",&h.h,&h.m);
 			    	getline(file,comentario,'\n');
 			    	aux.setFecha(f);
@@ -766,7 +795,7 @@ void anadirCita(Paciente &p){
 	printf("¿Desea guardar la cita? s/n\n");		//Pide confirmación (Si no confirma se sale)
 	cin>>c;
 	if(c=='s'){
-		if(C.addCita()){							
+		if(C.addCita()){
 			printf("Cita guardada correctamente\n");
 		}
 		else{

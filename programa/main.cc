@@ -8,11 +8,14 @@
 #include <dirent.h>
 using namespace std;
 
+fecha HOY;
+
 bool Registro::modificable_=false;
 int main(){
 	int menu=0;
-	Paciente p;	
+	Paciente p;
 	hoy(HOY);
+	printf("Hoy es: %s\n",escribeFecha(HOY));
 	DIR * carpeta;
 	string saludo;
 	fstream ajustes;
@@ -43,7 +46,7 @@ int main(){
 	while(menu>=0){
 		switch(menu){
 			case 0:
-			printf("1 Seleccionar paciente\n2 Añair paciente\n3 Añadir cita\n4 Consultar agenda\n-1 Salir\n");
+			printf("1 Seleccionar paciente\n2 Añadir paciente\n3 Añadir cita\n4 Consultar agenda\n-1 Salir\n");
 				cin>>menu;
 				system("clear");
 			break;

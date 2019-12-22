@@ -39,7 +39,7 @@
 				}
 			}
 		};
-		static fecha HOY;
+		extern fecha HOY;
 		struct hora{
 			int h;					//Hora
 			int m;					//Minuto
