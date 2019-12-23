@@ -112,7 +112,7 @@ void AgregaP()
 	else{
 		p.setTelefono(0);
 	}
-	cout<<"Introdzuca el cododico postal del paciente"<<endl;
+	cout<<"Introdzuca el codigo postal del paciente"<<endl;
 	getline(cin,aux);
 	if(aux.size()>0){
 		p.setCodPostal(stoi(aux));
@@ -366,6 +366,7 @@ bool filtrarPacientes(int filtro,list<Paciente> &p){			//Sin terminar, escribe t
 		if(lista.empty()){
 			printf("Error, ningun paciente corresponde con su busqueda\n");
 			sleep(2);
+			system("clear");
 			return false;
 		}
 		else{
@@ -503,7 +504,7 @@ bool modificarTratamiento(Tratamiento &t){
 		while(menu>=0){
 			switch(menu){
 				case 0:
-					printf("1 Finalizar tratamiento\n2 Moficicar tratamiento\n3 Modificar fechas de inicio y finalización\n4 Modificar comentario\n5 Eliminar tratamiento\n-1 Atras\n");
+					printf("1 Finalizar tratamiento\n2 Modificar tratamiento\n3 Modificar fechas de inicio y finalización\n4 Modificar comentario\n5 Eliminar tratamiento\n-1 Atras\n");
 					cin>>menu;
 				break;
 				case 1:		//Finalizar tratamiento
@@ -514,7 +515,7 @@ bool modificarTratamiento(Tratamiento &t){
 					}
 					return true;			//Aqui no preguntará si quiere seguir modificando
 				break;
-				case 2:	//Moficicar tratamiento
+				case 2:	//Modificar tratamiento
 					printf("Medicamento: ");
 					getline(cin,aux);
 					getline(cin,aux);

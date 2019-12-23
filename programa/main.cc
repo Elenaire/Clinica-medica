@@ -97,8 +97,14 @@ int main(){
 				system("clear");
 			break;
 			case 3:		//Añadir cita
+				printf("Seleccione el paciente con el tendrá la cita:\n\n");
+				p.setID(-1);
 				buscarPaciente(p);
-				anadirCita(p);
+				if(p.getID()!=-1){
+					system("clear");
+					p.mostrarRegistro();
+					anadirCita(p);
+				}
 				menu=0;
 				system("clear");
 			break;
