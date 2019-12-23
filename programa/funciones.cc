@@ -92,8 +92,6 @@ void AgregaP()
 		}
 		else if(dias(f,HOY)<0){
 			printf("Esa fecha aun no ha pasado\n");
-			printf("f:%s\nHoy: %s \n",escribeFecha(f),escribeFecha(HOY) );
-			printf("Dias: %d \n",dias(f,HOY));
 		}
 		else{
 			bucle=false;
@@ -150,7 +148,7 @@ void menuPaciente(Paciente p){
 				system("clear");
 			break;
 			case 1:
-				p.mostrarHistorial();
+				//p.mostrarHistorial();
 				menu=0;
 				system("clear");
 				break;

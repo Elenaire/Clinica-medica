@@ -218,12 +218,13 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
 }
 */
 
+/*
 void Paciente::mostrarHistorial()
 {
-  int elec;
+  int k;
   cout<<"Indique que historial quiere visualizar"<<endl<<"1.Notas\n2.Tratamientos\n3.Notas y tratamientos"<<endl;
-  cin>>elec;
-  switch(elec)
+  cin>>k;
+  switch(k)
   {
     case 1:
     {
@@ -237,7 +238,6 @@ void Paciente::mostrarHistorial()
         (*n).mostrarRegistro();
         cout<<endl;
       }
-      int k;
       cout<<"Seleccione una Nota(SI DESEA SALIR, SELECCIONE: 0)"<<endl;
       cin>>k;
       if(k<0)
@@ -259,7 +259,6 @@ void Paciente::mostrarHistorial()
         (*t).mostrarRegistro();
         cout<<endl;
       }
-      int k;
       cout<<"Seleccione un Tratamiento(SI DESEA SALIR, SELECCIONE: 0)"<<endl;
       cin>>k;
       if(k<0)
@@ -294,7 +293,7 @@ void Paciente::mostrarHistorial()
 
     }
   }
-}
+}*/
 
 bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;
@@ -329,6 +328,7 @@ void Paciente::eliminarPaciente()
   list<Paciente>::iterator i;
   leerPacientes(aux);
   char elec;
+  string carpeta;
   cout<<"Está seguro de querer elimina el paciente "<<nombre_<<" (s/n)"<<endl;
   cin>>elec;
   if(elec=='s')
@@ -349,7 +349,8 @@ void Paciente::eliminarPaciente()
       }
     }
     archivo.close();
-    rmdir(to_string(id_));
+    carpeta="Pacientes/"+to_string(id_);
+    rmdir(carpeta.c_str());
   }
 }
 
