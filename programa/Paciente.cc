@@ -369,7 +369,7 @@ void Paciente::modificarPaciente()
     {
       string name;
       cout<<"Indique el nuevo nombre del paciente"<<endl;
-      cin>>name;
+      getline(cin,name);
       for(i=aux.begin();i!=aux.end();i++)
       {
         if(i->getID()==id_)
@@ -382,7 +382,7 @@ void Paciente::modificarPaciente()
     {
       string surname;
       cout<<"Indique el nuevo apellido del paciente"<<endl;
-      cin>>surname;
+      getline(cin,surname);
       for(i=aux.begin();i!=aux.end();i++)
       {
         if((i->getID()==id_))
@@ -395,7 +395,7 @@ void Paciente::modificarPaciente()
     {
       string adress;
       cout<<"Indique la nueva direccion del paciente"<<endl;
-      cin>>adress;
+      getline(cin,adress);
       for(i=aux.begin();i!=aux.end();i++)
       {
         if((i->getID()==id_))
@@ -406,31 +406,60 @@ void Paciente::modificarPaciente()
     }break;
     case 4:
     {
-      //AQUI VA LA FECHA PERO NO SE COMO PONERLA
-    }break;
-    case 5:
-    {
-      int tlf;
-      cout<<"Indique el nuevo telefono del paciente"<<endl;
-      cin>>tlf;
+      fecha f;
+      bool bucle=true;
+      cout<<"Indique la nueva fecha de nacimiento"<<endl;
+      while(bucle){
+        if(leerFecha(f)!=true){
+          printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
+        }
+        else if(dias(f,HOY)<0){
+          printf("Esa fecha aun no ha pasado\n");
+        }
+        else{
+          bucle=false;
+        }
+      }
       for(i=aux.begin();i!=aux.end();i++)
       {
         if((i->getID()==id_))
         {
-          i->setTelefono(tlf);
+          i->setFechanacimiento(f);
+        }
+      }
+    }break;
+    case 5:
+    {
+      string tlf;
+      cout<<"Indique el nuevo telefono del paciente"<<endl;
+      getline(cin,tlf);
+    	getline(cin,tlf);
+      for(i=aux.begin();i!=aux.end();i++)
+      {
+        if((i->getID()==id_))
+        {
+          if(aux.size()>0){
+        		i->setTelefono((stoi(tlf)));
+        	}else{
+          i->setTelefono(0);
+          }
         }
       }
     }break;
     case 6:
     {
-      int cp;
+      string cp;
       cout<<"Indique el nuevo codigo postal del paciente"<<endl;
-      cin>>cp;
+      getline(cin,cp);
       for(i=aux.begin();i!=aux.end();i++)
       {
         if((i->getID()==id_))
         {
-          i->setCodPostal(cp);
+          if(aux.size()>0){
+        		i->setCodPostal((stoi(cp)));
+        	}else{
+            i->setCodPostal(0);
+          }
         }
       }
     }break;
@@ -449,18 +478,19 @@ void Paciente::modificarPaciente()
     }break;
     case 8:
     {
-      string name,surname,adress;
-      int tlf,cp,type;
+      string name,surname,adress,tlf,cp;
+      int type;
       cout<<"Indique el nuevo nombre del paciente"<<endl;
-      cin>>name;
+      getline(cin,name);
       cout<<"Indique el nuevo apellido del paciente"<<endl;
-      cin>>surname;
+      getline(cin,surname);
       cout<<"Indique la nueva direccion del paciente"<<endl;
-      cin>>adress;
+      getline(cin,adress);
       cout<<"Indique el nuevo telefono del paciente"<<endl;
-      cin>>tlf;
+      getline(cin,tlf);
+    	getline(cin,tlf);
       cout<<"Indique el nuevo codigo postal del paciente"<<endl;
-      cin>>cp;
+      getline(cin,cp);
       cout<<"Indique el nuevo tipo del paciente"<<endl;
       cin>>type;
       for(i=aux.begin();i!=aux.end();i++)
@@ -470,8 +500,18 @@ void Paciente::modificarPaciente()
           i->setNombre(name);
           i->setApellidos(surname);
           i->setDireccion(adress);
-          i->setTelefono(tlf);
-          i->setCodPostal(cp);
+          if(aux.size()>0){
+        		i->setTelefono(stoi(tlf));
+        	}
+        	else{
+        		i->setTelefono(0);
+        	}
+          if(aux.size()>0){
+        		i->setCodPostal(stoi(cp));
+        	}
+        	else{
+        		i->setCodPostal(0);
+        	}
           i->setTipo(type);
         }
       }
