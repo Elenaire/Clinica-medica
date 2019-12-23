@@ -50,7 +50,6 @@
     list <Nota> getNotas();//Javi esto te toca a ti no te fies mucho de lo que he escrito yo
     void mostrarPaciente(int=0);
     void mostrarHistorial();
-    bool addCita(const Nota n);
     bool addTratamiento(const Tratamiento t);	//Sin probar
     bool addNota(const Nota n);
     void eliminarPaciente();
