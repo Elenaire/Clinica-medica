@@ -15,7 +15,7 @@
 
 **Postcondiciones**:
 
-* Se habre un menu de opciones para los tratamientos del paciente
+* Se abre un menú de opciones para los tratamientos del paciente
 
 **Flujos alternativos**:
 
