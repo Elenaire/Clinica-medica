@@ -34,10 +34,10 @@ int Paciente::getEdad(){
   }
   return aux;
 }
-
-
-void Paciente::mostrarPaciente(){
-  cout<<endl<<"ID: "<<id_<<endl;
+void Paciente::mostrarPaciente(int n){
+  if(n==0){
+    cout<<endl<<"ID: "<<id_<<endl;
+  }
   cout<<"NOMBRE: "<<nombre_<<endl;
   cout<<"APELLIDOS: "<<apellidos_<<endl;
   cout<<"FECHANACIMIENTO: "<<escribeFecha(fechanacimiento_)<<endl;
@@ -334,18 +334,18 @@ void Paciente::eliminarPaciente()
   if(elec=='s')
   {
     ofstream archivo;
-    archivo.open("Pacientes.txt");
+    archivo.open("Pacientes.txt",ios::trunc);
     for(i=aux.begin();i!=aux.end();i++)
     {
       if((i->getID())!=id_)
       {
-        archivo<<i->getID()<<'|';
+        archivo<<endl<<i->getID()<<'|';
         archivo<<i->getNombre()<<'|';
         archivo<<i->getApellidos()<<'|';
         archivo<<escribeFecha(i->getFechanacimiento())<<'|';
         archivo<<i->getTelefono()<<'|';
         archivo<<i->getCodPostal()<<'|';
-        archivo<<i->getTipo()<<endl;
+        archivo<<i->getTipo();
       }
     }
     archivo.close();
@@ -361,7 +361,7 @@ void Paciente::modificarPaciente()
   list<Paciente>::iterator i;
   leerPacientes(aux);
   int elec;
-  cout<<"Indique que campos quiere modificar"<<endl<<"1.Nombre\n2.Apellidos\n3.Direccion\n4.Fecha de nacimiento\n5.Telefono\n6.Codigo Postal\n7.Tipo\n8.Modificar todos los campos"<<endl;
+  cout<<"Indique que campos quiere modificar"<<endl<<"1 Nombre\n2 Apellidos\n3 Direccion\n4 Fecha de nacimiento\n5 Telefono\n6.Codigo Postal\n7 Tipo\n8 Modificar todos los campos"<<endl;
   cin>>elec;
   switch(elec)
   {

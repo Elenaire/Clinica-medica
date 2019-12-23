@@ -22,6 +22,11 @@ bool buscarPaciente(Paciente &p){
 	scanf("%d",&menu);
 	if(menu>=0){
 		filtrarPacientes(menu,pacientes);
+		if(pacientes.empty()){
+			printf("No se han encontrado pacientes\n");
+			menu=-1;
+			sleep(1);
+		}
 	}
 	while(menu>=0){				//se sale con -1 o con negativo?
 		system("clear");
@@ -121,7 +126,8 @@ void AgregaP()
 	cout<<"Introdzuca el tipo del paciente(0 Publico/1 Privado)"<<endl;
 	cin>>n;
 	p.setTipo(n);
-	p.mostrarPaciente();
+	cout<<endl;
+	p.mostrarPaciente(1);
 	cout<<"¿Está seguro de querer guardar este Paciente? (s/n)"<<endl;
 	char elec;
 	cin>>elec;
@@ -179,7 +185,7 @@ void menuPaciente(Paciente p){
 			break;
 			case 7:
 				p.eliminarPaciente();
-				menu=0;
+				menu=-1;
 				system("clear");
 			break;
 			default:
@@ -200,38 +206,40 @@ void leerPacientes(list<Paciente> &P){
 	char fech[32];
 	string cad;
 	getline(file,cad,'\n');
-	while(!file.eof()){
-	    getline(file,cad,'|');
-	    aux.setID(stoi(cad));
-	    getline(file,cad,'|');
-	    aux.setNombre(cad);
-	    getline(file,cad,'|');
-	    aux.setApellidos(cad);
-	    file.getline(fech,32,'|');		//Fecha....
-	    sscanf(fech,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
-	    aux.setFechanacimiento(f);
-	    getline(file,cad,'|');
-	    if(cad.size()>1){
-	    	aux.setTelefono(stoi(cad));
-	    }
-	    else{
-	    	aux.setTelefono(-1);
+	if(file.is_open()){
+		while(!file.eof()){
+		    getline(file,cad,'|');
+		    aux.setID(stoi(cad));
+		    getline(file,cad,'|');
+		    aux.setNombre(cad);
+		    getline(file,cad,'|');
+		    aux.setApellidos(cad);
+		    file.getline(fech,32,'|');		//Fecha....
+		    sscanf(fech,"%2d/%2d/%4d",&f.d,&f.m,&f.a);
+		    aux.setFechanacimiento(f);
+		    getline(file,cad,'|');
+		    if(cad.size()>1){
+		    	aux.setTelefono(stoi(cad));
+		    }
+		    else{
+		    	aux.setTelefono(-1);
+			}
+			getline(file,cad,'|');
+		    if(cad.size()>1){
+		    	aux.setCodPostal(stoi(cad));
+		    }
+		    else{
+		    	aux.setCodPostal(-1);
+			}
+			getline(file,cad,'|');
+		    aux.setDireccion(cad);
+		    getline(file,cad,'\n');
+		    aux.setTipo(stoi(cad));
+		    p.push_back(aux);
 		}
-		getline(file,cad,'|');
-	    if(cad.size()>1){
-	    	aux.setCodPostal(stoi(cad));
-	    }
-	    else{
-	    	aux.setCodPostal(-1);
-		}
-		getline(file,cad,'|');
-	    aux.setDireccion(cad);
-	    getline(file,cad,'\n');
-	    aux.setTipo(stoi(cad));
-	    p.push_back(aux);
+		file.close();
+		P=p;
 	}
-	file.close();
-	P=p;
 }
 void mostrarPacientes(list<Paciente> &p){					//Sin probar
 	list<Paciente>::iterator i;
