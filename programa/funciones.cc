@@ -887,7 +887,8 @@ void anadirNota(Paciente &p){
 	char c;
 	string aux;
 	printf("Nota:\n");
-	cin>>aux;
+	getline(cin,aux);
+	getline(cin,aux);
 	n.setContenido(aux);			//Termina de pedir datos
 	printf("¿Desea guardar la nota? s/n\n");		//Pide confirmación (Si no confirma se sale)---------
 	cin>>c;
