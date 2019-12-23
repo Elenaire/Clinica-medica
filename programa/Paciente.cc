@@ -218,7 +218,7 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
 }
 */
 
-/*
+
 void Paciente::mostrarHistorial()
 {
   int k;
@@ -293,7 +293,8 @@ void Paciente::mostrarHistorial()
 
     }
   }
-}*/
+}
+
 
 bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;

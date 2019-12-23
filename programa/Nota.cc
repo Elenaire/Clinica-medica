@@ -22,3 +22,12 @@ bool Nota::borrar(){
 	printf("Me estoy borrando\n");
 	return false;
 }
+
+void Nota::modificarNota()
+{
+	cout<<"Introduzca el nuevo contenido de la nota"<<endl;
+	string content;
+	cin>>content;
+	contenido_=content;
+	cout<<"El nuevo contenido de la nota es: "<<contenido_<<endl;
+}
