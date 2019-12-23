@@ -405,7 +405,7 @@ bool modificarCita(Cita &C){		//Sin probar
 		C.mostrarRegistro();
 		while(menu<=0){
 			if(menu==0){
-				printf("1 Modificar fecha\n2 Modificar paciente\n3 Modificar comentario\n4 Eliminar cita\n-1Salir\n");
+				printf("1 Modificar fecha\n2 Modificar paciente\n3 Modificar comentario\n4 Eliminar cita\n-1 Salir\n");
 				cin>>menu;
 			}
 			if(menu==1){	//Modificar fecha y hora
@@ -634,17 +634,18 @@ void consultarTramientos(Paciente &p){
 	list <Tratamiento> tratamientos;
 	list <Tratamiento>::iterator t;
 	fstream file;
-	tratamientos=p.getTratamientos();		//Modificar getTratamientos
+	tratamientos=p.getTratamientos();		//Modificar getTratamientos;
 	t=tratamientos.begin();
-	while(t!=tratamientos.end()){
+	while((t!=tratamientos.end())&&(tratamientos.size()>0)){
 		if((*t).getEstado()!=0){
-			tratamientos.erase(t);
+			t=tratamientos.erase(t);
 		}
 		else{t++;}
 	}
 	i=1;
 	if(tratamientos.empty()){
 		printf("El paciente no está siguiendo ningun tratamiento actualmente\n");
+		sleep(2);
 	}
 	else{
 		for(t=tratamientos.begin();t!=tratamientos.end();t++){
@@ -655,7 +656,7 @@ void consultarTramientos(Paciente &p){
 		printf("Selecione un tratamiento o introduzca 0:");
 		cin>>i;
 		if(i>0){
-			if(i<=(tratamientos.size()+1)){
+			if(i<=(tratamientos.size())){
 				t=tratamientos.begin();
 				advance(t,i-1);
 				if(modificarTratamiento(*t)){
@@ -704,6 +705,7 @@ void consultarTramientos(Paciente &p){
 list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 	list<Cita> C;
 	struct Cita aux(0);
+	int fallo;
 	fecha i,f;
 	hora h;
 	ifstream file;
@@ -715,6 +717,7 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 		i.m=f1.m;
 		i.d=0;
 		while(i<f2){
+			fallo=0;
 			file.open("Agenda/"+to_string(i.m)+"_"+to_string(i.a)+".txt");
 			if(file.is_open()){
 				while((!file.eof())&&(bucle)){
@@ -735,7 +738,7 @@ list<Cita> getCitas(fecha f1,fecha f2){		//Tienen que ser fechas validas
 						C.push_back(aux);
 					}
 				}
-				C.pop_back();
+					C.pop_back();
 			}
 			file.close();
 			i.m=i.m+1;				//Siguiente fichero
@@ -776,19 +779,21 @@ void anadirCita(Paciente &p){
 	while(bucle){
 		printf("Hora:");
 		if(leerHora(h)!=true){
-		printf("Formato de hora incorrecto, introduzca hh:mm\n");
+			printf("Formato de hora incorrecto, introduzca hh:mm\n");
 		}
 		else {
 			agenda=getCitas(f,f);
 			bucle=false;
 			for(i=agenda.begin();((i!=agenda.end())&&(!bucle));i++){
-				num=minutos(h,(*i).getHora());
-				if(num<0){
-					num=num*-1;
-				}
-				if(num<5){
-					printf("No puede ser a esa hora porque tiene otra cita a las %s\n",escribeHora((*i).getHora()));
-					bucle=true;
+				if(dias(f,(*i).getFecha())==0){			//-------
+					num=minutos(h,(*i).getHora());
+					if(num<0){
+						num=num*-1;
+					}
+					if(num<5){
+						printf("No puede ser a esa hora porque tiene otra cita a las %s\n",escribeHora((*i).getHora()));
+						bucle=true;
+					}
 				}
 			}
 		}
@@ -940,10 +945,13 @@ int nuevoID(){
 }
 
 void consultarAgenda(){
-	int n;
+	int n,i=1;
 	string aux;
+	fecha f1,f2;
+	char c;
+	Cita cit(0);
 	list<Cita> citas;
-	list<Cita>::iterator c;
+	list<Cita>::iterator C;
 	printf("1 Mostrar citas del día\n2 Mostrar citas en intervalo\n");
 	cin>>n;
 	if((n==1)||(n==2)){
@@ -953,7 +961,6 @@ void consultarAgenda(){
 		}
 		if(n==2){
 			bool bucle;
-			fecha f1,f2;
 			printf("Mostrar citas desde:\n");
 			if(leerFecha(f1)!=true){			//Lee fecha 1
 				printf("Formato de fecha incorrecto, introduzca dia/mes/año\n");
@@ -967,14 +974,61 @@ void consultarAgenda(){
 			}
 			else{
 				citas=getCitas(f1,f2);
-				if(citas.size()==0){printf("No hay citas programadas para ese intervalo\n");}
 			}
 		}
-		for(c=citas.begin();c!=citas.end();c++){
-			(*c).mostrarRegistro();
+		for(C=citas.begin();C!=citas.end();C++){
+			printf("%d.\n",i);
+			(*C).mostrarRegistro();
+			i++;
 		}
 	}
-	printf("Pulse enter para volver al menu\n");
-	getline(cin,aux);
-	getline(cin,aux);
+	if(citas.size()==0){printf("No hay citas programadas para ese intervalo\n");}
+	else{
+		printf("Seleccione una cita o introduzca 0\n");
+		cin>>i;
+		if(i>0){
+				if(i<=(citas.size())){
+					C=citas.begin();
+					advance(C,i-1);
+					cit=*C;
+					if(modificarCita(cit)){
+						if((i=(cit).getID())==-1){
+							citas.erase(C);
+							printf("¿Seguro que desea eliminar la cita?(s/n)\n");
+						}
+						else{
+							system("clear");
+							(cit).mostrarRegistro();
+							printf("¿Desea guardar los cambios?(s/n)\n");
+						}
+						cin>>c;
+						if(c=='s'){
+							if((*C).borrar()){			//------
+								if(i==-1){
+									printf("Cita eliminada correctamente\n");
+								}
+								else{
+									if(cit.addCita()){
+										printf("Cita modificada correctamente\n");
+									}
+									else{
+										printf("Ha ocurrido un error\n");
+									}
+								}
+							}
+							else{
+								if(i==-1){
+									printf("La cita no se ha podido eliminar\n");
+								}
+								else{
+									printf("La cita no se ha podido modificar\n");
+								}
+							}
+							sleep(2);
+						}
+					}
+
+				}
+			}
+	}
 }

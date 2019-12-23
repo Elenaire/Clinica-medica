@@ -18,10 +18,6 @@ bool Nota::modificable(){
 		return false;
 	}
 }
-bool Nota::borrar(){
-	printf("Me estoy borrando\n");
-	return false;
-}
 
 void Nota::modificarNota()
 {

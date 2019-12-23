@@ -31,7 +31,3 @@ bool Tratamiento::modificable(){
 		return false;
 	}
 }
-bool Tratamiento::borrar(){
-	printf("Me estoy borrando\n");
-	return false;
-}

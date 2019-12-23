@@ -102,7 +102,7 @@ int main(){
 				buscarPaciente(p);
 				if(p.getID()!=-1){
 					system("clear");
-					p.mostrarRegistro();
+					p.mostrarPaciente();
 					anadirCita(p);
 				}
 				menu=0;

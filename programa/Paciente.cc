@@ -153,7 +153,7 @@ list <Nota> Paciente::getNotas()
         file.getline(cad,64,'|');   //Hora....
         sscanf(cad,"%2d:%2d",&h.h,&h.m);
         n.setHora(h);
-        getline(file,str,'|');
+        getline(file,str,'\n');
         n.setContenido(str);
         aux.push_back(n);
         }
@@ -217,21 +217,20 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
   }
 }
 */
-
-
+/*
 void Paciente::mostrarHistorial()
 {
   int k;
+  list <Nota> notas;
+  list <Nota>::iterator n;
+   notas=getNotas();
+  int i=0;
   cout<<"Indique que historial quiere visualizar"<<endl<<"1.Notas\n2.Tratamientos\n3.Notas y tratamientos"<<endl;
   cin>>k;
   switch(k)
   {
     case 1:
     {
-      list <Nota> notas;
-      list <Nota>::iterator n;
-      notas=getNotas();
-      int i=0;
       for(n=notas.begin();n!=notas.end();n++)
       {
         cout<<i<<": ";
@@ -294,8 +293,7 @@ void Paciente::mostrarHistorial()
     }
   }
 }
-
-
+*/
 bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;
   file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
@@ -313,7 +311,7 @@ bool Paciente::addNota(const Nota n){
   fstream file;
   file.open("Pacientes/"+to_string(id_)+"/Notas.txt",ios::out|ios::app|ios::ate);
   if(file){
-    file<<escribeFecha(n.getFecha())<<"|"<<escribeHora(n.getHora())<<n.getContenido()<<endl;
+    file<<escribeFecha(n.getFecha())<<"|"<<escribeHora(n.getHora())<<"|"<<n.getContenido()<<endl;
     file.close();
     return true;
   }
