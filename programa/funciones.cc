@@ -154,7 +154,7 @@ void menuPaciente(Paciente p){
 				system("clear");
 			break;
 			case 1:
-				//p.mostrarHistorial();
+			//	p.mostrarHistorial();
 				menu=0;
 				system("clear");
 				break;
