@@ -156,9 +156,9 @@ list <Nota> Paciente::getNotas()
         getline(file,str,'\n');
         n.setContenido(str);
         aux.push_back(n);
-        }
+      }
       file.close();
-      //aux.pop_back();     //LO pongo por si da el errror de TRatamientos
+      aux.pop_back();     //LO pongo por si da el errror de TRatamientos
     }
   return aux;
 }
@@ -217,33 +217,53 @@ void Paciente::mostrarHCitas()  //ESTO ES TO DE JAVI
   }
 }
 */
-/*
+
 void Paciente::mostrarHistorial()
 {
   int k;
-  list <Nota> notas;
-  list <Nota>::iterator n;
-   notas=getNotas();
-  int i=0;
   cout<<"Indique que historial quiere visualizar"<<endl<<"1.Notas\n2.Tratamientos\n3.Notas y tratamientos"<<endl;
   cin>>k;
   switch(k)
   {
     case 1:
     {
+      list <Nota> notas;
+      list <Nota>::iterator n;
+      notas=getNotas();
+      int i=1;
       for(n=notas.begin();n!=notas.end();n++)
       {
-        cout<<i<<": ";
+        cout<<i<<".";
         (*n).mostrarRegistro();
         cout<<endl;
+        i++;
       }
       cout<<"Seleccione una Nota(SI DESEA SALIR, SELECCIONE: 0)"<<endl;
-      cin>>k;
-      if(k<0)
+      cin>>i;
+      if(i>0)
       {
             n=notas.begin();
-            advance(k,i-1);
+            advance(n,i-1);
             (*n).modificarNota();
+            cout<<"Se va a guardar la nota: "<<n->getContenido()<<endl;
+            cout<<"Está seguro de querer guardar los cambios (s/n)"<<endl;
+            char c;
+            cin>>c;
+            if(c=='s')
+            {
+              fstream file;
+              file.open("Pacientes/"+to_string(id_)+"/Notas.txt");
+              if(file.is_open())
+              {
+                for(n=notas.begin();n!=notas.end();n++)
+                {
+                  cout<<"Estoy escribiendo "<<n->getContenido()<<endl;
+                  file<<escribeFecha(n->getFecha())<<'|'<<escribeHora(n->getHora())<<'|'<<n->getContenido()<<endl;
+                }
+              }
+              file.close();
+              cout<<"Se ha modificado la nota"<<endl;
+            }
       }
     }break;
     case 2:
@@ -251,20 +271,38 @@ void Paciente::mostrarHistorial()
       list <Tratamiento> tratamientos;
       list <Tratamiento>::iterator t;
       tratamientos=getTratamientos();
-      int i=0;
+      int i=1;
       for(t=tratamientos.begin();t!=tratamientos.end();t++)
       {
-        cout<<i<<": ";
+        cout<<i<<".";
         (*t).mostrarRegistro();
         cout<<endl;
+        i++;
       }
       cout<<"Seleccione un Tratamiento(SI DESEA SALIR, SELECCIONE: 0)"<<endl;
-      cin>>k;
-      if(k<0)
+      cin>>i;
+      if(i>0)
       {
           t=tratamientos.begin();
-          advance(k,i-1);
+          advance(t,i-1);
           modificarTratamiento(*t);
+          cout<<"Esta seguro de querer modificar el tratamiento(s/n)"<<endl;
+          char c;
+          cin>>c;
+          if(c=='s')
+          {
+            fstream file;
+            file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt");
+            if(file.is_open())
+            {
+              for(t=tratamientos.begin();t!=tratamientos.end();t++)
+              {
+                file<<escribeFecha(t->getFecha())<<"|"<<escribeHora(t->getHora())<<'|'<<t->getMedicamento()<<'|'<<t->getConcentracion()<<'|'<<t->getRegularidad()<<'|'<<escribeFecha(t->getFechaInicio())<<'|'<<escribeFecha(t->getFechaFinal())<<'|'<<t->getEstado()<<'|'<<t->getComentario()<<endl;
+              }
+            }
+            file.close();
+            cout<<"Se ha modificado El tratamiento"<<endl;
+          }
       }
     }break;
     case 3:
@@ -272,28 +310,31 @@ void Paciente::mostrarHistorial()
       list <Nota> notas;
       list <Nota>::iterator n;
       notas=getNotas();
-      int i=0;
+      int i=1;
       for(n=notas.begin();n!=notas.end();n++)
       {
-        cout<<i<<": ";
+        cout<<i<<".";
         (*n).mostrarRegistro();
         cout<<endl;
+        i++;
       }
       list <Tratamiento> tratamientos;
       list <Tratamiento>::iterator t;
       tratamientos=getTratamientos();
-      i=0;
+      i=1;
       for(t=tratamientos.begin();t!=tratamientos.end();t++)
       {
         cout<<i<<": ";
         (*t).mostrarRegistro();
         cout<<endl;
+        i++;
       }
-
-    }
+      sleep(5);
+    }break;
   }
 }
-*/
+
+
 bool Paciente::addTratamiento(const Tratamiento t){
   fstream file;
   file.open("Pacientes/"+to_string(id_)+"/Tratamientos.txt",ios::out|ios::app|ios::ate);
